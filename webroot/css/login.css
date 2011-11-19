@@ -1,0 +1,197 @@
+body.offline
+{
+    background:url(../img/viewer.png) no-repeat center top transparent;
+}
+
+body.offline #logoSite
+{
+background: url("../images/logo3.png") no-repeat scroll center top transparent;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 130px;
+    width: 250px;
+    display:none;
+}
+body.offline #logoHappy 
+{
+ background: url("../img/HappyNB.png") no-repeat scroll center top transparent;
+    height: 66px;
+    left: -22px;
+    position: absolute;
+    top: 45px;
+    width: 120px;
+}
+
+body.offline #logoHappy:hover
+{
+ background: url("../img/Happy.png") no-repeat scroll center top transparent;
+  
+}
+
+body.offline #logoLS 
+{
+  background: url("../img/LinkSiteNB.png") no-repeat scroll center top transparent;
+    height: 66px;
+    position: absolute;
+    right: -21px;
+    top: 45px;
+    width: 120px
+}
+
+body.offline #logoLS:hover
+{
+  background: url("../img/LinkSite.png") no-repeat scroll center top transparent;
+ 
+}
+body.offline #container
+{
+ margin: auto;
+    position: relative;
+    top: 675px;
+    width: 236px;
+}
+
+body.offline #container>div a
+{
+color: #84BD16;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+body.offline #container>div a:hover
+{
+font-weight: bolder;
+}
+
+body.offline #container>div
+{
+   color: #7D7D7D;
+    font-family: arial,sans-serif;
+    font-size: 13px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+body.offline #flags
+{
+left: 93px;
+    position: absolute;
+    top: 90px;
+    display:none;
+}
+body.offline #flags ul{
+     list-style: none outside none;
+     margin: 0;
+    padding: 0;
+}
+body.offline #flags ul li{
+    display: inline-block;
+    width: 24px;
+}
+#offline-message
+{
+    
+    display:none;
+}
+/*//////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ //////////////////////////////////////PAGE LOGIN///////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ /////////////////////////////////////////////////////////////////////////////*/
+body.login
+{
+    background:url(../img/login.jpg) no-repeat center top transparent;
+}
+
+body.login #logoSite
+{
+background: url("../images/logo3.png") no-repeat scroll center top transparent;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 130px;
+    width: 250px;
+}
+body.login #container #logoHappy 
+{
+ background: url("../img/HappyNB.png") no-repeat scroll center top transparent;
+    height: 66px;
+    left: -22px;
+    position: absolute;
+    top: 130px;
+    width: 120px;
+}
+
+body.login #container #logoHappy:hover
+{
+ background: url("../img/Happy.png") no-repeat scroll center top transparent;
+  
+}
+
+body.login #container #logoLS 
+{
+  background: url("../img/LinkSiteNB.png") no-repeat scroll center top transparent;
+    height: 66px;
+    position: absolute;
+    right: -21px;
+    top: 130px;
+    width: 120px
+}
+
+body.login #container #logoLS:hover
+{
+  background: url("../img/LinkSite.png") no-repeat scroll center top transparent;
+ 
+}
+body.login #container
+{
+margin: auto;
+    position: relative;
+    top: 75px;
+    width: 300px;
+}
+
+
+body.login #container>div
+{
+  background: url("../img/fondLogin.png") no-repeat scroll 0 0 transparent;
+    height: 77px;
+    text-align: center;
+    width: 300px;
+}
+
+
+.cake-sql-log
+{
+    position:absolute;
+    bottom:0;
+}
+
+body.login #container .input input{
+ background: url("../img/InputText.png") no-repeat scroll 0 0 transparent;
+    border: medium none;
+    color: #7D7D7D;
+    font-family: arial,sans-serif;
+    font-size: 15px;
+    font-weight: normal;
+    height: 30px;
+    margin-bottom: 10px;
+    margin-left: 94px;
+    margin-top: 2px;
+    text-align: center;
+    width: 198px;
+}
+
+
+.submit
+{
+
+    text-align: center;
+}
+
+
+
+
+
+

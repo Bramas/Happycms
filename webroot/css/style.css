@@ -1,0 +1,833 @@
+body {
+    background: url("../images/fond.jpg") no-repeat scroll center 0 #FFFFFF;
+    margin: auto;
+    padding: 0;
+}
+
+/*body.or{background: url("../images/fondMuni.jpg") no-repeat scroll center 0 #FFFFFF;}
+body.violet{background: url("../images/fondSante.jpg") no-repeat scroll center 0 #FFFFFF;}
+body.bleu{background: url("../images/fondEnfance.jpg") no-repeat scroll center 0 #FFFFFF;}
+body.vert{background: url("../images/fondEnvir.jpg") no-repeat scroll center 0 #FFFFFF;}
+body.jaune{background: url("../images/fondTourisme.jpg") no-repeat scroll center 0 #FFFFFF;}
+body.orange{background: url("../images/fondAssoc.jpg") no-repeat scroll center 0 #FFFFFF;}
+body.rouge{background: url("../images/fondSport.jpg") no-repeat scroll center 0 #FFFFFF;}
+body.beige{background: url("../images/fondCulture.jpg") no-repeat scroll center 0 #FFFFFF;}
+body.or #container #banniere{background: url("../images/BanOr.png") no-repeat scroll center bottom transparent;}
+body.violet #banniere{background: url("../images/BanViolet.png") no-repeat scroll center bottom transparent;}
+body.bleu #banniere{background: url("../images/BanBleu.png") no-repeat scroll center bottom transparent;}
+body.vert #banniere{background: url("../images/BanVert.png") no-repeat scroll center bottom transparent;}
+body.jaune #banniere{background: url("../images/BanJaune.png") no-repeat scroll center bottom transparent;}
+body.orange #banniere{background: url("../images/BanOrange.png") no-repeat scroll center bottom transparent;}
+body.rouge #banniere{background: url("../images/BanRouge.png") no-repeat scroll center bottom transparent;}
+body.beige #banniere{background: url("../images/BanBeige.png") no-repeat scroll center bottom transparent;}*/
+
+
+#header {
+    height: 160px;
+    margin: auto;
+    position: relative;
+    width: 960px;
+}
+
+#logo {
+    background: url("../images/logo.png") no-repeat scroll 0 0 transparent;
+    height: 60px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 220px;
+}
+
+#meteo {
+    
+    height: 90px;
+    left: 0;
+    position: absolute;
+    top: 60px;
+    width: 220px;
+}
+#meteo .hackDay
+{
+    position:absolute;
+    height:20px;
+    
+}
+
+
+.pictos
+{
+ padding-left: 26px;
+    width: 75px;
+}
+
+.pictos img
+{
+border:none;
+}
+
+.tempe
+{
+font-size: 25px;
+    left: 95px;
+    position: absolute;
+    top: 33px;
+}
+.date
+{
+    padding-left:30px;
+}
+
+.date .jour,.date .mois
+{color: #2A2A2A;
+    font-weight: bold;}
+
+.date .journ
+{
+    color:#b60b0b;
+    font-size:20px}
+    
+
+#nav {
+    height: 150px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 740px;
+}
+#nav ul {
+    background: none repeat scroll 0 0 #F9FBFD;
+    height: 25px;
+    line-height: 25px;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 740px;
+    z-index: 2;
+}
+
+#nav ul li {
+    border-right: 1px solid #7D7D7D;
+    float: left;
+    padding-left: 4px;
+    padding-right: 3px;
+}
+
+#nav ul li>a {
+    color: #7D7D7D;
+    display: block;
+    font-size: 14px;
+    text-decoration: none;
+    text-transform: capitalize;
+    cursor:pointer;
+}
+
+#nav ul li:hover>a,#nav ul li.current>a{color:#fff;}
+
+#nav ul li ul {
+    display: none;
+    height: 125px;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    width: 740px;
+    padding-left: 35px;
+}
+
+#nav ul li.home a, #nav ul li.home a:hover {
+background: url("../images/home.png") no-repeat scroll 0 0 transparent;
+width:25px;
+height:25px;
+position:absolute;
+left:-29px;
+font-size:0px;
+}
+
+
+#nav ul li:hover ul {display: block;}
+
+#nav ul li ul li {
+    border: medium none;
+    color: #FFFFFF;
+    list-style: square outside none;
+    width: 250px;
+}
+
+#nav ul li ul a {
+color: #FFFFFF;
+    display: block;
+    font-size: 13px;
+    margin-left: -22px;
+    margin-right: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+#nav ul li ul li a:hover {text-decoration: none;}
+
+#nav ul li.home a:hover {background-position:0 -25px;}
+#nav ul li.or ul{background: url("../images/or.png") no-repeat scroll 0 0 transparent;  }
+#nav ul li.violet ul {background: url("../images/violet.png") no-repeat scroll 0 0 transparent;  }
+#nav ul li.bleu ul {background: url("../images/bleu.png") no-repeat scroll 0 0 transparent;  }
+#nav ul li.vert ul {background: url("../images/vert.png") no-repeat scroll 0 0 transparent;  }
+#nav ul li.jaune ul {background: url("../images/jaune.png") no-repeat scroll 0 0 transparent;  }
+#nav ul li.orange ul {background: url("../images/orange.png") no-repeat scroll 0 0 transparent;  }
+#nav ul li.rouge ul {background: url("../images/rouge.png") no-repeat scroll 0 0 transparent;  }
+#nav ul li.beige ul{background: url("../images/beige.png") no-repeat scroll 0 0 transparent;  }
+
+
+#nav ul li.or:hover, #nav ul li.or.current {background: url("../images/fdor.jpg") repeat-x scroll 0 0 transparent;  }
+#nav ul li.violet:hover, #nav ul li.violet.current {background: url("../images/fdviolet.jpg") repeat-x scroll 0 0 transparent;  }
+#nav ul li.bleu:hover, #nav ul li.bleu.current {background: url("../images/fdbleu.jpg") repeat-x scroll 0 0 transparent;  }
+#nav ul li.vert:hover, #nav ul li.vert.current {background: url("../images/fdvert.jpg") repeat-x scroll 0 0 transparent;  }
+#nav ul li.jaune:hover, #nav ul li.jaune.current {background: url("../images/fdjaune.jpg") repeat-x scroll 0 0 transparent;  }
+#nav ul li.orange:hover, #nav ul li.orange.current {background: url("../images/fdorange.jpg") repeat-x scroll 0 0 transparent;  }
+#nav ul li.rouge:hover, #nav ul li.rouge.current {background: url("../images/fdrouge.jpg") repeat-x scroll 0 0 transparent;  }
+#nav ul li.beige:hover, #nav ul li.beige.current {background: url("../images/fdbeige.jpg") repeat-x scroll 0 0 transparent;  }
+
+#nav ul li.or a:hover, #nav ul li.or ul li.current a{background: #997e03; }
+#nav ul li.violet a:hover, #nav ul li.violet ul li.current a{background: #960099; }
+#nav ul li.bleu a:hover, #nav ul li.bleu ul li.current a{background: #087599; }
+#nav ul li.vert a:hover, #nav ul li.vert ul li.current a{background: #3b9908; }
+#nav ul li.jaune a:hover, #nav ul li.jaune ul li.current a{background: #949908; }
+#nav ul li.orange a:hover, #nav ul li.orange ul li.current a{background: #994602; }
+#nav ul li.rouge a:hover, #nav ul li.rouge ul li.current a{background: #991b02; }
+#nav ul li.beige a:hover, #nav ul li.beige ul li.current a{background: #998b79; }
+
+#nav ul li>a[href="#"]:hover{
+background:none;    
+}
+
+/*body.or #menuCat ul li:hover,body.or #menuCat ul li.current {background: url("../images/orHov.png") no-repeat scroll 0 0 transparent; }
+body.violet #menuCat ul li:hover,body.violet #menuCat ul li.current {background: url("../images/violetHov.png") no-repeat scroll 0 0 transparent;  }
+body.bleu #menuCat ul li:hover,body.bleu #menuCat ul li.current {background: url("../images/bleuHov.png") no-repeat scroll 0 0 transparent;  }
+body.vert #menuCat ul li:hover,body.vert #menuCat ul li.current {background: url("../images/vertHov.png") no-repeat scroll 0 0 transparent; }
+body.jaune #menuCat ul li:hover ,body.jaune #menuCat ul li.current{background: url("../images/jauneHov.png") no-repeat scroll 0 0 transparent;  }
+body.orange #menuCat ul li:hover,body.orange #menuCat ul li.current{background: url("../images/orangeHov.png") no-repeat scroll 0 0 transparent;  }
+body.rouge #menuCat ul li:hover,body.rouge #menuCat ul li.current{background: url("../images/rougeHov.png") no-repeat scroll 0 0 transparent;  }
+body.beige #menuCat ul li:hover,body.beige #menuCat ul li.current{background: url("../images/beigeHov.png") no-repeat scroll 0 0 transparent;  }
+*/
+
+
+#content{padding-top:10px;}
+
+#container {
+    min-height: 645px;
+    margin: auto;
+    position: relative;
+    width: 960px;
+}
+
+#flecheG a, #flecheD a, #flecheD a:hover, #flecheG a:hover {
+    background: url("../images/fleche.png") no-repeat scroll 0 0 transparent;
+    height: 100px;
+    position: absolute;
+    width: 40px;
+}
+#flecheG a {
+    background-position: 0 0;
+    left: -39px;
+}
+#flecheD a {
+    background-position: -40px 0;
+    right: -42px;
+}
+#flecheG a:hover {
+    background-position: 0 -100px;
+    left: -39px;
+}
+#flecheD a:hover {
+    background-position: -40px -100px;
+    right: -42px;
+}
+
+
+#carousel
+{
+    height: 350px;
+    position: relative;
+}
+
+#carousel-Bienvenue, #carousel-Actu {
+    height: 350px;
+    width: 960px;
+    position: absolute;
+    top:0;
+    left:0;
+}
+
+.texte {
+    height: 360px;
+    position: absolute;
+    right: 0;
+    width: 480px;
+}
+.texte p {
+    color: #FFFFFF;
+    font-size: 13px;
+    margin: 10px;
+}
+
+#carousel-Bienvenue .image ,#carousel-Actu .image{
+    height: 340px;
+    left: 0;
+    position: absolute;
+    width: 600px;
+    z-index: 10;
+}
+
+#carousel-Bienvenue .image{
+     background: url("../images/imgBienvenue.png") no-repeat scroll 0 0 transparent;
+     top: 0px;}
+     
+#carousel-Actu .image{
+   background: url("../images/imgActu.png") no-repeat scroll 0 0 transparent;
+    top: 17px;
+}
+#carousel-Bienvenue .texte .titre,#carousel-Actu .texte .titre {
+    height: 20px;
+    margin-left: 216px;
+    width: 255px;
+}
+
+#carousel-Bienvenue .texte .titre{background: url("../images/bienvenue.png") no-repeat scroll 0 0 transparent;}
+#carousel-Actu .texte .titre {background: url("../images/actu.png") no-repeat scroll 0 0 transparent;}
+
+#carousel-Bienvenue .texte h1  {
+    border-bottom: 1px solid;
+    color: #FFFFFF;
+    font-weight: normal;
+    margin: 10px;
+    padding-bottom: 10px;
+}
+
+#carousel-Actu .texte h1 {
+    border-bottom: 1px solid;
+    color: #FFFFFF;
+    font-weight: bolder;
+    margin: 10px;
+}
+
+#column {
+    min-height: 280px;
+    position: relative;
+    width: 960px;
+}
+#column-left {
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 320px;
+}
+
+#rechercher {
+    background: url("../images/rechercher.png") no-repeat scroll 0 0 transparent;
+    height: 59px;
+    width: 320px;
+    position:relative;
+}
+#accesRapide {
+    height: 156px;
+    padding-top: 15px;
+    width: 320px;
+}
+
+#accesRapide ul {
+    margin: 0;
+    padding: 0;
+}
+
+#accesRapide ul li{cursor:pointer;}
+
+#column-middle {
+    background: url("../images/fondbas.png") no-repeat scroll 0 0 transparent;
+    height: 280px;
+    left: 320px;
+    position: absolute;
+    top: 0;
+    width: 320px;
+}
+
+#column-middle #texteGalerie{
+  background: url("../images/titreGalerie.jpg") no-repeat scroll right center transparent;
+    height: 38px;
+    padding-left: 20px;
+    padding-top: 10px;
+    width: 267px;
+}
+
+#imageGalerie{
+    height: 212px;
+    padding-left: 20px;
+    padding-top: 13px;
+    width: 267px;
+    position:relative;
+}
+#imageGalerie .item
+{
+     left: 20px;
+    position: absolute;
+    top: 7px;
+}
+
+#column-right {
+    background: url("../images/fondbas.png") no-repeat scroll right center transparent;
+    height: 280px;
+    position: absolute;
+    right: -13px;
+    top: 0;
+    width: 333px;
+}
+
+#column-right h1{
+float: left;
+    font-size: 13px;
+    font-weight: bolder;
+    margin: 0 20px 5px 5px;
+    width: 185px;
+}
+
+#agenda p{
+font-size: 12px;
+ /*   margin: 0 20px 0 0;
+    padding: 20px 0 15px;*/
+    text-indent: 20px;
+}
+#agenda .item{
+    margin-top: 17px;
+}
+#agenda .head {
+    background: url("../images/agenda.png") no-repeat scroll right top transparent;
+    /*float: right;
+    right: -7px;
+    top: 0;
+    */
+    height: 49px;
+    position: relative;
+    width: 339px;
+}
+
+#agenda .categorie
+{
+background: url("../images/etiquetteAgenda.jpg") no-repeat scroll 0 0 transparent;
+    float: left;
+    height: 15px;
+    width: 120px;
+}
+
+#agenda .item1{padding-top:55px;}
+
+
+#agenda .categorie-84{background-position:0 0px;}
+#agenda .categorie-79{background-position:0 -15px;}
+#agenda .categorie-81{background-position:0 -30px;}
+
+#agenda .categorie-74{background-position:0 -45px;}
+#agenda .categorie-70{background-position:0 -60px;}
+#agenda .categorie-66{background-position:0 -75px;}
+#agenda .categorie-52{background-position:0 -90px;}
+#agenda .categorie-49{background-position:0 -105px;}
+
+#rechercher .input
+{
+    left: 38px;
+    position: absolute;
+    top: 13px;
+}
+#rechercher .input>input
+{
+ border: medium none;
+    color: #7D7D7D;
+    font-style: italic;
+    height: 30px;
+    padding-left: 10px;
+    width: 191px;
+}
+
+#rechercher input[type="submit"]
+{
+   background: url("../images/search.png") no-repeat scroll 0 0 transparent;
+    border: medium none;
+    cursor: pointer;
+    height: 32px;
+    position: absolute;
+    right: 35px;
+    top: 13px;
+    width: 32px;
+    font-size:0;
+}
+
+.ResultTermMatch{font-weight: bold;
+background-color:#ffadad;}
+
+#accesRapide ul li {
+   /* -moz-transition: all 0.5s ease 0s;*/
+    background: url("../images/iconeAR2.png") no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    height: 78px;
+    width: 60px;
+}
+
+#SearchResultInfos{
+ padding-left: 10px;
+padding-right: 10px;
+}
+
+#SearchResultInfos .title{
+    display: block;
+    font-size: 22px;
+    font-weight: bold;
+    color: #2A2A2A;
+}
+
+#SearchResultInfos .searchTerm{
+display: block;
+    font-style: italic;
+    padding: 15px 30px 15px 15px;
+    text-align: center;
+}
+
+
+
+#accesRapide ul li a{
+    display: block;
+    font-size: 0;
+    height: 78px;
+}
+#accesRapide ul li.icone-1 {background-position: 0 0;}
+#accesRapide ul li.icone-2 {background-position: -60px 0;}
+#accesRapide ul li.icone-3 {background-position: -120px 0;}
+#accesRapide ul li.icone-4 {background-position: -180px 0;}
+#accesRapide ul li.icone-5 {background-position: -240px 0;}
+#accesRapide ul li.icone-6 {background-position: -300px 0;}
+#accesRapide ul li.icone-7 {background-position: -360px 0;}
+#accesRapide ul li.icone-8 {background-position: -420px 0;}
+#accesRapide ul li.icone-9 {background-position: -480px 0;}
+#accesRapide ul li.icone-10{background-position: -540px 0;}
+#accesRapide ul li.icone-1:hover {background-position: 0 -80px;}
+#accesRapide ul li.icone-2:hover {background-position: -60px -80px;}
+#accesRapide ul li.icone-3:hover {background-position: -120px -80px;}
+#accesRapide ul li.icone-4:hover {background-position: -180px -80px;}
+#accesRapide ul li.icone-5:hover {background-position: -240px -80px;}
+#accesRapide ul li.icone-6:hover {background-position: -300px -80px;}
+#accesRapide ul li.icone-7:hover {background-position: -360px -80px;}
+#accesRapide ul li.icone-8:hover {background-position: -420px -80px;}
+#accesRapide ul li.icone-9:hover {background-position: -480px -80px;}
+#accesRapide ul li.icone-10:hover {background-position: -540px -80px;}
+
+
+
+
+/*//////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ /////////////////////////css page default/////////////////////////////////////
+ //////////////////////////////////////////////////////////////////////////////
+ ////////////////////////////////////////////////////////////////////////////*/
+#headPage
+{
+    position: relative;
+    top: -35px;
+}
+
+/*#headPage #banniere {
+    height: 129px;
+    left: -29px;
+    position: relative;
+    width: 1000px;
+    z-index: 1;
+}*/
+
+/*////////////////////Banniere page 2e ex///////*/
+#headPage #banniere {
+    background: url("../images/pixel.png") repeat scroll center bottom transparent;
+    height: 30px;
+    left: 50px;
+    position: relative;
+    width: 911px;
+    z-index: 1;
+    top:50px;
+}
+
+#menuImage
+{
+background: url("../images/fdIconeCat.png") repeat scroll 0 0 transparent;
+    height: 129px;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 129px;
+    z-index: 20;
+}
+
+#menuImage img
+{
+left: 12px;
+    position: relative;
+    top: 12px;
+}
+
+body.icone #menuImage:after{
+background: url("../images/iconeCat.png") no-repeat ;
+    content: "";
+    height: 105px;
+    left: 12px;
+    position: absolute;
+    top: 12px;
+    width: 105px;
+    z-index: 30;
+}
+body.icone-1 #menuImage:after{background-position:0 0px;}
+body.icone-2 #menuImage:after{background-position: -105px 0;}
+body.icone-3 #menuImage:after{background-position: -210px 0;}
+body.icone-4 #menuImage:after{background-position: -315px ;}
+body.icone-5 #menuImage:after{background-position: -420px 0;}
+body.icone-6 #menuImage:after{background-position: -525px 0;}
+body.icone-7 #menuImage:after{background-position: -630px 0;}
+body.icone-8 #menuImage:after{background-position: -735px 0;}
+body.icone-9 #menuImage:after{background-position: -840px 0;}
+
+
+
+
+/*#menuImage
+{
+    left: 30px;
+    position: absolute;
+    top: 12px;
+    z-index: 20;
+}*/
+
+#titreCat
+{
+    background: url("../images/titreCat.png") repeat scroll 0 0 transparent;
+    height: 22px;
+    left: 80px;
+    position: relative;
+    top: -26px;
+    width: 298px;
+}
+
+body.search #titreCat{background-position:0px -372px;}
+body.or #titreCat{background-position:0px 0px;}
+body.violet #titreCat{background-position:0px -22px;}
+body.bleu #titreCat{background-position:0px -44px;}
+body.vert #titreCat{background-position:0px -66px;}
+body.jaune #titreCat{background-position:0px -88px;}
+body.orange #titreCat{background-position:0px -110px;}
+body.rouge #titreCat{background-position:0px -132px;}
+body.beige #titreCat{background-position:0px -154px;}
+
+body.icone-1 #titreCat{background-position:0px -176px;}
+body.icone-2 #titreCat{background-position:0px -198px;}
+body.icone-3 #titreCat{background-position:0px -220px;}
+body.icone-4 #titreCat{background-position:0px -242px;}
+body.icone-5 #titreCat{background-position:0px -264px;}
+body.icone-6 #titreCat{background-position:0px -286px;}
+body.icone-7 #titreCat{background-position:0px -308px;}
+body.icone-8 #titreCat{background-position:0px -330px;}
+body.icone-9 #titreCat{background-position:0px -352px;}
+
+
+#breadcrumbs {
+    color: #000;
+    left: 130px;
+    position: absolute;
+    top: 57px;
+    z-index: 1;
+}
+
+#breadcrumbs a,#breadcrumbs>span {
+color: #2a2a2a;
+    font-family: arial,helvetica,sans-serif;
+    font-size: 11px;
+    text-transform: capitalize;
+}
+
+#breadcrumbs a:hover{color:#b60b0b;}
+
+.separator{margin:0 5px;}
+
+/*#menuCat {
+
+    height: 252px;
+    left: 17px;
+    padding-top: 35px;
+    position: relative;
+    top: 0;
+    width: 236px;
+    z-index: 0;
+}*/
+
+#menuCat,#SearchResultInfos {
+   background: url("../images/pixel.png") repeat scroll center bottom transparent;
+    height: 245px;
+    left: 30px;
+    padding-top: 50px;
+    position: relative;
+    top: 0;
+    width: 311px;
+    z-index: 0;
+}
+
+#menuCat ul
+{
+     margin: 0;
+     padding:0;
+}
+
+#menuCat ul li
+{
+     color: #FFFFFF;
+     list-style: none;
+     width:240px;
+     height:24px;
+     position:relative;
+     left:-4px;
+}
+
+#menuCat ul li a
+{
+color: #2A2A2A;
+    display: block;
+    font-size: 13px;
+    padding-left: 15px;
+    text-decoration: none;
+    width: 224px;
+}
+
+body #menuCat ul li a:hover,body #menuCat ul li.current a {background: url("../images/catHover.png") no-repeat scroll 0 0 transparent;
+display:block;
+width:240px;
+height:24px;
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: bolder;}
+
+body.or #menuCat ul li:hover,body.or #menuCat ul li.current a {background-position:0px 0px; }
+body.violet #menuCat ul li a:hover,body.violet #menuCat ul li.current a{background-position:0px -24px; }
+body.bleu #menuCat ul li a:hover,body.bleu #menuCat ul li.current a {background-position:0px -48px; }
+body.vert #menuCat ul li a:hover,body.vert #menuCat ul li.current  a{background-position:0px -72px; }
+body.jaune #menuCat ul li a:hover ,body.jaune #menuCat ul li.current a{background-position:0px -96px; }
+body.orange #menuCat ul li a:hover,body.orange #menuCat ul li.current a{background-position:0px -120px; }
+body.rouge #menuCat ul li a:hover,body.rouge #menuCat ul li.current a{background-position:0px -144px; }
+body.beige #menuCat ul li a:hover,body.beige #menuCat ul li.current a{background-position:0px -168px; }
+body.icone #menuCat ul li a:hover,body.icone #menuCat ul li.current a{background-position:0px -192px; }
+
+
+
+#Page,#SearchResult
+{
+    position: relative;
+    top: 46px;
+}
+
+/*#Page
+{
+    position: relative;
+    top: -35px;
+}*/
+
+
+#Page #column-left {
+    height: 287px;
+    left: 0;
+    position: absolute;
+    top: -31px;
+    width: 320px;
+}
+#rightPage {
+background: url("../images/fondPage.png") repeat-y scroll 0 0 transparent;
+    float: right;
+    min-height: 323px;
+    padding-left: 30px;
+    padding-right: 30px;
+    position: relative;
+    right: -10px;
+    top: -31px;
+    width: 580px;
+}
+#rightPage:after {
+background: url("../images/fondPageB.png") no-repeat scroll center bottom transparent;
+    bottom: -19px;
+    content: "";
+    height: 19px;
+    position: absolute;
+    right: 0;
+    width: 640px;
+}
+
+
+#rightPage h1.mainTitle{
+    color: #2A2A2A;
+    font-size: 17px;
+}
+
+
+#bottomPage{
+     height: 124px;
+    position: absolute;
+    right: 15px;
+    width: 200px;
+    bottom:0px;
+}
+
+.resultItem{border-bottom: 1px solid #D7D7D7;
+    padding: 10px;}
+
+.resultItem .content{padding:10px;}
+
+.resultItem a.url{font-size:12px;}
+
+.resultItem a.title{ color: #B60B0B;
+    font-size: 19px;
+    text-decoration: none;}
+
+
+
+/*body.or #bottomPage {background: url("../images/stylo.png") repeat scroll 0 0 transparent;}
+body.violet #bottomPage {background: url("../images/coeur.png") no-repeat scroll center bottom transparent;}
+body.bleu #bottomPage {background: url("../images/BanBleu.png") no-repeat scroll center bottom transparent;}
+body.vert #bottomPage {background: url("../images/BanVert.png") no-repeat scroll center bottom transparent;}
+body.jaune #bottomPage {background: url("../images/BanJaune.png") no-repeat scroll center bottom transparent;}
+body.orange #bottomPage {background: url("../images/BanOrange.png") no-repeat scroll center bottom transparent;}
+body.rouge #bottomPage {background: url("../images/BanRouge.png") no-repeat scroll center bottom transparent;}
+body.beige #bottomPage {background: url("../images/BanBeige.png") no-repeat scroll center bottom transparent;}*/
+
+/*body.or #menuCat{background: #b49504;}
+body.violet #menuCat{background: #c300c5;}
+body.bleu #menuCat{background: #0aa4d7;}
+body.vert #menuCat{background: #52d70a;}
+body.jaune #menuCat{background: #d0d70a;}
+body.orange #menuCat{background: #ec6b02;}
+body.rouge #menuCat{background: #ec2802;}
+body.beige #menuCat{background: #b6a58f;}*/
+
+
+#footer {
+    text-align: center;
+    width: 100%;
+}
+
+#footer a
+{
+    color: #BABABA;
+    text-decoration: none;
+}
+
+#footer a:hover
+{
+    color: #2a2a2a;
+
+}
+
+
+a, p, h1, h2, h3, h4,.date>span,#rechercher .input>input,#SearchResultInfos>span, .resultItem .content
+{
+color: #4b4b4b;
+    font-family: arial,helvetica,sans-serif;
+    font-size: 13px;
+    text-align: justify;
+}

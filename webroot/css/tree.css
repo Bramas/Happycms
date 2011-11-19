@@ -1,0 +1,287 @@
+	
+/* CSS Tree menu styles */
+.tree
+{
+    font-size:14px;
+    width: 182px;
+    font-weight:normal;
+}
+.tree a
+{
+    text-decoration:none;
+}
+.tree.disabled a
+{
+    color:#888888;
+}
+.tree li>div{
+    position: relative;
+    height:15px;
+    padding-bottom: 3px;
+    -webkit-transition:height 0.2s ease;
+    -moz-transition:height 0.2s ease;
+    -o-transition:height 0.2s ease;
+    -ms-transition:height 0.2s ease;
+    transition:height 0.2s ease;
+}
+.tree li>div:hover{
+    height:15px;
+}
+.tree ul
+{
+    /*min-height:10px;*/
+    padding: 0;
+    margin: 0 0 0 27px;
+}
+.tree .empty
+{
+    /*min-height:20px;*/
+	display:none;
+}
+.tree ul ul li
+{
+        background: url(../img/vline.png) repeat-y;
+	
+}
+.tree ul ul li.end
+{
+        background: url(../img/vline_end.png) no-repeat 0px -16px;
+	
+}
+
+.tree ul li 
+{
+        padding: 2px 0 0 0px;
+	margin: 0 0 0 -7px;
+        position: relative; 
+        list-style: none;
+	display:none;
+        cursor:pointer;
+       
+}
+.tree ul li div.hline
+{
+    position: absolute;
+    left:0px;
+    top:-5px;
+background: url(../img/hline.png) no-repeat 0px 16px;
+display: inline-block;
+height: 18px;
+width: 15px;
+}
+.tree ul li>div>.node-expand
+{
+	position: absolute;
+	left:-7px;
+	top:0;
+	display:inline-block;
+        height: 18px;
+        width: 18px;
+        background: url(../img/toggle-small-expand.png) 0px 4px no-repeat;
+       
+}
+.tree ul li.expand>div>.node-expand
+{
+        background-image: url(../img/toggle-small.png);
+       
+}
+.tree ul li.leaf>div>.node-expand
+{
+        background: none;
+}
+.tree .icon
+{
+    cursor:move;
+    position: absolute;
+    left:14px;
+    top:3px;
+    height:18px;
+    width:18px;
+    display:inline-block;
+    background: url(../img/skin.png)  -180px -162px no-repeat;
+}
+.tree ul li.leaf>div>span>a
+{
+       
+}
+
+.tree ul .expand>ul>li, .tree>ul>li,.tree ul.empty li
+{
+        display:block;
+}
+
+.tree div.current>span,.tree div>span:hover
+{
+    /*width: 100%;*/
+    display: inline-block;
+    background: #FEFEFE;
+}
+.tree li>div>span
+{
+    position: relative;
+    left:36px;
+    top: 5px;
+    height:100%;
+    padding:1px;
+    /*width: 100%;*/
+    width: 100%;
+    display: inline-block;
+    /*background: #dddddd;*/
+}
+.tree li>div>span:hover
+{
+    overflow: visible;
+}
+.tree .page-link
+{ 
+    display: inline-block;
+    overflow: hidden;
+    height:14px;
+}
+.tree .page-link .warning
+{
+    margin-bottom: -6px;
+    overflow: hidden;
+    padding-left: 18px;
+}
+.tree li.state-receiver
+{
+    padding:0;
+    background-color:#ff0000;
+    height:0px;
+}
+.tree div.receiver
+{
+    height:0px;
+    background-color:transparent;
+    display:block;
+}
+.tree div.receiver.state-active
+{
+}
+.tree div.receiver.state-hover
+{
+    background-color:#ff0000;
+}
+
+
+.tree.onMove ul
+{
+
+}
+.tree.onMove ul ul li.end
+{
+        background: url(../img/vline.png) repeat-y;
+	
+}
+.tree .node.state-hover
+{
+    border-bottom:2px solid #ff0000;
+}
+
+.tree .add-page
+{
+    cursor:move;
+    margin-top:20px;
+    margin-bottom:20px;
+    border:none;
+    background:none;
+    
+}
+.tree .add-page div span
+{
+    width:150px;
+}
+.tree .add-page div{
+    display:inline-block;
+}
+.tree .add-page .icon
+{
+    background-position:-232px -36px;
+}
+.tree .actions span{
+    float:left;
+        font-size:0;
+    height:16px;
+    width:16px;
+    margin:0;
+
+}
+.tree .actions span a{
+   margin:0;
+   height:100%;
+   width:100%;
+   display:inline-block;
+
+}
+.tree .actions
+{
+    background: #ffffff;
+    display:none;
+    margin: 0;
+    position: absolute;
+    right: 10px;
+    top: 0px;
+    width:18px;
+}
+.tree span:hover .actions,.tree span:hover .flags 
+{
+    display:block;
+}
+.tree .flags 
+{
+     z-index: 900;
+    position: absolute;
+    right: -22px;
+    top:0;
+    width: 20px;
+    display:none;
+}
+.tree .flags a
+{
+    position:relative;
+}
+.tree .flags a,.tree .flags span
+{
+    display:inline-block;
+    height:17px;
+    width: 18px;
+}
+.tree .flags a img{
+    height: 12px;
+}
+
+.tree .flags span
+{
+    position:absolute;
+    top:0;
+    left:0;
+}
+.tree .flags .no-lang
+{
+    background:url(../img/flags/no.png) no-repeat;
+}
+.tree .flags .unpublished
+{
+    left: -8px;
+    top: 1px;
+    background:url(../img/dot_red.png) no-repeat;
+}
+.tree .flags .published
+{
+    left: -8px;
+    top: 1px;
+    background:url(../img/dot_green.png) no-repeat;
+}
+.tree .flags .lang-fre
+{
+    background:url(../img/flags/fre.png) no-repeat;
+}
+.tree .flags .lang-eng
+{
+    background:url(../img/flags/eng.png) no-repeat;
+}
+.placeholder
+{
+    border:2px dashed #666666;
+}
