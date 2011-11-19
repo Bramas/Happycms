@@ -1,0 +1,74 @@
+<?php
+
+class PagesController extends AppController
+{
+    
+   var $uses =  array();
+    var $helpers = array('Html');
+    
+    
+    function admin_display_edit($params)
+    {
+        
+        $this->data = $this->getItem($params);
+        
+        
+        $this->helpers[] = 'Tinymce';
+        //exit();
+    }
+    function admin_display_new($menu_id)
+    {
+        
+        $item_id = $this->createItem();
+        
+        return $item_id
+       
+       
+    }
+    
+
+    function display($id=0)
+    {
+        if(!Configure::read('Menu.id'))
+        {
+            $this->cakeError('error404');
+            exit();
+        }
+        $r = $this->getItem($id,false);
+        
+        $this->set('item',$r['Content']);
+    }
+
+    function searchResult($result)
+    {
+        
+        $content = json_decode($result['Content']['params'],true);
+        App::import('Model','Menu');
+
+        $Menu = new Menu();
+        $Menu->Behaviors->attach('Content');
+        $menu = $Menu->find('first',array(
+            'conditions'=>array(
+                'Menu.extension'=>'pages',
+                'Menu.params'=>$result['Content']['item_id'])
+            )
+        );
+        if(empty($menu['Content']['alias']))
+        {
+            return false;
+        }
+
+
+        return array(
+            'url'=>array(
+                'controller'=>$menu['Menu']['extension'],
+                'action'=>$menu['Menu']['view'],
+                'slug'=>$menu['Content']['alias']
+                ),
+            'title'=>$menu['Content']['title'],
+            'content'=>$content['text']
+            );
+    }
+}
+
+?>
