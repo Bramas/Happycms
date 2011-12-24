@@ -1,0 +1,4 @@
+<IfModule mod_rewrite.c>
+   RewriteEngine on
+   RewriteRule    ^install/index$ app/webroot/install/index    [L]
+</IfModule>

@@ -1,0 +1,99 @@
+.rounded (@pix : 5px)
+{
+	-webkit-border-radius:@pix;
+	-moz-border-radius:@pix;
+	border-radius:@pix;
+}
+
+table
+{
+	border:1px solid #eeeeee;
+}
+#filesList
+{
+	background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #999999;
+    height: 365px;
+    margin: 10px;
+    overflow-y: scroll;
+    padding: 10px;
+    .rounded;
+    .media {
+	    float: left;
+	    height: 120px;
+	    width: 120px;
+	    .rounded;
+	    border:1px solid #cccccc;
+	    /*background:#eeeeee;*/
+	    margin:5px;
+	    cursor:pointer;
+	    padding:2px;
+	    overflow: hidden;
+	    position:relative;
+	    .actions
+		{
+			position: absolute;
+		    right: 0;
+		    top: 0;
+		    background-color: rgb(255,255,255);
+		    .delete{
+		    	background:url('../img/deselectall_small_normal_hover.png') no-repeat;
+		    	height:18px;
+		    	width:18px;
+		    	font-size:0;
+		    }
+		}
+	}
+}
+#filesList .media .image
+{
+	margin-left:auto;
+	margin-right:auto;
+    width: 100px;
+    img{
+    	max-width:100px;
+    	max-height:100px;
+    }
+}
+#filesList .media:hover {
+    border:1px solid #999999;
+    background:#dddddd;
+}
+#filesList .filename {
+	font-size: 12px;
+}
+
+.clear
+{
+	clear:both;
+}
+#uploader{
+	border-left: 1px solid #999999;
+    float: left;
+    margin-left: 30px;
+    margin-right: auto;
+    padding-left: 30px;
+    width: 306px;
+
+	h3{
+	    color: #333333;
+	    margin-bottom:  11px;
+	}
+}
+#filter
+{
+	float: left;
+    height: 100px;
+}
+body
+{
+	background: none repeat scroll 0 0 #b5b5b5;
+}
+
+#tinyShow
+{
+	background: none repeat scroll 0 0 #f0f0f0;
+}
+
+
+

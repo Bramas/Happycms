@@ -1,0 +1,104 @@
+\hypertarget{class_extension}{
+\section{\-Extension \-Class \-Reference}
+\label{class_extension}\index{\-Extension@{\-Extension}}
+}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_extension_ac97ad3a211910055ea89cca0cbfe96ea}{
+{\bfseries read} (\$params\-Name=null)}
+\label{class_extension_ac97ad3a211910055ea89cca0cbfe96ea}
+
+\item 
+\hypertarget{class_extension_ac8ce4bef9e66e64c4b6e8e3d7691433e}{
+{\bfseries write} (\$params\-Name, \$value, \$save=true)}
+\label{class_extension_ac8ce4bef9e66e64c4b6e8e3d7691433e}
+
+\item 
+\hyperlink{class_extension_ae978d04dce890b761ac3879e3b74375c}{get\-Next\-Id} (\$save=true)
+\item 
+\hypertarget{class_extension_ab459c435ce5174daebe9522f93280fbe}{
+{\bfseries load} (\$\-Hcontroller\-Name)}
+\label{class_extension_ab459c435ce5174daebe9522f93280fbe}
+
+\item 
+\hypertarget{class_extension_a67fa5f6af1ed44e7635a022436a7c5c3}{
+{\bfseries save} ()}
+\label{class_extension_a67fa5f6af1ed44e7635a022436a7c5c3}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_extension_a42ebad8a8c0a6300012daf8df5de872c}{
+{\bfseries \$name} = \char`\"{}\-Extension\char`\"{}}
+\label{class_extension_a42ebad8a8c0a6300012daf8df5de872c}
+
+\item 
+\hypertarget{class_extension_a298f61dc8a744785ea9e38fbb1a9bd94}{
+{\bfseries \$has\-Many} = array('\hyperlink{class_menu}{\-Menu}'=$>$array('foreign\-Key'=$>$'extension'))}
+\label{class_extension_a298f61dc8a744785ea9e38fbb1a9bd94}
+
+\item 
+{\bfseries \$has\-One}
+\item 
+\hypertarget{class_extension_a0e11c9a38d0ae1925507f18de6df7c69}{
+{\bfseries \$primary\-Key} = 'controller'}
+\label{class_extension_a0e11c9a38d0ae1925507f18de6df7c69}
+
+\item 
+\hyperlink{class_extension_adfc9e9443f5548da5fb81846472bfe92}{\$\-Hcontroller\-Name} = null
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{class_extension_ae978d04dce890b761ac3879e3b74375c}{
+\index{\-Extension@{\-Extension}!get\-Next\-Id@{get\-Next\-Id}}
+\index{get\-Next\-Id@{get\-Next\-Id}!Extension@{\-Extension}}
+\subsubsection[{get\-Next\-Id}]{\setlength{\rightskip}{0pt plus 5cm}\-Extension\-::get\-Next\-Id (
+\begin{DoxyParamCaption}
+\item[{\$}]{save = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}}
+\label{class_extension_ae978d04dce890b761ac3879e3b74375c}
+return the current\-\_\-id used for store the item in the content table and save the current\-\_\-d+1
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+boolean & {\em \$save} & if set to false the change is not going to be saved \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+a valid id 
+\end{DoxyReturn}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\hypertarget{class_extension_af1c4d0218b152e197099717ddb5fba7b}{
+\index{\-Extension@{\-Extension}!\$has\-One@{\$has\-One}}
+\index{\$has\-One@{\$has\-One}!Extension@{\-Extension}}
+\subsubsection[{\$has\-One}]{\setlength{\rightskip}{0pt plus 5cm}\-Extension\-::\$has\-One}}
+\label{class_extension_af1c4d0218b152e197099717ddb5fba7b}
+{\bfseries \-Initial value\-:}
+\begin{DoxyCode}
+ array(
+                       'Content'=>array(
+                                          'foreignKey'=>'',
+                                          'conditions'=>array(
+                                                              '
+      Content.extension'=>'extensions',
+                                                              'Content.item_id
+       = Extension.item_id'
+                                                              ))
+                        )
+\end{DoxyCode}
+\hypertarget{class_extension_adfc9e9443f5548da5fb81846472bfe92}{
+\index{\-Extension@{\-Extension}!\$\-Hcontroller\-Name@{\$\-Hcontroller\-Name}}
+\index{\$\-Hcontroller\-Name@{\$\-Hcontroller\-Name}!Extension@{\-Extension}}
+\subsubsection[{\$\-Hcontroller\-Name}]{\setlength{\rightskip}{0pt plus 5cm}\-Extension\-::\$\-Hcontroller\-Name = null}}
+\label{class_extension_adfc9e9443f5548da5fb81846472bfe92}
+name of the extension=name of the controller 
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+models/extension.\-php\end{DoxyCompactItemize}

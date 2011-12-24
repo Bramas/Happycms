@@ -1,0 +1,137 @@
+\hypertarget{class_content_behavior}{
+\section{\-Content\-Behavior \-Class \-Reference}
+\label{class_content_behavior}\index{\-Content\-Behavior@{\-Content\-Behavior}}
+}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_content_behavior_a452822643b4364f6c4b6a20af95d6462}{setup} (\&\$model, \$config=array())
+\item 
+\hyperlink{class_content_behavior_a882bfc5341b3f76903e1f8b1a917adab}{check\-If\-Its\-Loaded} (\&\$model)
+\item 
+\hyperlink{class_content_behavior_a051cb56c90e71bc686284e1ead3cac63}{before\-Find} (\&\$model, \$query)
+\item 
+\hyperlink{class_content_behavior_adb54e34db4918e3c8de3e69373966361}{after\-Find} (\&\$model, \$results, \$primary)
+\item 
+\hyperlink{class_content_behavior_a00ff6cc8480844f27fef4f0cd41d185f}{before\-Save} (\&\$model)
+\item 
+\hypertarget{class_content_behavior_a9ed0284d99a3db7592fdcb4dbdfc15f9}{
+{\bfseries before\-Delete} (\&\$model, \$cascade=true)}
+\label{class_content_behavior_a9ed0284d99a3db7592fdcb4dbdfc15f9}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_content_behavior_a59a50437bb125815bd1b315055535854}{
+{\bfseries \$extension\-Name} = null}
+\label{class_content_behavior_a59a50437bb125815bd1b315055535854}
+
+\item 
+\hypertarget{class_content_behavior_a3e067e8148e4ef691717f02f85980167}{
+{\bfseries \$custom\-Fields} = array()}
+\label{class_content_behavior_a3e067e8148e4ef691717f02f85980167}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{class_content_behavior_adb54e34db4918e3c8de3e69373966361}{
+\index{\-Content\-Behavior@{\-Content\-Behavior}!after\-Find@{after\-Find}}
+\index{after\-Find@{after\-Find}!ContentBehavior@{\-Content\-Behavior}}
+\subsubsection[{after\-Find}]{\setlength{\rightskip}{0pt plus 5cm}\-Content\-Behavior\-::after\-Find (
+\begin{DoxyParamCaption}
+\item[{\&\$}]{model, }
+\item[{\$}]{results, }
+\item[{\$}]{primary}
+\end{DoxyParamCaption}
+)}}
+\label{class_content_behavior_adb54e34db4918e3c8de3e69373966361}
+\-Remplace les donnée brut de la base contents (en \-Json) en array associatif. \-Cette fonction prend en charge le multilingue, c'est à dire que si les données contiennent plusieurs langues, toute les langues vont intégrées au résultat.
+
+\begin{DoxyReturn}{\-Returns}
+\$results traité  public 
+\end{DoxyReturn}
+
+\begin{DoxyParams}[1]{\-Parameters}
+array & {\em \$results} & contenant les resultats bruts \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_content_behavior_a051cb56c90e71bc686284e1ead3cac63}{
+\index{\-Content\-Behavior@{\-Content\-Behavior}!before\-Find@{before\-Find}}
+\index{before\-Find@{before\-Find}!ContentBehavior@{\-Content\-Behavior}}
+\subsubsection[{before\-Find}]{\setlength{\rightskip}{0pt plus 5cm}\-Content\-Behavior\-::before\-Find (
+\begin{DoxyParamCaption}
+\item[{\&\$}]{model, }
+\item[{\$}]{query}
+\end{DoxyParamCaption}
+)}}
+\label{class_content_behavior_a051cb56c90e71bc686284e1ead3cac63}
+2 cas \-:
+\begin{DoxyItemize}
+\item \-Si tout est contenu dans la table contents \-: id devient item\-\_\-id et on remplace certainnes conditions.
+\item \-Si la table est liée à la table contents par item\-\_\-id \-: on join la table contents \begin{DoxyReturn}{\-Returns}
+\$query modifiée  public 
+\end{DoxyReturn}
+
+\begin{DoxyParams}[1]{\-Parameters}
+array & {\em \$query} & brut \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}\$model-\/$>$use\-Table) \hypertarget{class_content_behavior_a00ff6cc8480844f27fef4f0cd41d185f}{
+\index{\-Content\-Behavior@{\-Content\-Behavior}!before\-Save@{before\-Save}}
+\index{before\-Save@{before\-Save}!ContentBehavior@{\-Content\-Behavior}}
+\subsubsection[{before\-Save}]{\setlength{\rightskip}{0pt plus 5cm}\-Content\-Behavior\-::before\-Save (
+\begin{DoxyParamCaption}
+\item[{\&\$}]{model}
+\end{DoxyParamCaption}
+)}}
+\label{class_content_behavior_a00ff6cc8480844f27fef4f0cd41d185f}
+\-Sauvegarde un élément et retourne false. \-Cette fonction prend en charge le multilingue, c'est à dire que si les données contiennent plusieurs langues, toute les langues vont être sauvegardées.
+
+\begin{DoxyReturn}{\-Returns}
+false si les données sont brut, true si les données ont été traiter par \hyperlink{class_content_behavior_a00ff6cc8480844f27fef4f0cd41d185f}{before\-Save()}  public 
+\end{DoxyReturn}
+\hypertarget{class_content_behavior_a882bfc5341b3f76903e1f8b1a917adab}{
+\index{\-Content\-Behavior@{\-Content\-Behavior}!check\-If\-Its\-Loaded@{check\-If\-Its\-Loaded}}
+\index{check\-If\-Its\-Loaded@{check\-If\-Its\-Loaded}!ContentBehavior@{\-Content\-Behavior}}
+\subsubsection[{check\-If\-Its\-Loaded}]{\setlength{\rightskip}{0pt plus 5cm}\-Content\-Behavior\-::check\-If\-Its\-Loaded (
+\begin{DoxyParamCaption}
+\item[{\&\$}]{model}
+\end{DoxyParamCaption}
+)}}
+\label{class_content_behavior_a882bfc5341b3f76903e1f8b1a917adab}
+\-Vérifie si le behavior est correctement chargé et sinon le recharge avec les config d'origine \begin{DoxyReturn}{\-Returns}
+\$query modifiée  public 
+\end{DoxyReturn}
+
+\begin{DoxyParams}[1]{\-Parameters}
+array & {\em \$query} & brut \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_content_behavior_a452822643b4364f6c4b6a20af95d6462}{
+\index{\-Content\-Behavior@{\-Content\-Behavior}!setup@{setup}}
+\index{setup@{setup}!ContentBehavior@{\-Content\-Behavior}}
+\subsubsection[{setup}]{\setlength{\rightskip}{0pt plus 5cm}\-Content\-Behavior\-::setup (
+\begin{DoxyParamCaption}
+\item[{\&\$}]{model, }
+\item[{\$}]{config = {\ttfamily array()}}
+\end{DoxyParamCaption}
+)}}
+\label{class_content_behavior_a452822643b4364f6c4b6a20af95d6462}
+\-Setup le behavior
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+mixed & {\em \$config} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+void  public 
+\end{DoxyReturn}
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+models/behaviors/content.\-php\end{DoxyCompactItemize}

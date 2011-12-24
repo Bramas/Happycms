@@ -1,0 +1,25 @@
+.jquery-checkbox       {display: inline; font-size: 20px; line-height: 20px; cursor: pointer; cursor: hand;}
+.jquery-checkbox .mark {display: inline;}
+
+.jquery-checkbox .checkbox-img {vertical-align: middle; width: 60px; height: 20px;}
+.jquery-checkbox .checkbox-img{background: transparent url(../img/checkbox.png) no-repeat;}
+
+.jquery-checkbox .checkbox-img{
+	background-position: 0px 0px;
+}
+.jquery-checkbox-hover .checkbox-img{
+	background-position: 0px -20px;
+}
+.jquery-checkbox-checked .checkbox-img{
+	background-position: 0px -40px;
+}
+.jquery-checkbox-checked .jquery-checkbox-hover .checkbox-img {
+	background-position: 0px -60px;
+}
+
+.jquery-checkbox-disabled .checkbox-img{
+	background-position: 0px -80px;
+}
+.jquery-checkbox-checked .jquery-checkbox-disabled .checkbox-img{
+	background-position: 0px -100px;
+}

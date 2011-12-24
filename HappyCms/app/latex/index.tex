@@ -1,0 +1,107 @@
+\hypertarget{index_intro_sec}{}\section{\-Introduction}\label{index_intro_sec}
+\-Happy \-C\-M\-S est un un outils entre un \-C\-M\-S est un framwork php \-M\-V\-C. \-Le but étant de développer avec la facilité d'un framwork mais que le résultat (notament la partie administration) soit intégré facilement dans une interface conventionnée. \-Il est basé sur le framework \-Cake\-P\-H\-P et conserve tous les conventions de \-Cake\-P\-H\-P. \-Il est principalement destiné aux développeurs (qui connaissent cake\-P\-H\-P de préférence). \-Après son installation vous pourrez continuer à développer votre application cake\-P\-H\-P comme d'habitude, et en plus de la gestion de certaines tache récurentes (utilisateurs, menus, pages simples..) vous aurez a disposition plusieurs controllers, models, et un behavior qui permette, en suivant un petit nombre de règles, d'intégré votre controller à \-Happy\-C\-M\-S. \par
+\par
+ \-Pour le moment le projet manque un peu d'unité, tout par un peu dans tout les sens, le temps de trouver des conventions. \-Pour le moment aussi le projet ne respect pas les convention cake\-P\-H\-P 2.\-0 ce qui est dommage. \par
+\par
+ \-Le projet étant encore à ses tout début, il est ouvert à toutes suggestions.\hypertarget{index_install_sec}{}\section{\-Installation}\label{index_install_sec}
+\hypertarget{index_tools_subsec}{}\subsection{\-Tools required\-:}\label{index_tools_subsec}
+
+\begin{DoxyItemize}
+\item \-Cake\-P\-H\-P 1.\-3.$\ast$
+\end{DoxyItemize}
+
+\-Pour l'installation il suffit d'ajouter les fichiers de cake php à un projet vide connecté à la base de données (et dont le \-Security.\-salt a été correctement changé) et de lancer l'installation \-S\-I\-T\-E\-\_\-\-B\-A\-S\-E/install/ \par
+\par
+ \-L'installeur ajoute quelques tables et crée un utilisateurs admin.\hypertarget{index_example_sec}{}\section{\-Example}\label{index_example_sec}
+\-Voici un exemple rapide pour offrir la possibilité à l'admin de rajouter des pages simples. \par
+\-Un des principaux avantage de \-Happy\-C\-M\-S c'est qu'on a pas besoins de toucher à la base de données. \par
+ \par
+ \-Il nous faut un controller, un model, 2 vues et préciser à \-Happy\-C\-M\-S que notre extension offre une nouvelle possibilité. \par
+\par
+ \-On commence par crée une extension que l'on appel \char`\"{}pages\char`\"{}.\par
+ config/extensions.\-php 
+\begin{DoxyCode}
+ Configure::write('Extensions.pages',array(
+                                           'name'=>'Pages Simple',
+                                           'views'=>array(
+                                              'display'=>array(
+                                                  'name'=>"Affichage d'une page
+       simple"
+                                                  )
+                                          )));
+\end{DoxyCode}
+ \par
+ \-Le code pour le controlleur change très peu d'un controlleur basique n'utilisant pas \-Happy\-C\-M\-S \par
+\par
+controllers/pages\-\_\-controller.\-php 
+\begin{DoxyCode}
+ class PagesController extends AppController
+ {
+                var $uses = array('Page');
+                
+                public function display($id)
+                {
+                        $this->set($this->Page->findById($id));
+                }
+                public function admin_display_edit($id)
+                {
+                        $this->request->data = $this->Page->findById($id);
+                }
+
+                public function admin_display_new($menu_id)
+                {
+                        //Le menu avec l'id = $menu_id veut afficher une
+       nouvelle page
+                        //Donc on crée cette page
+                        $this->Page->create();
+                        $this->Page->save(      array(
+                                                        'Page'=>array(
+                                                        'id'=>null,
+                                                        'text'=>'Texte par
+       défaut',
+                                                        'published'=>1
+
+                                                                )
+                                                ));
+                        //Ensuite on indique au menu l'argument qui devra être
+       envoyé a la fonction display : l'id de la page
+
+                        return $this->Page->id;
+                }
+
+ }
+\end{DoxyCode}
+
+
+\par
+\-Pour le model il faut juste rajouter un \-Behavior \par
+ \par
+ models/page.\-php 
+\begin{DoxyCode}
+ class Page extends AppModel
+ {
+                var $actsAs = array('Content'=>array(
+                                'extensionName'=>'pages'
+                                                ));
+                
+ }
+ *
+\end{DoxyCode}
+ \par
+\-Pour la vue permettant l'édition d'une page, la différence réside dans l'utilisation d'un élément pour crée le formulaire. \par
+\par
+ views/pages/admin\-\_\-display\-\_\-edit.\-ctp 
+\begin{DoxyCode}
+ <?php
+ echo $this->element('admin_create_form_item');
+ echo $this->Form->input('text');
+ echo $this->element('admin_end_form_item');
+\end{DoxyCode}
+ \par
+\par
+\-Pour la vue dislpay.\-ctp tout est permis.\hypertarget{index_copyright}{}\section{\-Copyright and License}\label{index_copyright}
+\-G\-N\-U v3
+
+\par
+\par
+ 

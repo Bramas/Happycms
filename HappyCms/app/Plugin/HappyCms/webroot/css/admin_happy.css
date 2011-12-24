@@ -1,0 +1,149 @@
+.clear
+{
+    clear:both;
+}
+.happy-displayMore
+{
+    overflow:hidden;
+}
+
+.input.file>div
+{
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    border:1px solid #dddddd;
+    background:#f5f5f5;
+    width:600px;
+}
+.input.file>div .a
+{
+    float:left;
+    padding:5px;
+    /*display:inline;*/
+}
+.input.file>div>div.clear
+{
+        float:none;
+        padding:0;
+        margin:0;
+}
+.input.file>div .actions
+{
+    margin:0;
+}
+.input.file>div .action
+{
+    display:inline-block;
+    height:65px;
+}
+.input.file>div .action.delete
+{
+    font-size:0;
+    width:32px;
+    background:url(../img/stop32.png) no-repeat center;
+}
+.input.file>div div.a{
+    position:relative;
+    height:65px;
+    width: 290px;
+}
+.input.file>div .distantfiled a,
+.input.file>div .pickfiles a
+{
+    display: inline-block;
+    left: 50px;
+    position: absolute;
+    top: 25px;
+    height: 65px;
+}
+.input.file>div div.image img
+{
+    margin: 10px;
+    height:65px;
+    max-width:200px;
+}
+.input.file>div .distantfiled img,
+.input.file>div .pickfiles img
+{
+    left: 5px;
+    position: absolute;
+    top: 19px;
+}
+/*
+form .input.file>div .distantfiled:before,
+form .input.file>div .pickfiles:before
+{
+    content:' ';
+    display: inline-block;
+    height: 65px;
+    width: 50px;
+    position:absolute;
+    top:0px;
+    left:0px;
+    margin-left:-50px;
+    margin-top:-20px;
+}
+form .input.file>div .pickfiles
+{
+    
+    background:url(../img/boxupload32.png) no-repeat left;
+}
+form .input.file>div .distantfiled
+{
+    background:url(../img/Slideshow.png) no-repeat left;
+}*/
+.input.file>div .plupload
+{
+    margin-left: 45px;
+    cursor:pointer;
+}
+.input.file #container>div.a.hover
+{
+    background-color:#dddddd;
+}
+
+#loader div.bar
+{
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    width:300px;
+    background-color:#cccccc;
+    position: relative;
+    padding:1px;
+}
+#loader div.bar div
+{
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    background-color:#99C60B;    
+    height: 18px;
+    width: 0px;
+}
+#loader div.bar b
+{
+    left: 5px;
+    position: absolute;
+    top: 0;
+}
+#result
+{
+    float: left;
+}
+
+#loader
+{
+   float: left;
+    width: 310px; 
+} 
+#finishList div.bar
+{
+    display:none;
+}
+#finishList
+{
+    float:left;
+    width:250px;
+}

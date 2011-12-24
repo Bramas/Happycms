@@ -1,0 +1,20 @@
+#AddType x-mapp-php5 .php
+
+<IfModule mod_rewrite.c>
+Options +FollowSymlinks
+
+   RewriteEngine on
+   RewriteBase /
+   
+   
+   #RewriteCond %{HTTP:X-Purpose} ^preview$
+   #RewriteRule ^facebookPreview app/webroot/fb.html [L]
+   #
+   #RewriteRule    ^facebookPreview http://www.facebook.com    [L]
+   
+   #RewriteRule    ^$ app/webroot/    [L]
+   #RewriteRule    (.*) app/webroot/$1 [L]
+   
+   #RewriteRule    ^$ deploiement/index.html    [L]
+   RewriteRule    (.*) app/webroot/$1 [L]
+</IfModule>

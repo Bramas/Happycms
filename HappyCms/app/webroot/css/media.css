@@ -1,0 +1,12 @@
+form .media 
+{
+	position:relative;
+}
+form .media iframe
+{
+	background: none repeat scroll 0 0 #FFFFFF;
+    position: absolute;
+    right: -82px;
+    top: -147px;
+    z-index: 9999;
+}

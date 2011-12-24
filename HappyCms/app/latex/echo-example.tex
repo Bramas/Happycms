@@ -1,0 +1,20 @@
+\hypertarget{echo-example}{
+\section{echo}
+}
+upload a file the form must be created with the element admin\-\_\-create\-\_\-form\-\_\-item with 'file'=$>$true
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+string & {\em \$name} & the field\-Name \\
+\hline
+string & {\em \$options,\mbox{[}'label'\mbox{]}} & the label \\
+\hline
+array & {\em \$filters} & title=$>$extensions use to filter the files\\
+\hline
+\end{DoxyParams}
+\$this-\/$>$element('happy/fields/file',array( 'filters'=$>$array( '\-Images'=$>$'jpg,png,gif', '\-Zip files'=$>$'zip'), 'name'=$>$'img1', 'options'=$>$array('label'=$>$'\-Image \-:')));
+
+
+\begin{DoxyCodeInclude}
+\end{DoxyCodeInclude}
+ 
