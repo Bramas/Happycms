@@ -87,7 +87,7 @@ Pour le model il faut juste rajouter un Behavior
 
  	class Page extends AppModel
  	{
-	  	var $actsAs = array('Content'=>array(
+	  	var $actsAs = array('HappyCms.Content'=>array(
 				'extensionName'=>'pages'
 						));
 		
