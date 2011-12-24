@@ -28,4 +28,4 @@ Les plugins n'ont pas trop été utilisés dans des config CakePhp existantes. i
 Tools
 ---------
 
-Outils pour transformé HappyCms en version installer.
+Outils pour transformer HappyCms en version installer.
