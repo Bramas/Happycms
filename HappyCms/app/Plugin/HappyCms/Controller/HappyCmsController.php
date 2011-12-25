@@ -39,12 +39,12 @@ class HappyCmsController extends Controller
 
     
     function beforeFilter(){
-    	//(debug($this->request->data));
     	//if($this->request->data)
     	//exit();
     	
     	//App::import('Model','Happycms.Menu');
     	//$menu = new Menu()
+
 	/**
 	 *
 	 *	Token
@@ -240,9 +240,8 @@ class HappyCmsController extends Controller
 						    'fields'=>'*',
 						    'joins'=>$ContentTablesLang
 						)
-					    );
+					);
 			$r = $this->Content->filterResults($r);
-	                //debug($r);
 	                //$r = $this->Menu->generatetreelist();
 	                $this->set('menus',$r);
 

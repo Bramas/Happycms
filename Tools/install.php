@@ -5,6 +5,7 @@ if(!file_exists('unzip.php'))
 }
 require_once('unzip.php');
 
+
 $step = (int)(empty($_GET['step'])?1:$_GET['step']);
 $content_for_layout = '';
 switch ($step)
@@ -33,7 +34,7 @@ switch ($step)
 		}
 		break;
 	case 2:
-		
+
 		ob_start();
 		?>
 <h3>Configuration de la Base de données</h3>
@@ -43,10 +44,13 @@ switch ($step)
 	<div class="input"><label for="inputUser">Utilisateur</label><input id="inputUser" type="text" name="user" value="root"></div>
 	<div class="input"><label for="inputPassword">Mot de passe</label><input id="inputPassword" type="text" name="password"></div>
 	<div class="input"><label for="inputPrefix">Prefixe</label><input id="inputPrefix" type="text" name="prefix"></div>
+
+<h3>Configuration des htaccess</h3>
+<div class="input"><label for="inputRewriteBase">RewriteBase</label><input id="inputRewriteBase" value="/" type="text" name="RewriteBase"></div>
+
+
 	<div class="submit"><input type="submit" value="Etape Suivante"></div>
 </form>
-
-
 		<?php
 
 
@@ -55,6 +59,7 @@ switch ($step)
 		break;
 
 	case 3:
+		require 'install_htaccess.php';
 	$toutEstOk = true;
 	$content_for_layout='';
 	if(empty($_POST))
@@ -67,6 +72,9 @@ switch ($step)
 	$user = $_POST['user'];
 	$password = $_POST['password'];
 	$prefix = $_POST['prefix'];
+	$rewriteBase = $_POST['RewriteBase'];
+
+	createHtaccess($rewriteBase);
 
 	$databaseConfig = 
 '<?php
@@ -89,7 +97,7 @@ class DATABASE_CONFIG {
 ';
 	//ini_set( "display_errors", 0);
 	//error_reporting (E_ALL ^ E_NOTICE);
-	$handle = fopen("app/config/database.php", "w");
+	$handle = fopen("app/Config/database.php", "w");
 	fwrite($handle, $databaseConfig);
 	fclose($handle);
 	$content_for_layout .= 'Configuration de la base : OK<br>';
@@ -122,12 +130,12 @@ class DATABASE_CONFIG {
 	$securitySalt		= random(100);
 	$securityCipherSeed	= random(70,'0123456789');
 
-	$contenu=file_get_contents('app/config/core.php');
+	$contenu=file_get_contents('app/Config/core.php');
 
 	$contenu=str_replace('#Security.salt#', $securitySalt, $contenu);
 	$contenu=str_replace('#Security.cipherSeed#', $securityCipherSeed, $contenu);
 
-	$text=fopen('app/config/core.php','w+') or die("Fichier manquant");
+	$text=fopen('app/Config/core.php','w+') or die("Fichier manquant");
 	fwrite($text,$contenu);
 	fclose($text); 
 
@@ -137,6 +145,7 @@ class DATABASE_CONFIG {
 	/* Import Database ******************************/
 
 	$requetes="";
+
  
 	$sql=file("install.sql"); // on charge le fichier SQL
 	foreach($sql as $l){ // on le lit

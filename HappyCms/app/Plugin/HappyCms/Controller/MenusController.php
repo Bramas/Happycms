@@ -158,7 +158,7 @@ class MenusController extends AppController
 	    $this->Menu->id=null;
 	    $this->Menu->save(array('Menu'=>array('parent_id'=>$parent_id,'item_id'=>$item_id)));
 	   
-	    $this->Menu->recover();
+	    //$this->Menu->recover();
 	    
 	    if($move>0)
 	    {
@@ -333,7 +333,6 @@ class MenusController extends AppController
 	
         $r = $this->Menu->findByDefault(1);
         //$r = $this->Menu->generatetreelist();
-        debug($r);
 	$this->redirect(array('controller'=>$r['Extension']['controller'],
 			      'action'=>$r['Extension']['action'],
 			      $r['Menu']['params']

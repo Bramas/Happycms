@@ -25,7 +25,6 @@ class HappyRoute extends CakeRoute {
 
         if($params['slug']=='default')
         {
-            
             $menu_id = Configure::read('Config.Content.default_menu_id');
             if(empty($menu_id))
             {

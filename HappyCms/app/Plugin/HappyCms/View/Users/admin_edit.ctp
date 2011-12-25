@@ -8,13 +8,13 @@ echo '<div>Identifiant : '.$User['username'].'</div>';
 	<ul>					
 <li id="new-password-modal-link">
         <a href="#">
-                <img src="./assets/icons/dashboard/54.png" alt="" />
+                
                 <span>Modifier mon mot de passe</span>
         </a>
 </li>
 
 <li class="fade_hover tooltip" title="End current session">
-        <?php echo $this->Html->link('<img src="./assets/icons/dashboard/118.png" alt="" />'.
+        <?php echo $this->Html->link(
                 '<span>Déconnexion</span>',
                 array('controller'=>'users',
                       'action'=>'logout'),

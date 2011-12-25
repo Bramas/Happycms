@@ -122,7 +122,7 @@ function displayNode($htmlHelper,$nodes,$place='NULL')
 
             echo '<div class="hline"></div><div class="node-expand"></div><div class="icon" style="'.$style.'"></div>'.
             '<span>'.
-            ($item['parent_id']?$htmlHelper->link($title,$url,array('class'=>'page-link','escape'=>false)):$item['title']);
+            ($item['parent_id']?$htmlHelper->link($title,$url,array('class'=>'page-link','escape'=>false)):$item['Content']['title']);
             
 	    echo $span_lang;
 

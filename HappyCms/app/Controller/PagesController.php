@@ -28,6 +28,7 @@ class PagesController extends AppController
 
     function display($id=0)
     {
+        
         if(!Configure::read('Menu.id'))
         {
             $this->cakeError('error404');

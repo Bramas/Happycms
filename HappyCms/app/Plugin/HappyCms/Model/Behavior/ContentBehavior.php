@@ -257,6 +257,7 @@ class ContentBehavior extends ModelBehavior {
 		{
 			if(empty($model->data[$alias]))
 			{
+				//debug($model->data);
 				//return true to do the basic save method
 				return true;
 			}
