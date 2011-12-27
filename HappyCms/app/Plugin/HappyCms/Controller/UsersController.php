@@ -86,7 +86,7 @@ class UsersController extends AppController
         $this->check_token();
         
         $r = $this->User->find('count',array('conditions'=>array(
-            'id'=>$this->Auth->user('id'),
+            'User.id'=>$this->Auth->user('id'),
             'password'=>$this->Auth->password($this->request->data['User']['password'])
         )));
         
