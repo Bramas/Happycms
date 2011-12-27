@@ -18,11 +18,13 @@ class PagesController extends AppController
     }
     function admin_display_new($menu_id)
     {
-        
         $item_id = $this->createItem();
         return $item_id;
-       
-       
+    }
+    function admin_display_delete($params)
+    {
+        return parent::admin_delete_($params);
+        
     }
     
 
