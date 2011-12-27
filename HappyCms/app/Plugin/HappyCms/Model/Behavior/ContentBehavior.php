@@ -408,7 +408,10 @@ class ContentBehavior extends ModelBehavior {
 		//if ($count == 0) {
 		//	return true;
 		//} else {
+		if($model->table == 'contents')
 			return false;
+
+		return true;
 		//}
 	}
 
