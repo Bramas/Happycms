@@ -77,6 +77,14 @@ class MenusController extends AppController
     		$lang=Configure::read('Config.languages');
     	}
     	$ajax = !empty($this->request->data['ajax']);
+
+
+	$menu = $this->Menu->find('first',array(
+	    'conditions'=>array(
+		'Menu.item_id'=>$item_id
+	    )
+	));
+
 	parent::admin_to_trash_($item_id,$lang);
 		
 	$r = $this->Content->find('count',array('conditions'=>array('Content.item_id'=>$item_id,
@@ -91,16 +99,23 @@ class MenusController extends AppController
 	    return true;
 	}
 	
-	$menu = $this->Menu->find('first',array(
-	    'conditions'=>array(
-		'Menu.item_id'=>$item_id
-	    )
-	));
 	$children = $this->Menu->children($menu['Menu']['id']);
 	$items = $this->getItem($menu['Menu']['item_id']);
 	if(empty($children) && empty($items['_Menu']['id']))
 	{
+		$this->Menu->recover();
 	    $this->Menu->delete($menu['Menu']['id']);
+
+	    $controllerName = ucfirst($menu['Menu']['extension']).'Controller';
+        App::uses($controllerName,$this->extensionPlugin($menu['Menu']['extension']).'Controller');
+        if(method_exists($controllerName, 'admin_'.$menu['Menu']['view'].'_delete'))
+        {
+        	$viewParams = $this->requestAction('/admin/'.$menu['Menu']['extension'].
+			     '/'.$menu['Menu']['view'].'_delete'.'/'.
+			      $menu['Menu']['params']);
+        }
+
+
 	    if($ajax)
 	    	echo 'DELETED';
 	}
@@ -109,6 +124,7 @@ class MenusController extends AppController
 	{
 		$this->redirect('/admin/');
 	}
+	exit();
     }
     /*function admin_to_trash($id=null)
     {
@@ -134,7 +150,7 @@ class MenusController extends AppController
     {
         if(!$id) exit();
 	 //$this->Menu->recover();
-        $this->Menu->moveup($id);
+        $this->Menu->moveUp($id);
         $this->Session->setFlash("La page a bien été modifiée");
         $this->redirect(array('action'=>'index', 'admin'=>true));
 	
@@ -143,7 +159,7 @@ class MenusController extends AppController
     {
         if(!$id) exit();
 	
-        $this->Menu->movedown($id);
+        $this->Menu->moveDown($id);
         $this->Session->setFlash("La page a bien été modifiée");
         $this->redirect(array('action'=>'index', 'admin'=>true));
 	
@@ -180,7 +196,7 @@ class MenusController extends AppController
 			'admin'=>true,
 			$this->Menu->id
 			));
-		exit();
+		exit(debug($this->Menu->data));
     }
     function admin_move()
     {
@@ -196,7 +212,6 @@ class MenusController extends AppController
 	    $this->Menu->id=null;
 	    $this->Menu->save(array('Menu'=>array('parent_id'=>$this->request->data['Menu']['parent_id'],'item_id'=>$item_id)));
 	   
-	    $this->Menu->recover();
 	    
 	    if($this->request->data['Move']>0)
 	    {
@@ -221,6 +236,7 @@ class MenusController extends AppController
     
 	if($this->Menu->save($this->request->data))
 	{
+		//$this->Menu->id = $this->request->data['Menu']['id'];
 	    
 	    if($this->request->data['Move']>0)
 	    {
@@ -236,7 +252,7 @@ class MenusController extends AppController
 			     $this->Menu->moveDown($this->Menu->id,1);//$this->request->data['Menu']['id']);
 			}
 	    }
-	    
+	    //$this->Menu->recover();
 	    echo '{"result":true}';
 	    exit();
 	}
