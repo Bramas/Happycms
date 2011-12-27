@@ -1,7 +1,7 @@
 <?php
 
 //echo $this->element('admin_create_form_item');
-$this->Form->create('User', array('autocomplete'=>"off"));
+$this->Form->create('User', array('autocomplete'=>"off",'url'=>'/admin/users/save'));
 echo $this->Form->input('username',array('label'=>'Identifiant :'));
 
 echo $this->Form->input('newpassword1',array('label'=>'Mot de passe :','type'=>'password','value'=>'','autocomplete' => "off"));

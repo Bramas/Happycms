@@ -27,7 +27,7 @@ echo '<div>Identifiant : '.$User['username'].'</div>';
 <div id="new-password-dialog" title="Modification du mot de passe">  
             <h2>Modifier mon mot de passe</h2>
             <p><?php
-echo $this->Form->create('User',array('action'=>'modify_password','id'=>'new-password-form'));
+echo $this->Form->create('User',array('url'=>'/admin/users/modify_password','id'=>'new-password-form'));
 
 echo $this->element('form_token');
 
