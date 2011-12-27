@@ -513,7 +513,7 @@ class HappyCmsController extends Controller
 	return $item_id;
     }
     
-    function deleteItem($item_id)
+    protected function deleteItem($item_id)
     {
 	$this->Content->deleteAll(array(
 							    'extension'=>$this->getExtensionName(),
@@ -534,13 +534,24 @@ class HappyCmsController extends Controller
 	}
 	return $controllerInfo['views'];
     }
-    
+    function admin_delete($item_id,$lang=null)
+    {
+
+    	$this->admin_to_trash_($item_id,$lang=null);
+    	$this->redirect($_SERVER['HTTP_REFERER']);
+    	exit();
+    }
     function admin_to_trash($item_id,$lang=null)
     {
 
     	$this->admin_to_trash_($item_id,$lang=null);
     	$this->redirect($_SERVER['HTTP_REFERER']);
     	exit();
+    }
+    function admin_delete_($item_id,$lang=null)
+    {
+
+    	$this->admin_to_trash_($item_id,$lang=null);
     }
     function admin_to_trash_($item_id,$lang=null)
     {
