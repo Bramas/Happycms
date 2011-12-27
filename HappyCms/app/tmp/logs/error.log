@@ -4850,3 +4850,124 @@
 2011-12-25 21:11:22 Error: [MissingControllerException] Controller class ImgController could not be found.
 #0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #1 {main}
+2011-12-26 11:42:45 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 11:42:46 Error: [MissingControllerException] Controller class CssController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 11:42:53 Error: [MissingControllerException] Controller class ImagesController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 11:43:10 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 11:43:11 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 11:43:11 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 11:43:11 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 11:43:20 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 11:43:21 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 11:44:41 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 11:44:42 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 11:45:37 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1052 Champ: 'id' dans where clause est ambigu
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\lib\Cake\Model\Datasource\DboSource.php(436): PDOStatement->execute(Array)
+#1 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\lib\Cake\Model\Datasource\DboSource.php(403): DboSource->_execute('SELECT COUNT(*)...', Array)
+#2 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\lib\Cake\Model\Datasource\DboSource.php(647): DboSource->execute('SELECT COUNT(*)...', Array, Array)
+#3 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\lib\Cake\Model\Datasource\DboSource.php(1040): DboSource->fetchAll('SELECT COUNT(*)...', false)
+#4 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\lib\Cake\Model\Model.php(2460): DboSource->read(Object(User), Array)
+#5 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\Plugin\HappyCms\Controller\UsersController.php(91): Model->find('count', Array)
+#6 [internal function]: UsersController->admin_modify_password()
+#7 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\lib\Cake\Controller\Controller.php(473): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#8 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\lib\Cake\Routing\Dispatcher.php(111): Controller->invokeAction(Object(CakeRequest))
+#9 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\lib\Cake\Routing\Dispatcher.php(89): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#10 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2011-12-26 11:46:41 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 11:46:42 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 11:46:42 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 11:46:51 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 11:47:03 Error: [MissingControllerException] Controller class ImagesController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 11:47:20 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 11:47:21 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 11:47:23 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 11:47:38 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 11:55:20 Error: [MissingControllerException] Controller class ImagesController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 11:55:30 Error: [MissingControllerException] Controller class ImagesController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 11:55:39 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 11:55:51 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 11:55:58 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 11:56:00 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 13:03:32 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 13:03:35 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 13:03:39 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 13:04:04 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 13:04:20 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 13:04:26 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 13:04:39 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 13:05:11 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 13:05:12 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2011-12-26 13:05:13 Error: [MissingControllerException] Controller class ImgController could not be found.
+#0 D:\Programs\EasyPHP-5.3.6\www\HappyCms\Git\HappyCms\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}

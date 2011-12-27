@@ -529,3 +529,8 @@ input, textarea {
     color: #FFFFFF;
     font-size: 24px;
 }
+
+#extensions-menu
+{
+    padding:10px;
+}

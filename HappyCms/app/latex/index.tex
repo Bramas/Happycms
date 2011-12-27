@@ -1,18 +1,18 @@
 \hypertarget{index_intro_sec}{}\section{\-Introduction}\label{index_intro_sec}
-\-Happy \-C\-M\-S est un un outils entre un \-C\-M\-S est un framwork php \-M\-V\-C. \-Le but étant de développer avec la facilité d'un framwork mais que le résultat (notament la partie administration) soit intégré facilement dans une interface conventionnée. \-Il est basé sur le framework \-Cake\-P\-H\-P et conserve tous les conventions de \-Cake\-P\-H\-P. \-Il est principalement destiné aux développeurs (qui connaissent cake\-P\-H\-P de préférence). \-Après son installation vous pourrez continuer à développer votre application cake\-P\-H\-P comme d'habitude, et en plus de la gestion de certaines tache récurentes (utilisateurs, menus, pages simples..) vous aurez a disposition plusieurs controllers, models, et un behavior qui permette, en suivant un petit nombre de règles, d'intégré votre controller à \-Happy\-C\-M\-S. \par
+\-Happy \-C\-M\-S est un un outils entre un \-C\-M\-S est un framwork php \-M\-V\-C. \-Le but étant de développer avec la facilité d'un framwork mais que le résultat (notament la partie administration) soit intégré facilement dans une interface existante. \-Il est basé sur le framework \-Cake\-P\-H\-P et conserve tous les conventions de \-Cake\-P\-H\-P. \-Il est principalement destiné aux développeurs (qui connaissent cake\-P\-H\-P de préférence). \-Après son installation vous pourrez continuer à développer votre application cake\-P\-H\-P comme d'habitude, et en plus de la gestion de certaines tache récurentes (utilisateurs, menus, pages simples..) vous aurez à disposition plusieurs controllers, models, et un behavior qui permettent, en suivant un petit nombre de règles, d'intégrer votre extension à \-Happy\-C\-M\-S. \par
 \par
- \-Pour le moment le projet manque un peu d'unité, tout par un peu dans tout les sens, le temps de trouver des conventions. \-Pour le moment aussi le projet ne respect pas les convention cake\-P\-H\-P 2.\-0 ce qui est dommage. \par
+ \-Le projet à migré récement sur cake\-P\-H\-P 2.\-0. \par
 \par
  \-Le projet étant encore à ses tout début, il est ouvert à toutes suggestions.\hypertarget{index_install_sec}{}\section{\-Installation}\label{index_install_sec}
 \hypertarget{index_tools_subsec}{}\subsection{\-Tools required\-:}\label{index_tools_subsec}
 
 \begin{DoxyItemize}
-\item \-Cake\-P\-H\-P 1.\-3.$\ast$
+\item \-Cake\-P\-H\-P 2.$\ast$
 \end{DoxyItemize}
 
-\-Pour l'installation il suffit d'ajouter les fichiers de cake php à un projet vide connecté à la base de données (et dont le \-Security.\-salt a été correctement changé) et de lancer l'installation \-S\-I\-T\-E\-\_\-\-B\-A\-S\-E/install/ \par
+\-Pour l'installation il suffit de placer les 3 fichiers (happycms.\-zip, install.\-php, unzip.\-php) sur votre serveur et de lancer l'installation \-S\-I\-T\-E\-\_\-\-B\-A\-S\-E/install.\-php \par
 \par
- \-L'installeur ajoute quelques tables et crée un utilisateurs admin.\hypertarget{index_example_sec}{}\section{\-Example}\label{index_example_sec}
+ \-L'installeur ajoute quelques tables et crée deux utilisateurs admin et superadmin.\hypertarget{index_example_sec}{}\section{\-Exemple}\label{index_example_sec}
 \-Voici un exemple rapide pour offrir la possibilité à l'admin de rajouter des pages simples. \par
 \-Un des principaux avantage de \-Happy\-C\-M\-S c'est qu'on a pas besoins de toucher à la base de données. \par
  \par
@@ -69,6 +69,12 @@ controllers/pages\-\_\-controller.\-php
                         return $this->Page->id;
                 }
 
+  function admin_display_delete($params)
+  {
+      return parent::admin_delete_($params);
+      
+  }
+
  }
 \end{DoxyCode}
 
@@ -80,7 +86,7 @@ controllers/pages\-\_\-controller.\-php
 \begin{DoxyCode}
  class Page extends AppModel
  {
-                var $actsAs = array('Content'=>array(
+                var $actsAs = array('HappyCms.Content'=>array(
                                 'extensionName'=>'pages'
                                                 ));
                 
@@ -88,7 +94,7 @@ controllers/pages\-\_\-controller.\-php
  *
 \end{DoxyCode}
  \par
-\-Pour la vue permettant l'édition d'une page, la différence réside dans l'utilisation d'un élément pour crée le formulaire. \par
+\-Pour la vue permettant l'édition d'une page, la différence réside dans l'utilisation d'un élément pour créer le formulaire. \par
 \par
  views/pages/admin\-\_\-display\-\_\-edit.\-ctp 
 \begin{DoxyCode}
@@ -100,7 +106,7 @@ controllers/pages\-\_\-controller.\-php
  \par
 \par
 \-Pour la vue dislpay.\-ctp tout est permis.\hypertarget{index_copyright}{}\section{\-Copyright and License}\label{index_copyright}
-\-G\-N\-U v3
+\-G\-N\-U/\-Gpl v3
 
 \par
 \par

@@ -5,10 +5,9 @@
  *
  * \section intro_sec Introduction
  *
- * Happy CMS est un un outils entre un CMS est un framwork php MVC. Le but étant de développer avec la facilité d'un framwork mais que le résultat (notament la partie administration) soit intégré facilement dans une interface conventionnée. Il est basé sur le framework CakePHP et conserve tous les conventions de CakePHP. Il est principalement destiné aux développeurs (qui connaissent cakePHP de préférence). Après son installation vous pourrez continuer à développer votre application cakePHP comme d'habitude, et en plus de la gestion de certaines tache récurentes (utilisateurs, menus, pages simples..) vous aurez a disposition plusieurs controllers, models, et un behavior qui permette, en suivant un petit nombre de règles, d'intégré votre controller à HappyCMS. 
+ * Happy CMS est un un outils entre un CMS est un framwork php MVC. Le but étant de développer avec la facilité d'un framwork mais que le résultat (notament la partie administration) soit intégré facilement dans une interface existante. Il est basé sur le framework CakePHP et conserve tous les conventions de CakePHP. Il est principalement destiné aux développeurs (qui connaissent cakePHP de préférence). Après son installation vous pourrez continuer à développer votre application cakePHP comme d'habitude, et en plus de la gestion de certaines tache récurentes (utilisateurs, menus, pages simples..) vous aurez à disposition plusieurs controllers, models, et un behavior qui permettent, en suivant un petit nombre de règles, d'intégrer votre extension à HappyCMS. 
  * <BR><BR>
- * Pour le moment le projet manque un peu d'unité, tout par un peu dans tout les sens, le temps de trouver des conventions.
- * Pour le moment aussi le projet ne respect pas les convention cakePHP 2.0 ce qui est dommage.
+ * Le projet à migré récement sur cakePHP 2.0.
  * <BR><BR>
  * Le projet étant encore à ses tout début, il est ouvert à toutes suggestions.
  *
@@ -24,7 +23,7 @@
  *
  *
  *
- * \section example_sec Example
+ * \section example_sec Exemple
  * Voici un exemple rapide pour offrir la possibilité à l'admin de rajouter des pages simples.
  * <BR>Un des principaux avantage de HappyCMS c'est qu'on a pas besoins de toucher à la base de données.
  * <BR>
@@ -77,6 +76,12 @@
  *			return $this->Page->id;
  *		}
  *
+ *  function admin_display_delete($params)
+ *  {
+ *      return parent::admin_delete_($params);
+ *      
+ *  }
+ *
  * }
  * \endcode
  *
@@ -87,13 +92,13 @@
  *\code
  * class Page extends AppModel
  * {
- *	  	var $actsAs = array('Content'=>array(
+ *	  	var $actsAs = array('HappyCms.Content'=>array(
  *				'extensionName'=>'pages'
  *						));
  *		
  * }
  *\endcode
- * <BR>Pour la vue permettant l'édition d'une page, la différence réside dans l'utilisation d'un élément pour crée le formulaire.
+ * <BR>Pour la vue permettant l'édition d'une page, la différence réside dans l'utilisation d'un élément pour créer le formulaire.
  * <BR><BR>
  * views/pages/admin_display_edit.ctp
  * \code
@@ -111,7 +116,7 @@
  * 
  * 
  * \section copyright Copyright and License
- * GNU v3
+ * GNU/Gpl v3
  *
  * <BR><BR>
  *
