@@ -10,7 +10,7 @@ class PagesController extends AppController
     function admin_display_edit($params)
     {
         
-        $this->request->data = $this->getItem($params);
+        $this->request->data = $this->Page->findById($params);
         
         
         $this->helpers[] = 'Tinymce';

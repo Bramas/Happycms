@@ -11,7 +11,7 @@ class ContactController extends AppController
     function admin_index_edit()
     {
         
-        $this->request->data = $this->getItem(1);
+        $this->request->data = $this->Contact->findById(1);
         
         
         $this->helpers[] = 'Tinymce';
@@ -30,6 +30,13 @@ class ContactController extends AppController
     
     function index()
     {
+
+        if(!Configure::read('Menu.id'))
+        {
+            $this->cakeError('error404');
+            exit();
+        }
+
         $r = $this->getItem(1,false);
      // debug($r);
         $this->set($r);

@@ -21,7 +21,15 @@ class ContentBehavior extends ModelBehavior {
 
 		$this->settings=$config;
 		$this->extensionName = $config['extensionName'];
-		$this->customFields = $config['customFields'];
+		$this->customFields = array();
+		$idx = 0;
+		foreach($config['customFields'] as $c)
+		{
+			$idx++;
+			$this->customFields[$c]='custom_field_'.$idx;
+		}
+		$this->customFields['published']='published';
+
 
 		if(!$model->useTable)
 		{
@@ -145,10 +153,9 @@ class ContentBehavior extends ModelBehavior {
 		{
 			if(preg_match('/^([a-zA-Z0-9]+\.)*([a-zA-Z0-9]+)[ =<>]{1}/',$array[$key].' ',$matches))
 			{
-				if(in_array($matches['2'],$this->customFields))
+				if(!empty($this->customFields[$matches['2']]))
 				{
-					$idx = array_search($matches['2'],$this->customFields);
-					$array[$key] = preg_replace('/^(([a-zA-Z0-9]+\.)*)([a-zA-Z0-9]+)[ =<>]{1}/','$1custom_field_'.($idx+1),$array[$key].' ');
+					$array[$key] = preg_replace('/^(([a-zA-Z0-9]+\.)*)([a-zA-Z0-9]+)[ =<>]{1}/','$1'.$this->customFields[$matches['2']],$array[$key].' ');
 				}
 			}
 		}
@@ -156,10 +163,9 @@ class ContentBehavior extends ModelBehavior {
 		{
 			if(preg_match('/^([a-zA-Z0-9]+\.)*([a-zA-Z0-9]+)$/',trim($key),$matches))
 			{
-				if(in_array($matches['2'],$this->customFields))
+				if(!empty($this->customFields[$matches['2']]))
 				{
-					$idx = array_search($matches['2'],$this->customFields);
-					$field = preg_replace('/^(([a-zA-Z0-9]+\.)*)([a-zA-Z0-9]+)$/','$1custom_field_'.($idx+1),trim($key));
+					$field = preg_replace('/^(([a-zA-Z0-9]+\.)*)([a-zA-Z0-9]+)$/','$1'.$this->customFields[$matches['2']],trim($key));
 					$array[$field]=$array[$key];
 					unset($array[$key]);
 				}
@@ -199,7 +205,6 @@ class ContentBehavior extends ModelBehavior {
 				//debug( $dbo->getLog(false,false) );
 			$alias = $model->alias;
 		}
-		
 		foreach($results as &$result)
 		{
 			$temp=json_decode($result[$alias]['params'],true);
@@ -211,18 +216,16 @@ class ContentBehavior extends ModelBehavior {
 
 			// Custom fields  ---
 
-			$idx=1;
-			foreach($this->customFields as $customField)
+			foreach($this->customFields as $customField=>$newField)
 			{
-				if(!empty($result[$alias]['custom_field_'.$idx]))
+				if(isset($result[$alias][$newField]))
 				{
-					$temp[$customField] = $result[$alias]['custom_field_'.$idx];
+					$temp[$customField] = $result[$alias][$newField];
 				}
-				if(empty($temp[$customField]))
+				if(!isset($temp[$newField]))
 				{
 					$temp[$customField] = '';
 				}
-				$idx++;
 			}
 
 
@@ -248,27 +251,30 @@ class ContentBehavior extends ModelBehavior {
 */
 	function beforeSave(&$model)
 	{
+
 		$alias = 'Content';
 		if($model->table == 'contents')
 		{
 			$alias = $model->alias;
+			$data = $model->data[$alias];
+			$ContentModel = $model;
 		}
 		else
 		{
-			if(empty($model->data[$alias]))
+			if(empty($model->data[$model->alias][$alias]))
 			{
 				//debug($model->data);
 				//return true to do the basic save method
 				return true;
 			}
+			$data = $model->data[$model->alias][$alias];
+        	App::import('Content','Happycms.Model');
+        	$ContentModel = new Content();
 		}
-		$data = $model->data[$alias];
-		
 		if(isset($data['params']) && !is_array( $data['params'] ))
 		{
 			return true;
 		}
-		
 
 
 		$this->checkIfItsLoaded($model);
@@ -312,17 +318,13 @@ class ContentBehavior extends ModelBehavior {
             }
             
             //save custom field separatly
-            $idx=1;
-            $data['custom_field_1']='';
-            $data['custom_field_2']='';
 
-			foreach($this->customFields as $customField)
+			foreach($this->customFields as $customField=>$newField)
 			{
-				if(!empty($params[$customField]))
+				if(isset($params[$customField]))
 				{
-					$data['custom_field_'.$idx] = $params[$customField];
+					$data[$lang][$newField] = $params[$customField];
 				}
-				$idx++;
 			}
 
 
@@ -330,41 +332,54 @@ class ContentBehavior extends ModelBehavior {
             $params = json_encode($params);
             $data['params'] = $params;
             
-            if(empty($params))
-            {
-                $params = '{"empty":true}';
-            }
             
             
              if($newEntry)    
              {
-             	$model->create();
-             	$model->save(array($alias => array(
+             	$finalData = array(
              					'id'=>null,
 								'extension'=>$extension,
 	                            'language_id'=>(int)$lang_id,
 	                           	'item_id'=>(int)$item_id,
-	                           	'params'=>$params,
-                        		'custom_field_1'=>$data['custom_field_1'],
-                        		'custom_field_2'=>$data['custom_field_2']
-                                            )));                             
+	                           	'params'=>$params
+                                            );
+                foreach($this->customFields as $customField=>$newField)
+                {
+                	if(isset($data[$lang][$newField]))
+                	{
+	                	$finalData[$newField] = $data[$lang][$newField];
+	                }
+                }   
+             	$ContentModel->create();
+             	$ContentModel->save(array($alias => $finalData));                             
             		
             
              }  
              else
              {
-             	$tempItem = $model->updateAll(  
-	             	array(
-						$alias.'.params'=>'"'.mysql_real_escape_string($params).'"',
-                        $alias.'.custom_field_1'=>'"'.mysql_real_escape_string($data['custom_field_1']).'"',
-                        $alias.'.custom_field_2'=>'"'.mysql_real_escape_string($data['custom_field_2']).'"'
-					),
+
+            	App::uses('Sanitize', 'Utility');
+             	$finalData = array(
+						$alias.'.params'=>'"'.Sanitize::escape($params).'"'
+					);
+                foreach($this->customFields as $customField=>$newField)
+                {
+                	if(isset($data[$lang][$newField]))
+                	{
+                		$finalData[$alias.'.'.$newField] = $data[$lang][$newField];
+                	}
+                }   
+             	$tempItem = $ContentModel->updateAll(  
+             		$finalData
+	             	,
 					array(
 						$alias.'.extension'=>$extension,
                         $alias.'.language_id'=>(int)$lang_id,
                         $alias.'.item_id'=>(int)$item_id
                     )
                   );
+
+				//exit(debug($finalData));
              }
 
             /*$tempParams = json_decode($tempItem[$alias]['params'],true);

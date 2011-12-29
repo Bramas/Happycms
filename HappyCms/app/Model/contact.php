@@ -3,14 +3,16 @@
 
 
 class Contact extends AppModel
-
 {
 
-    var $name = "contact";
+    var $actsAs = array('Happycms.Content'=>array(
+            'extensionName'=>'contact'
+        ));
+    var $name = "Contact";
 
     var $useTable = false;
 
-    var $_schema = array(
+    /*var $_schema = array(
 
         'nom'=> array(
 
@@ -34,7 +36,7 @@ class Contact extends AppModel
 
         )
 
-    );
+    );*/
 
     
 
@@ -46,7 +48,7 @@ class Contact extends AppModel
 
             'rule'=> 'email',
 
-            'required' => true,
+            'required' => false,
 
             'allowEmpty' => false,
 
@@ -58,7 +60,7 @@ class Contact extends AppModel
 
             'rule'=> '/\S+/',
 
-            'required' => true,
+            'required' => false,
 
             'allowEmpty' => false,
 
@@ -70,7 +72,7 @@ class Contact extends AppModel
 
             'rule'=> '/\S+/',
 
-            'required' => true,
+            'required' => false,
 
             'allowEmpty' => false,
 

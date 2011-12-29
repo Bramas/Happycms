@@ -4,7 +4,7 @@ class Menu extends HappycmsAppModel
 {
     var $name = "Menu";
     var $alias = "Menu";
-    var $actsAs = array('Tree','HappyCms.Content');
+    var $actsAs = array('Tree','HappyCms.Content'=>array('extensionName'=>'menus'));
     var $belongsTo = array(
       'Extension'=>array(
         'foreignKey'=>'extension',

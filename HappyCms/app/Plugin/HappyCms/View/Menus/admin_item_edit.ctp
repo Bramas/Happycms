@@ -5,7 +5,7 @@
 
 $controller_output['formOptions'] = empty($controller_output['formOptions'])?array():$controller_output['formOptions'];
 
-echo $this->element('admin_create_form_item',array('formOptions'=>$controller_output['formOptions']));
+echo $this->element('admin_create_form_item',array('model'=>'Menu','formOptions'=>$controller_output['formOptions']));
 
 ?>
 <div class="ContentMenuInfoForm ui-corner-all">

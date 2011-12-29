@@ -9,6 +9,11 @@ if(empty($this->request->data['Happy']) || empty($this->request->data['Happy']['
 {
     $this->request->data['Happy']=array('lang_form'=>Configure::read('Config.language'));
 }*/
+if(empty($model))
+{
+    $model=isset($modelName)?$modelName:$this->request->data['Happy']['model_name'];
+}
+
 if(empty($this->request->data['Happy']))
 {
     $this->request->data['Happy']=array();
@@ -63,7 +68,7 @@ if(!empty($file) || ( !empty($formOptions['type']) && $formOptions['type']=='fil
 
 $token_input = '<input name="data[_token]" type="hidden" value="'.$this->Session->read('User.token').'">';
 
-$create = $this->Form->create(isset($modelName)?$modelName:$this->request->data['Happy']['model_name'],$formOptions);
+$create = $this->Form->create($model,$formOptions);
 
 $this->request->data['Happy']['output']['formOptions']=$formOptions;
 
@@ -76,6 +81,7 @@ if($this->request->data['Happy']['first_call'])
 }
 
 echo $this->Form->input('_extension',array('type'=>'hidden','value'=>empty($this->request->data['Content']['_extension'])?$ExtensionName:$this->request->data['Content']['_extension']));
+echo $this->Form->input('_model',array('type'=>'hidden','value'=>$model));
 echo $this->Form->input('id',array('type'=>'hidden'));
 //echo $this->Form->input($this->request->data['Happy']['lang_form'],array('type'=>'hidden','value'=>'1'));
 

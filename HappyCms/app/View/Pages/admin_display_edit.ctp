@@ -1,5 +1,5 @@
 <?php
-echo $this->element('admin_create_form_item');
+echo $this->element('admin_create_form_item',array('model'=>'Page'));
 
 echo $this->Form->textarea('text');
 

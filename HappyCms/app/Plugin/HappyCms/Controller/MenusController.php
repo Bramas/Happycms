@@ -4,7 +4,7 @@ class MenusController extends AppController
     //var $helpers = array('Html','Layout');
     var $uses = array('HappyCms.Menu','HappyCms.Extension');
     
-    var $Hmodel_name = '_Menu';
+    var $Hmodel_name = 'Menu';
     /** var uses when we automatically create a new element
      *
      */
@@ -264,8 +264,33 @@ class MenusController extends AppController
     
     function admin_save()
     {
-	
-		parent::admin_save();
+    	foreach($this->request->data as $model => $data)
+		{
+			if(is_array($data) && isset($data['_model']) && is_string($data['_model']))
+			{
+				if($data['_model']=='Menu')
+				{
+					$this->Menu->save(array('Content'=>$data));
+				}
+				else
+				{
+					App::uses($model,$this->extensionPlugin($data['_extension']).'Model');
+					$Model = new $model();
+					if($Model->table=='contents')
+					{
+						$Model->save(array($model=>$data));
+					}
+					else
+					{
+						$Model->save(array('Content'=>$data));
+					}
+					
+				}
+			}
+		}
+		
+		//exit(debug($this->request->data));
+		//parent::admin_save();
 
 		$this->redirect(array('action'=>'index', 'admin'=>true));
 	/*if(!$this->request->data) exit();
@@ -373,19 +398,21 @@ class MenusController extends AppController
 	}
     function admin_item_edit($item_id)
     {
-	$menu = $this->Menu->find('first',array('conditions'=>array('Menu.item_id'=>$this->request->data[$this->Hmodel_name]['id'])));
+		$menu = $this->Menu->find('first',array('conditions'=>array('Menu.item_id'=>$this->request->data[$this->Hmodel_name]['id'])));
 
-	$out=$this->requestAction('/admin/contents/load_form/'.$menu['Menu']['extension'].'/'.$menu['Menu']['view'].'_edit/'.$menu['Menu']['params'],
-				 array('named'=>array('lang_form'=>$this->_requestedLanguage,
-                                                                     'first_call'=>false,
-                                                                     'data'=>$menu)));
-	
-	if(!is_array($out))
-	{
-		$out = array('output'=>$out);
-	}
-	$this->set('controller_output', $out);
-	$this->set('SubExtensionName', $menu['Menu']['extension']);
+		$this->request->data['_Menu'] = $menu['Content'];
+
+		$out=$this->requestAction('/admin/contents/load_form/'.$menu['Menu']['extension'].'/'.$menu['Menu']['view'].'_edit/'.$menu['Menu']['params'],
+					 array('named'=>array('lang_form'=>$this->_requestedLanguage,
+	                                                                     'first_call'=>false,
+	                                                                     'data'=>$menu)));
+		
+		if(!is_array($out))
+		{
+			$out = array('output'=>$out);
+		}
+		$this->set('controller_output', $out);
+		$this->set('SubExtensionName', $menu['Menu']['extension']);
     }
     
     function list_menus($parent_id)
@@ -464,16 +491,17 @@ class MenusController extends AppController
 
     function admin_togglePublished()
     {
+    	//debug($this->Menu->findByItemId(51));
     	if(empty($this->request->data['_Menu']['language']) || empty($this->request->data['_Menu']['id']))
     	{
     		
     		exit('empty data');
     	}
     	$this->_requestedLanguage = $this->request->data['_Menu']['language'];
-    	$item = $this->getItem($this->request->data['_Menu']['id']);
-
-    	$item['_Menu'][$this->_requestedLanguage]['published']=empty($item['_Menu'][$this->_requestedLanguage]['published'])?'1':'0';
-    	$this->Content->saveItem(array('Content'=>current($item)));
+    	$item = $this->Menu->findByItemId($this->request->data['_Menu']['id']);
+    	//debug($item);
+    	$item['Content'][$this->_requestedLanguage]['published']=empty($item['Content'][$this->_requestedLanguage]['published'])?'1':'0';
+    	$this->Menu->save(array('Content'=>$item['Content']));
 
 
     	exit();

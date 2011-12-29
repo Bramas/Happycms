@@ -41,7 +41,7 @@ class HappyRoute extends CakeRoute {
 						    'conditions'=>array('Content.extension=\'menus\'',
 									    'Content.language_id='.Configure::read('Config.id_language'),
 									    'Menu.id = '.$menu_id
-                                        //,'Content.params LIKE (\'%"published":"1"%\')'
+                                        ,'Content.published'=>'1'
                                         ) 
 	    ));
 
