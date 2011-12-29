@@ -228,15 +228,20 @@ class ContentBehavior extends ModelBehavior {
 				}
 			}
 
+			if(empty($result[$model->alias]))
+			{
+				$result[$model->alias]=array();
+			}
+			$result[$model->alias] = array_merge($temp,$result[$model->alias]);
 
-			$result[$alias]=$temp;
-			$result[$alias][Configure::read('Config.language')]=$temp;
+			$result[$model->alias][Configure::read('Config.language')]=$temp;
 
 			if($model->findQueryType=='list' && !empty($result['Content']['title']))
 			{
-				$result['Menu']['item_id']=$result['Content']['title'];
+				$result[$model->alias]['item_id']=$result['Content']['title'];
 			}
 		}
+		debug($results);
 		
 		return $results;
 	}
