@@ -87,14 +87,14 @@ class ContentBehavior extends ModelBehavior {
 				unset($query['conditions'][$model->alias.'.id']);
 			}
 			foreach($query['conditions'] as $key => $condition){
-				$this->replaceCustomField($query['conditions'],$key);
+				$this->replaceCustomField($model,$query['conditions'],$key);
 			}
 			foreach($query['order'] as &$a)
 			{
 				if(is_array($a))
 				{
 					foreach($a as $key => $condition){
-						$this->replaceCustomField($a,$key);
+						$this->replaceCustomField($model,$a,$key);
 					}
 				}
 			}	
@@ -138,6 +138,20 @@ class ContentBehavior extends ModelBehavior {
 			)
 			
 		));
+		if(!empty($query['conditions']))
+		foreach($query['conditions'] as $key => $condition){
+			$this->replaceCustomField($model,$query['conditions'],$key);
+		}
+		if(!empty($query['oreder']))
+		foreach($query['order'] as &$a)
+		{
+			if(is_array($a))
+			{
+				foreach($a as $key => $condition){
+					$this->replaceCustomField($model,$a,$key);
+				}
+			}
+		}
 		return $query;
 	}
 /**
@@ -148,25 +162,28 @@ class ContentBehavior extends ModelBehavior {
 * @param mixed $key
 *
 */
-	private function replaceCustomField(&$array, &$key)
+	private function replaceCustomField(&$model, &$array, &$key)
 	{
+		$alias = $model->table=='contents'?$model->alias:'Content';
 		if(is_numeric($key))
 		{
 			if(preg_match('/^([a-zA-Z0-9]+\.)*([a-zA-Z0-9]+)[ =<>]{1}/',$array[$key].' ',$matches))
 			{
 				if(!empty($this->customFields[$matches['2']]))
 				{
-					$array[$key] = preg_replace('/^(([a-zA-Z0-9]+\.)*)([a-zA-Z0-9]+)[ =<>]{1}/','$1'.$this->customFields[$matches['2']],$array[$key].' ');
+					$array[$key] = preg_replace('/^(([a-zA-Z0-9]+\.)*)([a-zA-Z0-9]+)[ =<>]{1}/',$alias.'.'.$this->customFields[$matches['2']],$array[$key].' ');
 				}
 			}
 		}
 		else
 		{
+			//debug($array);
+			//debug($key);
 			if(preg_match('/^([a-zA-Z0-9]+\.)*([a-zA-Z0-9]+)$/',trim($key),$matches))
 			{
 				if(!empty($this->customFields[$matches['2']]))
 				{
-					$field = preg_replace('/^(([a-zA-Z0-9]+\.)*)([a-zA-Z0-9]+)$/','$1'.$this->customFields[$matches['2']],trim($key));
+					$field = preg_replace('/^(([a-zA-Z0-9]+\.)*)([a-zA-Z0-9]+)$/',$alias.'.'.$this->customFields[$matches['2']],trim($key));
 					$array[$field]=$array[$key];
 					unset($array[$key]);
 				}

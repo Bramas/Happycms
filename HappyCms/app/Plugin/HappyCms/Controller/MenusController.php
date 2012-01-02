@@ -443,47 +443,6 @@ class MenusController extends AppController
 
         $list = $this->Menu->generateTreeList ();//null, 'Menu.id', 'Menu.item_id',  '_', null);
         
-        //debug($list);
-       $keys=array();
-       foreach($list as $key=>&$l)
-        {
-            preg_match('/(_*)([^_]{1}.*)/',$l,$matches);
-            if(empty($matches[1]) || empty($matches[2]))
-            {
-                continue;
-            }
-            $keys[]=$matches[2];
-            $l = array('prefix'=>$matches[1],
-                       'id'=>$matches[2]
-                      );
-        }
-        //debug($keys);
-       $content = $this->Content->find('list',array('conditions'=>array(
-            'Content.extension'=>'menus',
-            'Content.item_id' => $keys,
-            'Content.language_id'=>Configure::read('Config.id_language')
-        ),'fields' => array('Content.item_id', 'Content.params')
-            ));
-       //debug($content);
-        foreach($list as $key=>&$l)
-        {
-            if(empty($l))
-            {
-                $list[$key]="Menu racine";
-            }
-            elseif(!empty($content[$l['id']]))
-            {
-                $temp = json_decode($content[$l['id']],true);
-                
-                $l = $l['prefix'].$temp['title'];
-            }
-            else{
-                unset($list[$key]);
-            }
-            
-            
-        }
-        
         return $list;
     }
 

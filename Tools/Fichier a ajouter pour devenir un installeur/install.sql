@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `#prefix#contents` (
 INSERT INTO `#prefix#contents` (`id`, `extension`, `item_id`, `language_id`, `created`, `published`, `params`, `custom_field_1`, `custom_field_2`) VALUES
 (418, 'extensions', 1, 1, '0000-00-00 00:00:00', 1, '{"default_menu_id":"56"}', '', ''),
 (516, 'pages', 20, 1, '2011-12-19 12:05:17', 1, '{"text":""}', '', ''),
-(415, 'menus', 1, 1, '0000-00-00 00:00:00', 1, '{"title":"Menu racine","alias":"Menu-racine","published":"1","class":"","thumb":"imgAcc.jpg"}', '', ''),
+(415, 'menus', 2, 1, '0000-00-00 00:00:00', 1, '{"title":"Menu racine","alias":"Menu-racine","published":"1","class":"","thumb":"imgAcc.jpg"}', '', ''),
 (514, 'pages', 19, 1, '2011-12-19 12:04:26', 1, '{"text":""}', '', ''),
 (419, 'extensions', 3, 1, '0000-00-00 00:00:00', 1, '{}', '', ''),
 (420, 'extensions', 2, 1, '0000-00-00 00:00:00', 1, '{}', '', ''),
@@ -100,12 +100,12 @@ INSERT INTO `#prefix#contents` (`id`, `extension`, `item_id`, `language_id`, `cr
 (444, 'extensions', 6, 1, '0000-00-00 00:00:00', 1, '{}', '', ''),
 (445, 'extensions', 7, 1, '0000-00-00 00:00:00', 1, '{"online":"1","offline-message":"","title":"Happy Cms","description":"","meta-tag":"","default_menu_id":"71"}', '', ''),
 (452, 'pages', 6, 1, '0000-00-00 00:00:00', 1, '{"text":"<p>treshf hdgh g g tru<\\/p>"}', '', ''),
-(505, 'menus', 35, 1, '2011-12-17 17:28:42', 1, '{"title":"Contact","alias":"Contact","published":"1","class":""}', '', ''),
+(505, 'menus', 3, 1, '2011-12-17 17:28:42', 1, '{"title":"Contact","alias":"Contact","published":"1","class":""}', '', ''),
 (503, 'pages', 14, 1, '2011-12-17 17:28:14', 1, '[]', '', ''),
 (454, 'pages', 7, 1, '0000-00-00 00:00:00', 1, '{"text":"<p>testtestetzt<\\/p>"}', '', ''),
 (456, 'pages', 8, 1, '0000-00-00 00:00:00', 1, '{"text":""}', '', ''),
 (458, 'pages', 9, 1, '0000-00-00 00:00:00', 1, '{"text":"<p>dfsdf<\\/p>"}', '', ''),
-(499, 'menus', 33, 1, '2011-12-17 17:25:13', 1, '{"title":"Page d''accueil","alias":"Page-d-accueil","published":"1","class":""}', '', ''),
+(499, 'menus', 4, 1, '2011-12-17 17:25:13', 1, '{"title":"Page d''accueil","alias":"Page-d-accueil","published":"1","class":""}', '', ''),
 (489, 'extensions', 10, 1, '0000-00-00 00:00:00', 1, '{}', '', ''),
 (469, 'extensions', 8, 1, '0000-00-00 00:00:00', 1, '{}', '', ''),
 (475, 'extensions', 9, 1, '0000-00-00 00:00:00', 1, '{}', '', ''),
@@ -239,9 +239,9 @@ CREATE TABLE IF NOT EXISTS `#prefix#menus` (
 
 INSERT INTO `#prefix#menus` (`id`, `parent_id`, `lft`, `rght`, `extension`, `view`, `item_id`, `params`, `default`, `display_in`, `lang_available`) VALUES
 (1, NULL, 1, 8, '', '', 0, '', 0, NULL, ''),
-(2, 1, 2, 7, 'menus', 'top_menu', 1, '', 0, NULL, ''),
-(73, 2, 5, 6, 'contact', 'index', 35, '', 0, NULL, ''),
-(71, 2, 3, 4, 'pages', 'display', 33, '13', 0, NULL, '');
+(2, 1, 2, 7, 'menus', 'top_menu', 2, '', 0, NULL, ''),
+(3, 2, 5, 6, 'contact', 'index', 3, '', 0, NULL, ''),
+(4, 2, 3, 4, 'pages', 'display', 4, '13', 0, NULL, '');
 
 -- --------------------------------------------------------
 
