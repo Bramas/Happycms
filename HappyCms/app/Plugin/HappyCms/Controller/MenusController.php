@@ -270,7 +270,7 @@ class MenusController extends AppController
 			{
 				if($data['_model']=='Menu')
 				{
-					$this->Menu->save(array('Content'=>$data));
+					$this->Menu->save(array($model=>$data));
 				}
 				else
 				{
@@ -279,10 +279,6 @@ class MenusController extends AppController
 					if($Model->table=='contents')
 					{
 						$Model->save(array($model=>$data));
-					}
-					else
-					{
-						$Model->save(array('Content'=>$data));
 					}
 					
 				}
@@ -301,6 +297,8 @@ class MenusController extends AppController
     
     function admin_index($id=null)
     {
+    	//debug($this->Menu->find('first'));
+    	//exit();
     }
     
     
@@ -400,7 +398,7 @@ class MenusController extends AppController
     {
 		$menu = $this->Menu->find('first',array('conditions'=>array('Menu.item_id'=>$this->request->data[$this->Hmodel_name]['id'])));
 
-		$this->request->data['_Menu'] = $menu['Content'];
+		$this->request->data['Menu'] = $menu['Menu'];
 
 		$out=$this->requestAction('/admin/contents/load_form/'.$menu['Menu']['extension'].'/'.$menu['Menu']['view'].'_edit/'.$menu['Menu']['params'],
 					 array('named'=>array('lang_form'=>$this->_requestedLanguage,
@@ -492,17 +490,17 @@ class MenusController extends AppController
     function admin_togglePublished()
     {
     	//debug($this->Menu->findByItemId(51));
-    	if(empty($this->request->data['_Menu']['language']) || empty($this->request->data['_Menu']['id']))
+    	if(empty($this->request->data['Menu']['language']) || empty($this->request->data['Menu']['id']))
     	{
     		
     		exit('empty data');
     	}
-    	$this->_requestedLanguage = $this->request->data['_Menu']['language'];
-    	$item = $this->Menu->findByItemId($this->request->data['_Menu']['id']);
+    	$this->_requestedLanguage = $this->request->data['Menu']['language'];
+    	$item = $this->Menu->findById($this->request->data['Menu']['id']);
     	//debug($item);
-    	$item['Content'][$this->_requestedLanguage]['published']=empty($item['Content'][$this->_requestedLanguage]['published'])?'1':'0';
-    	$this->Menu->save(array('Content'=>$item['Content']));
-
+    	$item['Menu'][$this->_requestedLanguage]['published']=empty($item['Menu'][$this->_requestedLanguage]['published'])?'1':'0';
+    	$this->Menu->save($item['Menu']);
+    	
 
     	exit();
     	

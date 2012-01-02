@@ -19,8 +19,8 @@ class ContactController extends AppController
     }
     function admin_index_new($menu_id)
     {
-        $item = $this->getItem(1);
-       // if(empty($item))
+        $item = $this->Contact->findById(1);
+        if(empty($item)) //if its the first time
         {
             $item_id = $this->createItem();
         }
@@ -37,7 +37,7 @@ class ContactController extends AppController
             exit();
         }
 
-        $r = $this->getItem(1,false);
+        $r = $this->Contact->findById(1);
      // debug($r);
         $this->set($r);
         

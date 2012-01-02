@@ -242,8 +242,8 @@ $(function() {
                 url:SiteBaseAdmin+'menus/togglePublished',
                 data:{
                     "data[ajax]":1,
-                    "data[_Menu][id]":menu_id,
-                    "data[_Menu][language]":lang
+                    "data[Menu][id]":menu_id,
+                    "data[Menu][language]":lang
                 },
                 type:'POST',
                 success:function()
@@ -252,7 +252,7 @@ $(function() {
                   if($('#lang-tab-'+lang+' .togglePublished').attr('menu_id')==menu_id)
                   {
                     $('#lang-tab-'+lang+' .togglePublished').toggleClass('unpublished').toggleClass('published').removeClass('waitpublished');;
-                    $('#_Menu'+lang.charAt(0).toUpperCase() + lang.slice(1)+'Published').attr('checked', !$('#_Menu'+lang.charAt(0).toUpperCase() + lang.slice(1)+'Published').attr('checked'));
+                    $('#Menu'+lang.charAt(0).toUpperCase() + lang.slice(1)+'Published').attr('checked', !$('#Menu'+lang.charAt(0).toUpperCase() + lang.slice(1)+'Published').attr('checked'));
                   }
                     
                     $('#menus .menu-item-id-'+menu_id+'>div>span>.flags .'+lang+' span.published, #menus .menu-item-id-'+menu_id+'>div>span>.flags .'+lang+' span.unpublished').toggleClass('unpublished').toggleClass('published');

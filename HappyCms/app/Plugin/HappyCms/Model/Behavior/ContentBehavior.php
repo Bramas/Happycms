@@ -111,6 +111,7 @@ class ContentBehavior extends ModelBehavior {
 			$query['fields']=array_merge((array)$query['fields'],array(
 									   'Content.id',
 									   'Content.created',
+									   'Content.item_id',
 									   'Content.params',
 									   'Content.custom_field_1',
 									   'Content.custom_field_2',
@@ -131,7 +132,7 @@ class ContentBehavior extends ModelBehavior {
 			'table'=>$Content->tablePrefix.$Content->table,
 			'alias'=>'Content',
 			'conditions'=>array(
-				$model->alias.'.item_id=Content.item_id',
+				$model->alias.'.id=Content.item_id',
 				'Content.language_id'=>Configure::read('Config.id_language'),
 				'Content.extension'=>$extension
 			)
@@ -232,16 +233,26 @@ class ContentBehavior extends ModelBehavior {
 			{
 				$result[$model->alias]=array();
 			}
-			$result[$model->alias] = array_merge($temp,$result[$model->alias]);
+			if($model->table=='contents')
+			{
+				$result[$model->alias] = $temp;
+			}
+			else
+			{
+				$result[$model->alias] = array_merge($temp,$result[$model->alias]);
+			}
 
 			$result[$model->alias][Configure::read('Config.language')]=$temp;
 
 			if($model->findQueryType=='list' && !empty($result['Content']['title']))
 			{
-				$result[$model->alias]['item_id']=$result['Content']['title'];
+				$result[$model->alias]['view']=$result['Content']['title'];
+			}
+			if($model->table!='contents')
+			{
+				unset($result['Content']);
 			}
 		}
-		debug($results);
 		
 		return $results;
 	}
@@ -256,6 +267,7 @@ class ContentBehavior extends ModelBehavior {
 */
 	function beforeSave(&$model)
 	{
+		//exit(debug($model->data));
 
 		$alias = 'Content';
 		if($model->table == 'contents')
@@ -266,20 +278,16 @@ class ContentBehavior extends ModelBehavior {
 		}
 		else
 		{
-			if(empty($model->data[$model->alias][$alias]))
-			{
-				//debug($model->data);
-				//return true to do the basic save method
-				return true;
-			}
-			$data = $model->data[$model->alias][$alias];
+			$data = $model->data[$model->alias];
         	App::import('Content','Happycms.Model');
         	$ContentModel = new Content();
 		}
-		if(isset($data['params']) && !is_array( $data['params'] ))
+           
+		if(isset($data['params']) && count($data)==count($data,COUNT_RECURSIVE) && !is_array( $data['params'] ))
 		{
 			return true;
 		}
+		 //debug($data);
 
 
 		$this->checkIfItsLoaded($model);
@@ -414,7 +422,10 @@ class ContentBehavior extends ModelBehavior {
             }*/
             
     endforeach;
-        
+        if($model->table!='contents')
+		{
+			return true;
+		}
 
 		return false;
 	}
@@ -429,7 +440,12 @@ class ContentBehavior extends ModelBehavior {
 		//	return true;
 		//} else {
 		if($model->table == 'contents')
+		{
+			$model->deleteAll(array('item_id'=>$item_id,
+						'extension'=>$this->extensionName
+					));
 			return false;
+		}	
 
 		return true;
 		//}

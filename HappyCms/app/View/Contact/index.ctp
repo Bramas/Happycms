@@ -3,12 +3,12 @@
       <div class="span8">
         <div class="info">
         <?php
-          echo $Content['text'];
+          echo $Contact['text'];
           ?>
         </div>
         <div class="googlemap">
                   <?php
-          list($lat,$lng,$zoom) = explode('|',$Content['googlemaps']);
+          list($lat,$lng,$zoom) = explode('|',$Contact['googlemaps']);
 
           ?>
           <script type="text/javascript"

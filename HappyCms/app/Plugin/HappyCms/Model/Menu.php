@@ -11,7 +11,7 @@ class Menu extends HappycmsAppModel
         'className'=>'Happycms.Extension'
       )
     );
-    var $displayField = 'item_id'; 
+    var $displayField = 'view'; 
     var $extension='menus';
     function save( $data = NULL, $validate = true, $fieldList = array ( ) )
     {
