@@ -34,7 +34,6 @@ switch ($step)
 		}
 		break;
 	case 2:
-		require 'install_htaccess.php';
 
 		ob_start();
 		?>
@@ -72,8 +71,9 @@ switch ($step)
 	$user = $_POST['user'];
 	$password = $_POST['password'];
 	$prefix = $_POST['prefix'];
-	$rewriteBase = $_POST['rewriteBase'];
+	$rewriteBase = $_POST['RewriteBase'];
 
+	require 'install_htaccess.php';
 	createHtaccess($rewriteBase);
 
 	$databaseConfig = 

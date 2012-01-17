@@ -76,7 +76,7 @@ echo $this->element('body') ?>
 		<div class="page-header">
 			<h1>
 			<?php 
-				echo Configure::read('Menu.Content.title'); ?>
+				echo Configure::read('Menu.title'); ?>
 			</h1>
 		</div>
 		<div class="contentForLayout">

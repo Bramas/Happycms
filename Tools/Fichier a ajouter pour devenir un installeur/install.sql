@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: 127.0.0.1
--- Généré le : Lun 19 Décembre 2011 à 16:00
+-- Généré le : Sam 14 Janvier 2012 à 14:21
 -- Version du serveur: 5.5.10
 -- Version de PHP: 5.3.6
 
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `#prefix#contents` (
   `custom_field_2` varchar(255) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`),
   FULLTEXT KEY `params` (`params`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=520 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=618 ;
 
 --
 -- Contenu de la table `contents`
@@ -82,42 +82,27 @@ CREATE TABLE IF NOT EXISTS `#prefix#contents` (
 
 INSERT INTO `#prefix#contents` (`id`, `extension`, `item_id`, `language_id`, `created`, `published`, `params`, `custom_field_1`, `custom_field_2`) VALUES
 (418, 'extensions', 1, 1, '0000-00-00 00:00:00', 1, '{"default_menu_id":"56"}', '', ''),
-(516, 'pages', 20, 1, '2011-12-19 12:05:17', 1, '{"text":""}', '', ''),
 (415, 'menus', 2, 1, '0000-00-00 00:00:00', 1, '{"title":"Menu racine","alias":"Menu-racine","published":"1","class":"","thumb":"imgAcc.jpg"}', '', ''),
-(514, 'pages', 19, 1, '2011-12-19 12:04:26', 1, '{"text":""}', '', ''),
 (419, 'extensions', 3, 1, '0000-00-00 00:00:00', 1, '{}', '', ''),
 (420, 'extensions', 2, 1, '0000-00-00 00:00:00', 1, '{}', '', ''),
-(423, 'pages', 1, 1, '0000-00-00 00:00:00', 1, '{"text":"<p>test de page &eacute;&eacute;&eacute;&eacute;<\\/p>"}', '', ''),
-(435, 'pages', 3, 1, '0000-00-00 00:00:00', 1, '{"text":""}', '', ''),
-(436, 'pages', 4, 1, '0000-00-00 00:00:00', 1, '{"fields":["","googlemap:map"],"map":"45.47265123688458|2.5309749687500016|8","mapOptions":"width:580px;height:580px;","text":"<p>fgfghdfghgfhgf truc much<\\/p>"}', '', ''),
-(510, 'pages', 17, 1, '2011-12-19 12:01:26', 1, '{"text":""}', '', ''),
-(512, 'pages', 18, 1, '2011-12-19 12:02:55', 1, '{"text":""}', '', ''),
-(439, 'pages', 5, 1, '0000-00-00 00:00:00', 1, '{"text":""}', '', ''),
-(440, 'extensions', 1, 1, '0000-00-00 00:00:00', 1, '{}', '', ''),
-(441, 'extensions', 1, 1, '0000-00-00 00:00:00', 1, '{}', '', ''),
 (442, 'extensions', 4, 1, '0000-00-00 00:00:00', 1, '{}', '', ''),
 (443, 'extensions', 5, 1, '0000-00-00 00:00:00', 1, '{}', '', ''),
 (444, 'extensions', 6, 1, '0000-00-00 00:00:00', 1, '{}', '', ''),
-(445, 'extensions', 7, 1, '0000-00-00 00:00:00', 1, '{"online":"1","offline-message":"","title":"Happy Cms","description":"","meta-tag":"","default_menu_id":"71"}', '', ''),
-(452, 'pages', 6, 1, '0000-00-00 00:00:00', 1, '{"text":"<p>treshf hdgh g g tru<\\/p>"}', '', ''),
-(505, 'menus', 3, 1, '2011-12-17 17:28:42', 1, '{"title":"Contact","alias":"Contact","published":"1","class":""}', '', ''),
-(503, 'pages', 14, 1, '2011-12-17 17:28:14', 1, '[]', '', ''),
-(454, 'pages', 7, 1, '0000-00-00 00:00:00', 1, '{"text":"<p>testtestetzt<\\/p>"}', '', ''),
-(456, 'pages', 8, 1, '0000-00-00 00:00:00', 1, '{"text":""}', '', ''),
-(458, 'pages', 9, 1, '0000-00-00 00:00:00', 1, '{"text":"<p>dfsdf<\\/p>"}', '', ''),
-(499, 'menus', 4, 1, '2011-12-17 17:25:13', 1, '{"title":"Page d''accueil","alias":"Page-d-accueil","published":"1","class":""}', '', ''),
+(445, 'extensions', 7, 1, '0000-00-00 00:00:00', 1, '{"online":"1","offline-message":"test","title":"Happy Cms","description":"","meta-tag":"","default_menu_id":"33","contactEmail":"contact@linksite.fr"}', '', ''),
+(505, 'menus', 35, 1, '2011-12-17 17:28:42', 1, '{"title":"Contact","alias":"Contact","published":"1","class":""}', '', ''),
+(499, 'menus', 33, 1, '2011-12-17 17:25:13', 1, '{"title":"Page d''accueil","alias":"Page-d-accueil","published":"1","class":""}', '', ''),
 (489, 'extensions', 10, 1, '0000-00-00 00:00:00', 1, '{}', '', ''),
+(607, 'menus', 139, 1, '0000-00-00 00:00:00', 1, '{"title":"Page d''accueil","alias":"accueil","published":"1","class":""}', '', ''),
+(608, 'pages', 46, 1, '2012-01-05 14:32:07', 1, '{"text":""}', '', ''),
 (469, 'extensions', 8, 1, '0000-00-00 00:00:00', 1, '{}', '', ''),
+(610, 'extensions', 12, 1, '2012-01-13 18:07:00', 1, '{}', '', ''),
 (475, 'extensions', 9, 1, '0000-00-00 00:00:00', 1, '{}', '', ''),
-(481, 'contact', 1, 1, '0000-00-00 00:00:00', 1, '{"text":"<p>Twitter, Inc.<br \\/> 795 Folsom Ave, Suite 600<br \\/> San Francisco, CA 94107<br \\/>P: (123) 456-7890<\\/p>","googlemaps":"45.783806|3.1681820000000016|7","googlemapsOptions":""}', '', ''),
-(486, 'pages', 10, 1, '0000-00-00 00:00:00', 1, '{"text":""}', '', ''),
-(508, 'pages', 16, 1, '2011-12-19 11:57:27', 1, '{"text":""}', '', ''),
-(488, 'pages', 11, 1, '0000-00-00 00:00:00', 1, '{"text":""}', '', ''),
+(481, 'contact', 1, 1, '0000-00-00 00:00:00', 1, '{"text":"<p>Twitter, Inc.<br \\/> 795 Folsom Ave, Suite 600<br \\/> San Francisco, CA 94107<br \\/>P: (123) 456-7890.<\\/p>","googlemaps":"45.783806|3.1681820000000016|8","googlemapsOptions":""}', '', ''),
+(527, 'menus', 47, 1, '2011-12-22 17:21:05', 1, '{"title":"Actus","alias":"Actus","published":"1","class":""}', '', ''),
 (492, 'extensions', 11, 1, '0000-00-00 00:00:00', 1, '{}', '', ''),
-(493, 'posts', 1, 1, '0000-00-00 00:00:00', 1, '{"title":"Titre de l\\u2019actualit\\u00e9 num\\u00e9ro 1","text":"<div id=\\"actu1\\">\\r\\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sed metus id metus varius cursus vel vitae sapien. Pellentesque porta vehicula nisi nec vehicula. Nulla fringilla dictum nequeinia consequat nec vitae massa.<\\/p>\\r\\n<\\/div>"}', '', ''),
-(494, 'posts', 2, 1, '0000-00-00 00:00:00', 1, '{"title":"Titre de l\\u2019actualit\\u00e9 num\\u00e9ro 2","text":"<div id=\\"actu1\\">\\r\\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sed metus id metus varius cursus vel vitae sapien. Pellentesque porta vehicula nisi nec vehicula. Nulla fringilla dictum nequeinia consequat nec vitae massa.<\\/p>\\r\\n<\\/div>"}', '', ''),
-(501, 'pages', 13, 1, '2011-12-17 17:25:30', 1, '{"text":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer gravida convallis neque vestibulum volutpat. In egestas sodales erat, sed dapibus nisl rhoncus ut. Nam sit amet nisl ultrices arcu mattis aliquam mollis et felis. Pellentesque sit amet suscipit orci. Vivamus ultricies urna eget sapien placerat a convallis sem pellentesque. Nam ut urna lectus, ac venenatis odio. Mauris fringilla enim vitae lacus tincidunt faucibus tincidunt ante accumsan. Aliquam molestie augue quis lorem blandit pretium. Aenean vitae commodo eros. Cras bibendum posuere neque, ut interdum augue laoreet sed. Curabitur eros lorem, consectetur vel rutrum nec, ultrices sed tellus. Nunc fermentum sapien sit amet augue consequat molestie. Aliquam sed odio vel mi condimentum mollis in in dolor. Sed ornare pulvinar lorem quis sollicitudin. Aenean tortor mi, placerat eu fringilla sed, aliquet laoreet diam. <br \\/><br \\/> In eu leo turpis, id bibendum massa. Nam non imperdiet ante. Nulla molestie condimentum libero vel interdum. Vestibulum euismod luctus justo vel vehicula. Sed tincidunt vulputate odio, vitae placerat massa pellentesque at. Curabitur varius tincidunt lectus non consectetur. Etiam tempus ante in lorem ornare lobortis. Praesent egestas pellentesque leo vitae elementum. Curabitur non tellus est, luctus mollis leo. Nam accumsan aliquet magna, ut pulvinar sapien elementum a. Sed vitae facilisis odio. Nullam tincidunt, mauris sed congue porttitor, metus sem elementum nisl, nec porta libero urna id nulla. Mauris auctor faucibus purus adipiscing blandit. Aliquam at lorem eget est adipiscing viverra nec ac eros.<\\/p>"}', '', ''),
-(519, 'pages', 21, 1, '2011-12-19 12:34:42', 1, '{"text":""}', '', '');
+(493, 'posts', 1, 1, '0000-00-00 00:00:00', 1, '{"title":"Titre de l\\u2019actualit\\u00e9 num\\u00e9ro 1","img":"4f1063ff46431_74239.jpg","text":"<div id=\\"actu1\\">\\r\\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sed metus id metus varius cursus vel vitae sapien. Pellentesque porta vehicula nisi nec vehicula. Nulla fringilla dictum nequeinia consequat nec vitae massa.!:!<\\/p>\\r\\n<\\/div>"}', '', ''),
+(494, 'posts', 2, 1, '0000-00-00 00:00:00', 1, '{"title":"Titre de l\\u2019actualit\\u00e9 num\\u00e9ro 2","img":"4f1063fb5716e_74235.jpg","text":"<div id=\\"actu1\\">\\r\\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sed metus id metus varius cursus vel vitae sapien. Pellentesque porta vehicula nisi nec vehicula. Nulla fringilla dictum nequeinia consequat nec vitae massa.<\\/p>\\r\\n<\\/div>"}', '', ''),
+(501, 'pages', 13, 1, '2011-12-17 17:25:30', 1, '{"text":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer gravida convallis neque vestibulum volutpat. In egestas sodales erat, sed dapibus nisl rhoncus ut. Nam sit amet nisl ultrices arcu mattis aliquam mollis et felis. Pellentesque sit amet suscipit orci. Vivamus ultricies urna eget sapien placerat a convallis sem pellentesque. Nam ut urna lectus, ac venenatis odio. Mauris fringilla enim vitae lacus tincidunt faucibus tincidunt ante accumsan. Aliquam molestie augue quis lorem blandit pretium. Aenean vitae commodo eros. Cras bibendum posuere neque, ut interdum augue laoreet sed. Curabitur eros lorem, consectetur vel rutrum nec, ultrices sed tellus. Nunc fermentum sapien sit amet augue consequat molestie. Aliquam sed odio vel mi condimentum mollis in in dolor. Sed ornare pulvinar lorem quis sollicitudin. Aenean tortor mi, placerat eu fringilla sed, aliquet laoreet diam. <br \\/><br \\/> In eu leo turpis, id bibendum massa. Nam non imperdiet ante. Nulla molestie condimentum libero vel interdum. Vestibulum euismod luctus justo vel vehicula. Sed tincidunt vulputate odio, vitae placerat massa pellentesque at. Curabitur varius tincidunt lectus non consectetur. Etiam tempus ante in lorem ornare lobortis. Praesent egestas pellentesque leo vitae elementum. Curabitur non tellus est, luctus mollis leo. Nam accumsan aliquet magna, ut pulvinar sapien elementum a. Sed vitae facilisis odio. Nullam tincidunt, mauris sed congue porttitor, metus sem elementum nisl, nec porta libero urna id nulla. Mauris auctor faucibus purus adipiscing blandit. Aliquam at lorem eget est adipiscing viverra nec ac eros.<\\/p>"}', '', '');
 
 -- --------------------------------------------------------
 
@@ -139,14 +124,15 @@ CREATE TABLE IF NOT EXISTS `#prefix#extensions` (
 --
 
 INSERT INTO `#prefix#extensions` (`name`, `controller`, `item_id`, `current_id`, `category_id`) VALUES
-('Menu racine', 'menus', 1, 43, 0),
-('Page simple', 'pages', 2, 22, 0),
-('Formulaire de contact', 'contact', 3, 3, 0),
+('Menu racine', 'menus', 1, 3, 0),
+('Page simple', 'pages', 2, 5, 0),
+('Formulaire de contact', 'contact', 3, 4, 0),
 ('Lien vers une autre page', 'links', 5, 1, 0),
-('gestion des extensions', 'extensions', 6, 12, 0),
+('Page d''accueil', 'home', 12, 2, 0),
+('gestion des extensions', 'extensions', 6, 1, 0),
 ('Configuration du site', 'configurations', 7, 1, 0),
 ('Sous Menus', 'submenus', 9, 1, 0),
-('Actualités', 'posts', 11, 3, 0);
+('Actualités', 'posts', 11, 4, 0);
 
 -- --------------------------------------------------------
 
@@ -225,23 +211,21 @@ CREATE TABLE IF NOT EXISTS `#prefix#menus` (
   `rght` int(11) NOT NULL,
   `extension` varchar(255) NOT NULL,
   `view` varchar(255) NOT NULL,
-  `item_id` int(11) NOT NULL,
   `params` text NOT NULL,
-  `default` tinyint(1) NOT NULL DEFAULT '0',
-  `display_in` int(11) DEFAULT NULL,
-  `lang_available` tinytext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=81 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=145 ;
 
 --
 -- Contenu de la table `menus`
 --
 
-INSERT INTO `#prefix#menus` (`id`, `parent_id`, `lft`, `rght`, `extension`, `view`, `item_id`, `params`, `default`, `display_in`, `lang_available`) VALUES
-(1, NULL, 1, 8, '', '', 0, '', 0, NULL, ''),
-(2, 1, 2, 7, 'menus', 'top_menu', 2, '', 0, NULL, ''),
-(3, 2, 5, 6, 'contact', 'index', 3, '', 0, NULL, ''),
-(4, 2, 3, 4, 'pages', 'display', 4, '13', 0, NULL, '');
+INSERT INTO `#prefix#menus` (`id`, `parent_id`, `lft`, `rght`, `extension`, `view`, `params`) VALUES
+(1, NULL, 1, 12, '', '', ''),
+(2, 1, 2, 11, 'menus', 'top_menu', ''),
+(35, 2, 7, 8, 'contact', 'index', ''),
+(33, 2, 3, 4, 'pages', 'display', '13'),
+(47, 2, 5, 6, 'posts', 'index', ''),
+(139, 2, 9, 10, 'pages', 'display', '46');
 
 -- --------------------------------------------------------
 

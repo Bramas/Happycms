@@ -98,7 +98,7 @@ function displayNode($htmlHelper,$nodes,$place='NULL')
             	{
             		if(!empty($temp['image']) && $temp['image']!='none')
             		{
-	            		$style.="background-image:url('".$htmlHelper->url('/img/'.$temp['image'])."');";
+	            		$style.="background-image:url('".$htmlHelper->url($temp['image'])."');";
 	            	}
 	            	elseif(isset($temp['image']))
 	            	{
@@ -154,9 +154,10 @@ function displayNode($htmlHelper,$nodes,$place='NULL')
     
     
 	<?php
-			//$menus = current($menus);
+			$menus = $menus[0]['children'];
 			//debug($menus);
 			displayNode($this->Html,$menus);
+			echo $this->Html->link('nouveau menu racine',array('controller'=>'menus','action'=>'add_new','admin'=>true,1,0));
 		?>
 
 

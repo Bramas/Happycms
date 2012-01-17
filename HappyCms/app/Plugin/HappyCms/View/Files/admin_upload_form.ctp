@@ -14,9 +14,9 @@
 	}
 </style>
 
-<?php  echo $this->Html->css('admin_style'); ?>
-<?php  echo $this->Html->css('admin_happy'); 
-		echo $this->Html->css('pepper-grinder/jquery-ui');
+<?php  echo $this->Html->css('/HappyCms/css/admin_style'); ?>
+<?php  echo $this->Html->css('/HappyCms/css/admin_happy'); 
+		echo $this->Html->css('/HappyCms/css/pepper-grinder/jquery-ui');
 
 echo $this->Html->script('jquery.min');
 		echo $this->Html->script('jquery-ui.min'); ?>
@@ -41,7 +41,7 @@ echo $this->Html->script('jquery.min');
 		    <div class="a pickfiles" id="pickfiles" href="javascript:;"><?php echo $this->Html->image('/img/boxupload32.png'); ?>
 				<a id="file-<?php echo $name.'-'.$lang ?>-pickfiles" >A partir de mon ordinateur</a>
 		    </div> 
-		    <div  class="a distantfiled"><?php echo $this->Html->image('/img/Slideshow.png'); ?>
+		    <!--<div  class="a distantfiled"><?php echo $this->Html->image('/img/Slideshow.png'); ?>
 		    	<a  id="file-<?php echo $name.'-'.$lang ?>-distantfiled" >Images existantes</a>
 		    </div>
 		    <!--<a id="uploadfiles" href="javascript:;">[Upload files]</a>
@@ -73,18 +73,18 @@ var uploader = new plupload.Uploader({
 	browse_button : 'pickfiles',
 	container: 'pickfiles-container',
 	max_file_size : '6mb',
-	url : '<?php echo $this->Html->url('/admin/',true); ?>'+'/contents/upload?extension=<?php echo $extension ?>'+
+	url : '<?php echo $this->Html->url('/admin/',true); ?>'+'contents/upload?extension=<?php echo $extension ?>'+
                
                 '&fieldname=<?php echo $name ?>'+
                 '&contentid=1'+
                 '&lang=<?php echo $lang ?>'+
                 '&',
-    chunk_size:'300kb',
+    chunk_size:'100kb',
 	//resize : {width : 320, height : 240, quality : 90},
 	flash_swf_url : '<?php echo $this->Html->url('/js/plupload/js/plupload.flash.swf',true); ?>',
 	silverlight_xap_url : '<?php echo $this->Html->url('/js/plupload/js/plupload.silverlight.xap',true); ?>',
 	filters : [
-		{title : "Image files", extensions : "jpg,gif,png"},
+		{title : "Image files", extensions : "jpg,gif,png,jpeg"},
 		{title : "Zip files", extensions : "zip"}
 	]
 });

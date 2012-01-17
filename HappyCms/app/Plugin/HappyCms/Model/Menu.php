@@ -8,7 +8,8 @@ class Menu extends HappycmsAppModel
     var $belongsTo = array(
       'Extension'=>array(
         'foreignKey'=>'extension',
-        'className'=>'Happycms.Extension'
+        'className'=>'Happycms.Extension',
+        
       )
     );
     var $displayField = 'title'; 

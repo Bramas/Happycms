@@ -16,9 +16,9 @@
 	}
 </style>
 
-<?php  echo $this->Html->css('admin_style'); ?>
-<?php  echo $this->Html->css('admin_happy'); 
-		echo $this->Html->css('pepper-grinder/jquery-ui');
+<?php  echo $this->Html->css('/HappyCms/css/admin_style'); ?>
+<?php  echo $this->Html->css('/HappyCms/css/admin_happy'); 
+		echo $this->Html->css('/HappyCms/css/pepper-grinder/jquery-ui');
 
 echo $this->Html->script('jquery.min');
 		echo $this->Html->script('jquery-ui.min'); ?>
@@ -128,14 +128,15 @@ var uploader = new plupload.Uploader({
                 'contextId=<?php echo $contextId; ?>'+
                 '&contextExtension=<?php echo $contextExtension; ?>'+
                 '&',
-    chunk_size:'300kb',
+    chunk_size:'100kb',
 	//resize : {width : 320, height : 240, quality : 90},
 	flash_swf_url : '<?php echo $this->Html->url('/js/plupload/js/plupload.flash.swf',true); ?>',
 	silverlight_xap_url : '<?php echo $this->Html->url('/js/plupload/js/plupload.silverlight.xap',true); ?>',
 	filters : [
 		{title : "Image files", extensions : "jpg,jpeg,gif,png,bmp"},
 		{title : "Zip files", extensions : "zip"},
-		{title : "Pdf files", extensions : "pdf"}
+		{title : "Pdf files", extensions : "pdf"},
+		{title : "Doc files", extensions : "odt,doc,docx"}
 	]
 });
 

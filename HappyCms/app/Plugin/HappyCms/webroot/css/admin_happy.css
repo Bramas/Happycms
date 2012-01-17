@@ -147,3 +147,14 @@ form .input.file>div .distantfiled
     float:left;
     width:250px;
 }
+
+form .media iframe {
+    background: none repeat scroll 0 0 #FFFFFF;
+    position: absolute;
+    right: -82px;
+    top: -147px;
+    z-index: 9999;
+}
+form .media {
+    position: relative;
+}

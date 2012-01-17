@@ -163,9 +163,8 @@ class Extension extends HappyCmsAppModel
             }
             
             $this->Hparams=json_decode($dboResult['Content']['params'],true);
-            $dboResult=current($dboResult);
             
-            $this->current_id=$dboResult['current_id'];
+            $this->current_id=$dboResult['Extension']['current_id'];
             //$this->id=$dboResult['id']; // there is no more id field
         }
         return true;

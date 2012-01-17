@@ -12,7 +12,7 @@ class PostsController extends AppController
     
     function admin_menu_index()
     {
-        $this->request->data = $this->Post->find('all');
+        $this->request->data = $this->Post->find('all',array('order'=>'Post.created desc'));
     }
     function admin_save()
     {
@@ -24,7 +24,7 @@ class PostsController extends AppController
 
     function getList($start=0,$limit=2)
     {
-        $posts = $this->Post->find('all',array('limit'=>$start.','.$limit));
+        $posts = $this->Post->find('all',array('order'=>'Post.created desc','limit'=>$start.','.$limit));
         return $posts;
     }
     function getMain()
@@ -47,7 +47,12 @@ class PostsController extends AppController
         {
             exit('Contactez l\'administrateur');
         }
-        $post = $this->Post->findById($id);
+        //debug($this->Post->find('first',array('conditions'=>array('Post.id'=>$id),'recursive'=>2)));
+        //debug($this->Post->Comment->belongsTo);
+        //debug($this->Post->hasMany);
+        //exit(debug($this->Post->getLastQuery()));
+
+        $post = $this->Post->find('first',array('conditions'=>array('Post.id'=>$id),'recursive'=>2));
         $this->set($post);
         $this->set('bodyClass','actualite');
         Configure::write('Menu.Content.title',$post['Post']['title']);
@@ -77,7 +82,40 @@ class PostsController extends AppController
             'content'=>$result['text']
             );
     }
-
+    public function addComment()
+    {
+        if($this->request->is('post'))
+        {
+            if($this->Auth->user('real'))
+            {
+                $this->request->data['Comment']['fre']['user_id'] = $this->Auth->user('id');
+                $this->Post->Comment->save($this->request->data);
+                exit('{"result":true}');
+            }
+            else
+            {
+                exit('{"result":false}');   
+            }
+            
+        }
+        else
+        {
+            exit('{"result":false}');   
+        }
+    }
+    public function rss()
+    {
+        $this->layout = 'empty';
+        $this->set('Posts',$this->getList(0,10));
+    }
+    public function admin_comments_delete($id)
+    {
+        $this->check_token();
+        $this->Post->Comment->delete($id);
+        $this->redirect($_SERVER['HTTP_REFERER']);
+        exit();
+    }
+   
 }
 
 ?>

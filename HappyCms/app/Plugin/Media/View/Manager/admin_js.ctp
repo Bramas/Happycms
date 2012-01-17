@@ -18,7 +18,7 @@ $(function(){
         var contextId = $(this).attr('contextId');
 		contextId = contextId?contextId:'null';
 		$(this).after('<iframe src="<?php 
-			echo $this->Html->url('/media/manager/index/',true); ?>'+contextExtension+'/'+contextId+'/'+domId+'" frameBorder="0" width="560" height="550">');         
+			echo $this->Html->url('/media/manager/index/',true); ?>'+contextExtension+'/'+contextId+'/'+domId+'" frameBorder="0" width="560" height="575">');         
 
 		return false;
 		
@@ -27,7 +27,7 @@ $(function(){
 	$(document).bind('onFileChosen',function(event,name,url,id,domId)
 	{
 		$('#'+domId+'Container img').attr('src',url+'_<?php echo Configure::read('Media.formats.formThumb'); ?>').show();
-		$('#'+domId).val(id);
+		$('#'+domId+'Container input').val(id);
 		$('#'+domId+'Container iframe').hide();
 	});
 

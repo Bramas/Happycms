@@ -64,11 +64,24 @@ Configure::write('Extensions',array(
                                             'menu'=>array(
                                                 'title'=>'Actualités'
                                             )
-                                        )
+                                        ),
+                                        'home'=>array(
+                                            'name'=>'Page d\'accueil'
+                                        ),
+                                        'galleries'=>array(
+                                            'name'=>'Galerie de photos',
+                                            'views'=>array(
+                                                'index'=>'Liste des Galeries'
+                                            ),
+                                            'menu'=>array(
+
+                                                'title'=>'Galeries photos'
+
+                                            ))
                         ));
 
 /** if this is set to true, then when it will check the if all your extensions are in the database,
 *   and add it if necessary
 *
 */
-$refresh_extension=true;
+$refresh_extension=false;

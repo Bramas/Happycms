@@ -51,6 +51,18 @@ class FilesController extends AppController
 
     		if(file_exists(ROOT.DS.$filename))
     		{
+              if(!is_dir(ROOT.DS.'files_backup'))
+              {
+                  mkdir(ROOT.DS.'files_backup');
+              }
+              if(!is_dir(ROOT.DS.'files_backup'.DS.'new'))
+              {
+                  mkdir(ROOT.DS.'files_backup'.DS.'new');
+              }
+              if(!is_dir(ROOT.DS.'files_backup'.DS.'old'))
+              {
+                  mkdir(ROOT.DS.'files_backup'.DS.'old');
+              }
     			//BACKUP THE FILE
 
     			//copy(ROOT.DS.$filename,ROOT.DS.'trash'.DS.time().'-'.preg_replace('/^.*\/([^\/]*\.[a-zA-Z]{2,3})$/','$1',$filename));

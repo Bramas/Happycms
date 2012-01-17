@@ -2,7 +2,7 @@
 
 class ManagerController extends MediaAppController
 {
-		public $components = array('Img');
+		//public $components = array('Img');
 		public $uses = array('Media'); 
 		public $helpers = array('Form'); 
 

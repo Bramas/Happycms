@@ -59,7 +59,6 @@ switch ($step)
 		break;
 
 	case 3:
-		require 'install_htaccess.php';
 	$toutEstOk = true;
 	$content_for_layout='';
 	if(empty($_POST))
@@ -74,6 +73,7 @@ switch ($step)
 	$prefix = $_POST['prefix'];
 	$rewriteBase = $_POST['RewriteBase'];
 
+	require 'install_htaccess.php';
 	createHtaccess($rewriteBase);
 
 	$databaseConfig = 

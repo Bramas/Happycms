@@ -17,14 +17,6 @@ class Content extends AppModel
                            );
     var $hasAndBelongsToMany = array('Category');
     
-    function save( $data = NULL, $validate = true, $fieldList = array ( ) )
-    {
-        if(empty($data['Content']['params']))
-        {
-            $data['Content']['params'] = '{"empty":true}';
-        }
-        return parent::save( $data , $validate , $fieldList );
-    }
     
     function saveItem( $data = NULL, $validate = true, $fieldList = array ( ) )
     {

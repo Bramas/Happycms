@@ -14,7 +14,7 @@ class HappyRoute extends CakeRoute {
             $params['admin']=true;
             return $params;
         }*/
-        
+
         
         App::import('Model','Happycms.Menu');
         App::import('Model','Happycms.Content');
@@ -54,6 +54,7 @@ class HappyRoute extends CakeRoute {
                                         AND Content.params LIKE (\'%"published":"1"%\')
                                         ') 
 	    ));
+
         }
         
         //debug($menu);
@@ -111,9 +112,13 @@ class HappyRoute extends CakeRoute {
         {
              $params['pass'] = array_merge((array)$menu['Menu']['params'],$params['pass']);
         }
-        //$params['plugin'] = 'Happycms';
+        if(in_array($params['controller'], Configure::read('HappyCms.ControllersNeedRoutes')))
+        {
+            $params['plugin'] = 'HappyCms';
+        }
         //debug($params);
         //exit();
+
         return $params;
     }
     

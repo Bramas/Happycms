@@ -63,6 +63,13 @@ class UsersController extends AppController
         exit();
         //$this->layout = 'admin_login';
     }
+    function logout()
+    {
+        $this->Session->write('User.token',0);
+        $this->Auth->logout();
+        $this->redirect('/');
+        exit();
+    }
     function admin_logout()
     {
         $this->Session->write('User.token',0);
@@ -182,10 +189,114 @@ class UsersController extends AppController
             $this->request->data['User']['password'] = $this->Auth->password($this->request->data['User']['newpassword1']);
         }
 
-        $this->User->save($this->request->data,array(),array('username','password','group_id'));
+        $this->User->save($this->request->data,array(),array('username','password','group_id','rules'));
+        //exit(debug($this->request->data));
         $this->Session->setFlash('Modifications sauvegardés','flash_success');
         $this->redirect('/admin/users/index');
         exit();
+    }
+
+
+    function register()
+    {
+        if($this->request->is('post'))
+        {
+            $this->User->set($this->request->data);
+            if($this->User->validates())
+            {
+                $this->User->create();
+                //$this->User->save(array('User'=>array('username'=>'lol')));
+                //exit(debug($this->request->data));
+                $this->request->data['User']['password'] = $this->Auth->password($this->request->data['User']['password']);
+                if(!$this->User->save($this->request->data,false))
+                {
+                    
+                }
+                if($this->Auth->login())
+                {
+                    $User = $this->User->findById($this->User->getLastInsertID());
+                    $User = array_merge($User['User'],array(
+                        'Group.rules'=>$User['Group']['rules'],
+                        'Group.id'=>$User['Group']['id']
+                        ));
+                    $this->Auth->login($User);
+                    $this->redirect('/users/view/'.$User['User']['id'].'-'.$User['User']['username']);
+                }
+            }
+        }
+
+    }
+    function view($slug)
+    {
+        $id = false;
+        if(is_numeric($slug))
+        {
+            $id = $slug;
+        }
+        if(strpos($slug, '-'))
+        {
+            list($id) = explode('-',$slug,1);
+        }
+        if(!$id)
+        {
+            $this->redirect('/');
+        }
+        $user = $this->User->findById($id);
+        if($user['User']['username']=='default')
+        {
+            $this->redirect('/');
+        }
+        $this->set('viewUser',$user);
+    }
+    function edit()
+    {
+        $user = $this->Auth->user();
+
+        if($user['username']=='default')
+        {
+            $this->redirect('/');
+        }
+
+        if(!$user['real'])
+        {
+            
+            exit();
+        }
+
+        $id=$user['id'];
+        if($this->request->data)
+        {
+            $this->User->set($this->request->data);
+            $this->User->id = $id;
+            debug($this->request->data);
+            if($this->User->validates())
+            {
+                //$this->User->save(array('User'=>array('username'=>'lol')));
+                //exit(debug($this->request->data));
+                $fields = array('nom','prenom','licence','sport_id','avatar');
+                if(!empty($this->request->data['User']['password']))
+                {
+                    $fields[]='password';
+                    $this->request->data['User']['password'] = $this->Auth->password($this->request->data['User']['password']);
+                }
+                
+                if(!$this->User->save($this->request->data,false,$fields))
+                {
+                    
+                }
+
+                $this->redirect('/users/view/'.$this->User->id);
+                exit();
+                
+                
+            }
+        }
+        else
+        {
+            $this->request->data = $this->User->findById($id);
+        }
+
+        
     }
 }
 ?>

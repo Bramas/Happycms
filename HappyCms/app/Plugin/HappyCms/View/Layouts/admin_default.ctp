@@ -23,6 +23,7 @@ header('Content-type: text/html; charset=UTF-8');
 		echo $this->Html->script('/HappyCms/js/jquery.qtip.min');
 		echo $this->Html->script('/HappyCms/js/nested');
 		echo $this->Html->script('/HappyCms/js/jquery.checkbox.min');
+		echo $this->Html->script('/media/manager/js/');
 
 		echo $scripts_for_layout;
 	?>

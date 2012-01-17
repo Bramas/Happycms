@@ -20,8 +20,8 @@ class HappyHelper extends AppHelper {
 			if(!$this->Form)
 			{
 				App::uses('FormHelper','View/Helper');
-				$this->Form=new FormHelper();
-				$this->Form->Html=new HtmlHelper();
+				$this->Form=new FormHelper($this->_View);
+				$this->Form->Html=new HtmlHelper($this->_View);
 			}
 	
 		if(!is_null($this->__blockName))
@@ -73,7 +73,7 @@ class HappyHelper extends AppHelper {
 		App::uses('Menu','HappyCms.Model');
 		App::uses('HtmlHelper','View/Helper');
 
-		$Html = new HtmlHelper();
+		$Html = new HtmlHelper($this->_View);
 		$Menu = new Menu();
 		
 		$Menu->Behaviors->attach('Content');
@@ -112,7 +112,7 @@ class HappyHelper extends AppHelper {
 		App::uses('Menu','HappyCms.Model');
 		App::uses('HtmlHelper','View/Helper');
 
-		$Html = new HtmlHelper();
+		$Html = new HtmlHelper($this->_View);
 		$Menu = new Menu();
 		
 		$menu = $Menu->findById((int)$id);
@@ -156,6 +156,7 @@ class HappyHelper extends AppHelper {
 		
 
 	}
+
 
 
 	
