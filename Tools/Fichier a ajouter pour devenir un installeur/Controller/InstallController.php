@@ -4,11 +4,11 @@ class InstallController extends AppController
 {
     function index()
     {
-    	$adminPass = $this->Auth->password('linkadmin');
-    	$linksitePass = $this->Auth->password('viveol');
+    	$adminPass = $this->Auth->password('admin');
+    	$superadminPass = $this->Auth->password('superadmin');
 
-    	$u = $this->User->findByUsername('linksite');
-    	$u['User']['password'] = $linksitePass;
+    	$u = $this->User->findByUsername('superadmin');
+    	$u['User']['password'] = $superadminPass;
     	$this->User->save($u);
 
     	$u = $this->User->findByUsername('admin');

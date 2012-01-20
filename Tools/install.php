@@ -194,7 +194,11 @@ class DATABASE_CONFIG {
 	$content_for_layout='L\'installation est terminée. Veuillez noter vos identifiants nécessaires pour se connecter è l\'administration du site
 	<div class="identifiants">
 		<div><label>Identifiant : </label>admin</div>
-		<div><label>Mot de passe : </label>linkadmin</div>
+		<div><label>Mot de passe : </label>admin</div>
+	</div>
+	<div class="identifiants">
+		<div><label>Identifiant : </label>superadmin</div>
+		<div><label>Mot de passe : </label>superadmin</div>
 	</div>
 	<a href="'.preg_replace('/\/([^\/]+)$/','',$_SERVER['PHP_SELF']).'">Voir le site</a>
 	';

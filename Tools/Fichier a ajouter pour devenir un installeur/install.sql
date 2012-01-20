@@ -248,5 +248,5 @@ CREATE TABLE IF NOT EXISTS `#prefix#users` (
 
 INSERT INTO `#prefix#users` (`id`, `username`, `password`, `rules`, `group_id`) VALUES
 (2, 'admin', '2b36c3eae875942d63340663e373d6711babf5a9', '', 2),
-(1, 'linksite', 'a5cda2d8751551b5b65766985b3716f74f4fb511', '', 1),
+(1, 'superadmin', 'a5cda2d8751551b5b65766985b3716f74f4fb511', '', 1),
 (3, 'default', '', '', 3);
