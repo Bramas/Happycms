@@ -7,6 +7,7 @@ echo $this->element('happy/admin_table',array('alias'=>'User',
                                                                       'username'=>'Identifiant'
                                                                       )));
 echo '<h2>Groupes</h2>';
+echo $this->Html->link('Nouveau Groupe',array('controller'=>'users','action'=>'group_edit',$ExtensionName));
 $this->request->data = $Groups;
 echo $this->element('happy/admin_table',array('alias'=>'Group',
 												'editUrl'=>'/admin/users/group_edit/',

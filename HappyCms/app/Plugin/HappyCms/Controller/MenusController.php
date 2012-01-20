@@ -108,7 +108,6 @@ class MenusController extends AppController
 	if(empty($children))
 	{
 		$this->Menu->recover();
-		exit(debug($this->Menu->getLastQuery()));
 	    $this->Menu->delete($menu['Menu']['id']);
 
 	    $controllerName = ucfirst($menu['Menu']['extension']).'Controller';
