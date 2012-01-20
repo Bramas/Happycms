@@ -1,0 +1,6 @@
+
+HappyCms/app/tmp/
+HappyCms/app/webroot/files/
+HappyCms/app/webroot/media/
+
+*.psd
