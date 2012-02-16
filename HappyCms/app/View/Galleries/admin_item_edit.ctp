@@ -6,7 +6,8 @@ echo $this->element('admin_create_form_item',array('file'=>true,'model'=>'Galler
 
 echo $this->Form->input('title',array('label'=>'Nom :','type'=>'text'));
 
-echo $this->element('happy/fields/files',array('label'=>'Image :','name'=>'img'));
+echo $this->element('gallery',array('label'=>'Images :','name'=>'img'),array('plugin'=>'media'));
+echo $this->element('media',array('label'=>'Image :','name'=>'img2'),array('plugin'=>'media'));
 
 echo $this->Form->input('text',array('label'=>'Description :','type'=>'textarea'));
 

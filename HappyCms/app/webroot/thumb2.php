@@ -29,6 +29,8 @@ if(!file_exists($dest))
 
 header("Content-type:image/".$_GET['ext']);
 
+header("Cache-Control: public, max-age=31536000");
+header("Expires: ".date('r',time()+31536000)); // set expiration time
 echo file_get_contents($dest);
 
 class Image{

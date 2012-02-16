@@ -92,7 +92,7 @@ function displayNode($htmlHelper,$nodes,$place='NULL')
             $style = '';
             
 
-            if(($temp = Configure::read('Extensions.'.$menu['extension'].'.views.'.$menu['view'].'.icon')))
+            if(($temp = Configure::read('Extensions.'.$menu['extension'].'.views.'.$menu['view'].'.menuIcon')))
             {
             	if(is_array($temp))
             	{
@@ -104,10 +104,13 @@ function displayNode($htmlHelper,$nodes,$place='NULL')
 	            	{
 	            		$style.="background-image:none;";
 	            	}
-
 					if(!empty($temp['position']))
             		{
 	            		$style.="background-position:".$temp['position'].";";
+	            	}
+					if(!empty($temp['style']))
+            		{
+	            		$style.=$temp['style'];
 	            	}
 
             	}

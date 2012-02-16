@@ -45,8 +45,16 @@
 
 		echo $scripts_for_layout;
 
+		echo '<link href="'.$this->Html->url('/css/style.css').'" id="styleCss" type="text/css" rel="stylesheet">';
 		
 	?>
+		<script type="text/javascript">
+	function liveCssReload(c)
+	{
+		$('#styleCss').remove();
+		 $("#liveCssStyle").html(c);
+	}
+	</script>
 </head>
 <?php
 
@@ -95,8 +103,9 @@ echo $this->element('body') ?>
 				array('target' => '_blank', 'escape' => false)
 			);
 		?>
-		<a href="http://www.linksite.fr">Création et design LinkSite</a> |
-		<?php echo $this->Html->link('Administration','/admin/'); ?>
+		
+		<?php 
+		echo $this->Html->link('Administration','/admin/'); ?>
 		</p>
 		</footer>
 	</div>
@@ -116,12 +125,17 @@ echo $this->element('body') ?>
 	});
 
 </script>
-<span class="hideSqlDump">Cacher le Log SQL</span>
+<span class="hideSqlDump">Cacher le Log SQL</span> - <a onClick="window.open('<?php echo $this->Html->url('/admin/files/liveCss'); ?>');return false;" href="#">Editer le Css</a>
 <?php
 
 		echo $this->element('sql_dump'); 
+		?>
+		<style type="text/css" id="liveCssStyle"></style>
+<?php
 	} 
 	?>
+
+
 
 </body>
 </html>

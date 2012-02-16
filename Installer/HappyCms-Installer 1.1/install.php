@@ -14,7 +14,7 @@ switch ($step)
 	case 1:
 		if(!is_dir('app'))
 		{
-			$l = unzip('happycms.zip','');
+			$l = unzip('HappyCms.zip','');
 			if(is_array($l))
 			{
 				$content_for_layout = 'le site a correctement été dézippé. <a href="install.php?step=2">Etape suivante></a>';

@@ -1,14 +1,23 @@
 <IfModule mod_rewrite.c>
-    RewriteEngine On
-    #RewriteBase /
+	RewriteEngine on
+   	
+	RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+
+    RewriteRule ^media\/(.*)\/([^\/]*)\.(png|gif|jpg|jpeg|JPG|JPEG)_([0-9]{1,4})x([0-9]{1,4})$ thumbs/$1/$2_$4x$5.$3
+
+# depreciate Line because dont use the media manager
+#    RewriteRule ^files\/uploads\/(.*)\/([^\/]*)\.(png|gif|jpg|jpeg|JPG|JPEG)_([0-9]{1,4})x([0-9]{1,4})$ thumb2.php?folder=$1&filename=$2&ext=$3&width=$4&height=$5 [QSA,L]
+
+
+	RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+	
+	RewriteRule ^thumbs\/(.*)\/([^\/]*)_([0-9]{1,4})x([0-9]{1,4})\.(png|gif|jpg|jpeg|JPG|JPEG)$ thumb.php?folder=$1&filename=$2&ext=$5&width=$3&height=$4
+
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
-    
-    RewriteRule ^files\/uploads\/(.*)\/([^\/]*)\.(png|gif|jpg|jpeg|JPG|JPEG)_([0-9]{1,4})x([0-9]{1,4})$ thumb2.php?folder=$1&filename=$2&ext=$3&width=$4&height=$5 [QSA,L]
-    
-    RewriteRule ^media\/(.*)\/([^\/]*)\.(png|gif|jpg|jpeg|JPG|JPEG)_([0-9]{1,4})x([0-9]{1,4})$ thumb.php?folder=$1&filename=$2&ext=$3&width=$4&height=$5 [QSA,L]
-    
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
+
     RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
 </IfModule>

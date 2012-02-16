@@ -407,7 +407,14 @@ class HappyCmsController extends Controller
     	$this->admin_save_();
 
     	$this->Session->setFlash("Données sauvegardées",'flash_success');
-        $this->redirect($_SERVER['HTTP_REFERER']);
+        if(empty($this->request->data['_redirect']) || $this->request->data['_redirect']=='default')
+		{
+			$this->redirect($_SERVER['HTTP_REFERER']);
+		}
+		else
+		{
+			$this->redirect(array('action'=>'index', 'admin'=>true));
+		}
         exit();
     }
     

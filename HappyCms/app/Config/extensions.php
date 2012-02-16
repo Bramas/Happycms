@@ -49,29 +49,59 @@
 */
 Configure::write('Extensions',array(
                                         'pages'=>array(
-                                            'name'=>'Pages Simple',
+                                            'name'=>'Pages',
                                             'views'=>array(
                                                 'display'=>array(
-                                                    'name'=>"Affichage d'une page simple"
+                                                    'name'=>"Affichage d'une page simple",
+                                                    'mainIcon'=>'/HappyCms/img/paper_content.png',
+                                                    'menuIcon'=>array(
+                                                            'image'=>'/HappyCms/img/skin.png',
+                                                            'position'=>'0px -180px'
+                                                        )
                                                     )
                                             )
                                         ),
                                         'contact'=>array(
-                                            'name'=>"Formulaire de contact",
+                                            'name'=>"Contact",
+                                            'views'=>array(
+                                                'index'=>array(
+                                                    'name'=>'Formulaire de contact',
+                                                    'mainIcon'=>'/HappyCms/img/mail.png',
+                                                    'menuIcon'=>array(
+                                                            'image'=>'/HappyCms/img/skin.png',
+                                                            'position'=>'-233px -17px'
+                                                        )
+                                                    )
+                                                )
                                         ),
                                         'posts'=>array(
                                             'name'=>'Actualités',
                                             'menu'=>array(
                                                 'title'=>'Actualités'
-                                            )
+                                            ),
+                                            'views'=>array(
+                                                'index'=>array(
+                                                    'name'=>'Liste des Actualités',
+                                                    'menuIcon'=>array(
+                                                            'image'=>'/HappyCms/img/skin.png',
+                                                            'position'=>'0px -180px'
+                                                    ),
+                                                    'mainIcon'=>'/HappyCms/img/newspaper.png'
+                                                    ))
                                         ),
                                         'home'=>array(
                                             'name'=>'Page d\'accueil'
                                         ),
                                         'galleries'=>array(
-                                            'name'=>'Galerie de photos',
+                                            'name'=>'Photos',
                                             'views'=>array(
-                                                'index'=>'Liste des Galeries'
+                                                'index'=>array(
+                                                    'name'=>'Liste des Galeries',
+                                                    'menuIcon'=>array(
+                                                            'image'=>'/HappyCms/img/skin.png',
+                                                            'position'=>'-144px -180px'
+                                                    ),
+                                                    'mainIcon'=>'/HappyCms/img/image_add.png')
                                             ),
                                             'menu'=>array(
 

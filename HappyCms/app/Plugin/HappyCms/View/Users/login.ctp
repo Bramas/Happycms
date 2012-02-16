@@ -1,11 +1,11 @@
 <?php
 echo $this->Form->create('User');//,array("action"=>"login",'url'=>'/admin/users/login/'));
-echo $this->Form->input('username' ,array('value'=>'Identifiant','label'=>''));
-echo $this->Form->input('password' ,array('value'=>'password','type'=>'password','label'=>''));
+echo $this->Form->input('username' ,array('label'=>''));
+echo $this->Form->input('password' ,array('type'=>'password','label'=>''));
 echo $this->Form->end('Connexion');
 ?>
 <script type="text/javascript">
-    $('#UserUsername').focus(function(){
+ /*   $('#UserUsername').focus(function(){
         if($(this).val()=='Identifiant')
         {
             $(this).val('');
@@ -29,5 +29,5 @@ echo $this->Form->end('Connexion');
         {
             $(this).val('password');
         }
-    });
+    });*/
 </script>

@@ -41,39 +41,19 @@ class ManagerController extends MediaAppController
 			
 
 		}
-		function admin_index($contextExtension,$contextId,$domId='tinyMce'){
-
-		/*if($this->request->data){
-			$data = $this->request->data['Media'];
-			if(isset($data['url'])){
-				$this->redirect(array('action'=>'show','?class=&alt=&src='.urlencode($data['url'])));
+		function admin_index($contextExtension,$contextId,$domId='tinyMce',$multiple=0){
+		$checkList =array();
+		if(!empty($_GET['checkList']))
+		{
+			if(strpos($_GET['checkList'],',')!==false)
+			{
+				$checkList = explode(',',$_GET['checkList']);
 			}
-			$dir = IMAGES.date('Y');
-			if(!file_exists($dir))
-				mkdir($dir,0777);
-			$dir .= DS.date('m');
-			if(!file_exists($dir))
-				mkdir($dir,0777);
-			$f = explode('.',$data['file']['name']); 
-			$ext = '.'.end($f);  
-			$filename = Inflector::slug(implode('.',array_slice($f,0,-1)),'-');
-			// Sauvegarde en bdd
-			$success = $this->Media->save(array(
-				'name' => $data['name'],
-				'url'  => date('Y').'/'.date('m').'/'.$filename.$ext
-			));
-			if($success){
-				move_uploaded_file($data['file']['tmp_name'], $dir.DS.$filename.$ext);
-				foreach(Configure::read('Media.formats') as $k=>$v){
-					$prefix = $k;
-					$size = explode('x',$v);
-					$this->Img->crop( $dir.DS.$filename.$ext,$dir.DS.$filename.'_'.$prefix.'.jpg',$size[0],$size[1]); 
-				}
-			}else{
-				$this->Session->setFlash("L'image n'est pas au bon format","notif",array('type'=>'error'));
+			else{
+				$checkList = array($_GET['checkList']);
 			}
-		}*/
-
+		}
+		$this->set('checkList',$checkList);
 
 		$contextIdCondition = true;
 		if($contextId==='null') 
@@ -81,13 +61,17 @@ class ManagerController extends MediaAppController
 			$contextId = 0;
 			$contextIdCondition = false;
 		}
-
+		$conditions = array(
+			'context_extension'=>$contextExtension,
+			'context_id'=>($contextIdCondition?$contextId:false)
+		);
+		if(!empty($_GET['all']))
+		{
+			$conditions = array();
+		}
 		$d = array(); 
 		$d['medias'] = $this->Media->find('all',array(
-			'conditions' => array(
-				'context_extension'=>$contextExtension,
-				'context_id'=>($contextIdCondition?$contextId:false)
-			)
+			'conditions' => $conditions
 		));
 		$d['formats'] = Configure::read('Media.formats');
 		$d['contextExtension'] = $contextExtension;
@@ -101,6 +85,7 @@ class ManagerController extends MediaAppController
 
 		$this->set($d);
         $this->set('domId',$domId);
+        $this->set('multiple',$multiple);
 
 	}
 
@@ -237,7 +222,7 @@ if ($chunks < 2 && file_exists($targetDir . $DS . $fileName)) {
 */
 $id = 0;
 $url = $linkDir.'/'.$fileName;
-$url = Router::url($url,true);
+//$url = Router::url($url,true);
 if (!$chunks || $chunk == $chunks - 1) { // last chunk
 	$this->Session->write('Media.currentUploadedFile.'.$realName,false);
 	$this->Media->save(

@@ -59,7 +59,7 @@ body.admin.ajax #container {
     background: none repeat scroll 0 0 #FEFEFE;
     color: #333333;
     float: left;
-    overflow: scroll;
+    /*overflow: scroll;*/
     padding: 10px 20px 40px;
     width: 740px;
 }
@@ -591,4 +591,32 @@ form .head-action .file-edit-action a.layout
 {
     width:28px;
     background-image:url('../img/app_layout_18.png');
+}
+.extension-item .icon img
+{
+    max-width:75px;
+    margin:auto;
+}
+.extension-item .icon
+{
+    text-align:center;
+}
+
+.extension-item .name
+{
+    text-align:center;
+    font-size:11px;
+}
+.extension-item
+{
+    padding:5px;
+    border-radius:5px;
+    background:#eeeeee;
+    width:120px;
+}
+
+.extension-group
+{
+    float:left;
+    margin:25px;
 }

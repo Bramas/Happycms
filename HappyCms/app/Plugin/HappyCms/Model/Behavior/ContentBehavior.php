@@ -45,8 +45,12 @@ class ContentBehavior extends ModelBehavior {
 					}
 					if(isset($model->$ModelName->hasMany[$model->alias]['foreignKey']))
 					{
-						$model->$ModelName->hasMany[$model->alias]['foreignKey'] = $model->belongsTo[$ModelName]['foreignKey'];
-						$model->$ModelName->hasMany[$model->alias]['conditions'] = array($model->alias.'.extension'=>$this->extensionName[$model->alias]);
+						if(in_array($model->$ModelName->hasMany[$model->alias]['foreignKey'], array_keys($this->customFields[$model->alias])))
+						{
+
+							$model->$ModelName->hasMany[$model->alias]['foreignKey'] = $this->customFields[$model->alias][$model->$ModelName->hasMany[$model->alias]['foreignKey']];
+							$model->$ModelName->hasMany[$model->alias]['conditions'] = array($model->alias.'.extension'=>$this->extensionName[$model->alias]);
+						}
 					}
 				}
 			}
@@ -97,6 +101,7 @@ class ContentBehavior extends ModelBehavior {
 
 		if($model->table == 'contents')//!$model->useTable)
 		{
+			
 			$this->primaryKey = $model->primaryKey;
 			$model->primaryKey = 'item_id';
 			$query['conditions'][$model->alias.'.extension'] = $this->extensionName[$model->alias];
@@ -270,7 +275,8 @@ class ContentBehavior extends ModelBehavior {
 		$alias = 'Content';
 		if($model->table == 'contents')
 		{
-			$model->primaryKey = $this->primaryKey;
+			if(!empty($this->primaryKey))
+				$model->primaryKey = $this->primaryKey;
 			 	//$dbo = $model->getDatasource();
 				//debug( $dbo->getLog(false,false) );
 			$alias = $model->alias;
@@ -397,7 +403,7 @@ class ContentBehavior extends ModelBehavior {
 
         $item_id = $data['id'];
  
-
+ 
         foreach(Configure::read('Config.id_languages') as $lang=>$lang_id):
         
             if(empty($data[$lang]))
@@ -449,6 +455,7 @@ class ContentBehavior extends ModelBehavior {
 	                	$finalData[$newField] = $data[$lang][$newField];
 	                }
                 }   
+
              	$ContentModel->create();
              	$ContentModel->save(array($alias => $finalData));                             
             		

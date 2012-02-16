@@ -428,7 +428,7 @@ class MenusController extends AppController
 		Configure::write('HappyCms.fileEdit.adminView','admin_'.$menu['Menu']['view'].'_edit');
     }
     
-    function list_menus($parent_id)
+    function list_menus($parent_id=null)
     {
     	if(empty($parent_id))
     	{
@@ -480,6 +480,13 @@ class MenusController extends AppController
     	exit();
     	
 
+    }
+
+    function sitemaps()
+    {
+    	$menus = $this->list_menus();
+    	$this->layout='empty';
+    	$this->set('Menus',$menus);
     }
 
   /*  function admin_afterParamsSave($lang,$data)

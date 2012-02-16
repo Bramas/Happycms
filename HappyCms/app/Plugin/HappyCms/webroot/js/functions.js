@@ -285,15 +285,10 @@ $(function() {
 
     });
 
-    $('.filesImagesContainter .item .actions .delete').live('click',function(){
-        var e = $(this).parent().parent().parent().attr('extension');
-        var dom = $(this).parent().parent().parent().attr('domid');
+     $('.filesImagesContainter .item .actions .delete').live('click',function(){
         var uid = $(this).parent().parent().attr('uid');
-        var f = $(this).parent().parent().attr('title');
         $(this).parent().parent().hide();
-        $(this).parent().parent().parent().append('<input name="data[Delete]['+e+'][]" type="hidden" value="'+f+'" />');
-        $('#'+dom+' input[uid="'+uid+'"]').remove();
-        
+        $(this).parent().parent().parent().parent().find('input[uid="'+uid+'"]').remove();
         //alert($('#'+dom+' input[uid="'+uid+'"]').length);
     })
 

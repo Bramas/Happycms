@@ -16,6 +16,10 @@ class GalleriesController extends AppController
         $Gallery = $this->Gallery->find('all',array('order'=>'Gallery.created desc','limit'=>$start.','.$limit));
         return $Gallery;
     }
+    function admin_index()
+    {
+        $this->redirect(array('action'=>'menu_index'));
+    }
     function index()
     {
     	$this->set('Galleries',$this->getList(0,20));

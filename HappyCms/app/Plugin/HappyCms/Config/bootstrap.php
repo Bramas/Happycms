@@ -16,10 +16,7 @@ foreach($extensions as $extensionName => &$extension)
     }
     if(empty($extension['views']))
     {
-        $extension['views']=array('index'=>$extension['name']);
-        
-    }
-    else{
+        $extension['views']=array();
         
     }
 
@@ -29,6 +26,14 @@ foreach($extensions as $extensionName => &$extension)
     	{
     		$view=array('name'=>$view);
     	}
+    	if(empty($view['mainIcon']))
+	    {
+	    	$view['mainIcon'] = '/media/default/extensionIcon.png';
+	    }
+    	if(!isset($view['enabled']))
+	    {
+	    	$view['enabled'] = true;
+	    }
     	if(empty($view['optgroup']))
 	    {
 	    	$view['optgroup'] = $extension['optgroup'];
