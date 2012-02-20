@@ -7,7 +7,6 @@
 		}	
 			
 			echo '<div class="username"><label>Pseudo : </label><span>'.$viewUser['User']['username'].'</span></div>';
-
 		?>
 	</div>
 </div>
