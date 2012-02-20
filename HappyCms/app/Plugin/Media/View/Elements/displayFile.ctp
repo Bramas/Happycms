@@ -1,5 +1,5 @@
 <?php
-$url=false;
+
 if(!empty($id))
 {
 	$url = $this->requestAction('/media/manager/id2url/'.$id);

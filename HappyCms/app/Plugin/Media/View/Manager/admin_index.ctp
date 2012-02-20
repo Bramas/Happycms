@@ -3,8 +3,12 @@
 
 ?>
 <div id="filesList">
-	<?php foreach ($medias as $k => $v): $v = current($v); ?>
-	<div class="media" media_id="<?php echo $v['id']; ?>" title="<?php echo $v['name']; ?>" media_url="<?php echo $v['url']; ?>">
+	<?php foreach ($medias as $k => $v): $v = current($v);
+	$checked = in_array($v['url'],$checkList);
+
+	 ?>
+
+	<div class="media<?php echo $checked?' checked':''; ?>" media_id="<?php echo $v['id']; ?>" title="<?php echo $v['name']; ?>" media_url="<?php echo $v['url']; ?>">
 		<div class="image"><img src="<?php 
 		
 		//echo $v['url'];
@@ -17,6 +21,7 @@
 			</div>
 		</div>
 	</div>
+
 	<?php endforeach ?>
 
 	<div class="clear"></div>
@@ -42,6 +47,8 @@
 		));
 
 		echo $this->Form->end();
+		echo '<br/><br/>';
+		echo $this->Html->link('Afficher tous les fichiers du site','#',array('id'=>'displayAll'));
 		?>
 
 </div>
@@ -103,6 +110,11 @@ $(function(){
 	});
 
 	$('#filesList .media').live('click',function(){
+		if(!<?php echo $multiple?'true':'false'; ?>)
+		{
+				$(this).parent().find('.checked').removeClass('checked');	
+		}
+		$(this).addClass('checked');
 		var id = $(this).attr('media_id');
 		var name = $(this).attr('title');
 		var url = $(this).attr('media_url');
@@ -202,6 +214,13 @@ $(function(){
 	$('#MediaFilter').change(filterFiles);
 
 	filterFiles();
+
+	$('#displayAll').click(function(){
+	
+		window.location.href = window.location.href+'?all=1';
+
+		return false;
+	})
 });
 
 </script>

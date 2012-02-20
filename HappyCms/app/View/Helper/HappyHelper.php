@@ -20,8 +20,8 @@ class HappyHelper extends AppHelper {
 			if(!$this->Form)
 			{
 				App::uses('FormHelper','View/Helper');
-				$this->Form=new FormHelper();
-				$this->Form->Html=new HtmlHelper();
+				$this->Form=new FormHelper($this->_View);
+				$this->Form->Html=new HtmlHelper($this->_View);
 			}
 	
 		if(!is_null($this->__blockName))
@@ -73,7 +73,7 @@ class HappyHelper extends AppHelper {
 		App::uses('Menu','HappyCms.Model');
 		App::uses('HtmlHelper','View/Helper');
 
-		$Html = new HtmlHelper();
+		$Html = new HtmlHelper($this->_View);
 		$Menu = new Menu();
 		
 		$Menu->Behaviors->attach('Content');
@@ -91,15 +91,14 @@ class HappyHelper extends AppHelper {
 			$ret['url'] = array(
 										'controller' =>$menu['Extension']['controller'],
 										'action'     =>$menu['Menu']['view'] ,
-										'slug'       =>$menu['Content']['alias'],
+										'slug'       =>$menu['Menu']['alias'],
 										'default'    =>$menu['Menu']['default'],
 										$menu['Menu']['params']
 					);
 			
 
-			$ret['link'] = $this->Html->link($menu['Content']['title'],$ret['url']);
+			$ret['link'] = $this->Html->link($menu['Menu']['title'],$ret['url']);
 			$ret['Menu'] = $menu['Menu'];
-			$ret['Content'] = $menu['Content'];
 			return $ret;
 		}
 		else
@@ -113,10 +112,9 @@ class HappyHelper extends AppHelper {
 		App::uses('Menu','HappyCms.Model');
 		App::uses('HtmlHelper','View/Helper');
 
-		$Html = new HtmlHelper();
+		$Html = new HtmlHelper($this->_View);
 		$Menu = new Menu();
 		
-		$Menu->Behaviors->attach('Content');
 		$menu = $Menu->findById((int)$id);
 
 
@@ -125,11 +123,11 @@ class HappyHelper extends AppHelper {
 
 			
 
-			$text=empty($text)?$menu['Content']['title']:$text; 
+			$text=empty($text)?$menu['Menu']['title']:$text; 
 			$url = array(
 										'controller' =>$menu['Extension']['controller'],
 										'action'     =>$menu['Menu']['view'] ,
-										'slug'       =>$menu['Content']['alias'],
+										'slug'       =>$menu['Menu']['alias'],
 										'default'    =>$menu['Menu']['default'],
 										$menu['Menu']['params']
 					);
@@ -158,6 +156,7 @@ class HappyHelper extends AppHelper {
 		
 
 	}
+
 
 
 	

@@ -25,6 +25,9 @@ foreach($folders as $f)
 
 header("Content-type:image/".$_GET['ext']);
 
+header("Cache-Control: public, max-age=31536000");
+header("Expires: ".date('r',time()+31536000)); // set expiration time
+
 if(!file_exists($dest))
 {
     if(!Image::resize($img,$dest,$width,$height))

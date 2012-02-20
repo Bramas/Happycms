@@ -17,6 +17,14 @@ class MenusController extends AppController
 		//$this->Auth->allowedActions = array('getTree');
 	
 	}
+
+	function admin_test()
+	{
+		phpinfo();
+		debug($this->Menu->find('first',array('fields'=>array('MAX(Menu.lft) as lft'))));
+		debug($this->Menu->getLastQuery());
+		exit();
+	}
     
     /*
     function view($id=-1)
@@ -53,7 +61,7 @@ class MenusController extends AppController
     }*/
     function admin_sub_menu_edit($params)
     {
-    	$this->request->data = $this->request->data = $this->getItem($this->request->data['Menu']['item_id']);
+    	$this->request->data = $this->Menu->findById($this->request->data['Menu']['id']);
 		
     }
     function admin_sub_menu_new($menu_id)
@@ -79,11 +87,7 @@ class MenusController extends AppController
     	$ajax = !empty($this->request->data['ajax']);
 
 
-	$menu = $this->Menu->find('first',array(
-	    'conditions'=>array(
-		'Menu.item_id'=>$item_id
-	    )
-	));
+	$menu = $this->Menu->findById($item_id);
 
 	parent::admin_to_trash_($item_id,$lang);
 		
@@ -100,8 +104,8 @@ class MenusController extends AppController
 	}
 	
 	$children = $this->Menu->children($menu['Menu']['id']);
-	$items = $this->getItem($menu['Menu']['item_id']);
-	if(empty($children) && empty($items['_Menu']['id']))
+	//$items = $this->Menu->findById($menu['Menu']['id']);
+	if(empty($children))
 	{
 		$this->Menu->recover();
 	    $this->Menu->delete($menu['Menu']['id']);
@@ -119,7 +123,6 @@ class MenusController extends AppController
 	    if($ajax)
 	    	echo 'DELETED';
 	}
-
 	if(!$ajax)
 	{
 		$this->redirect('/admin/');
@@ -166,14 +169,10 @@ class MenusController extends AppController
     }
     function admin_add_new($parent_id,$move)
     {
-    	
-    	$item_id=$this->createItem();
-	    
-	    $this->request->data['Menu']['item_id']=$item_id;
-	    
+
 	    $this->Menu->id=null;
-	    $this->Menu->save(array('Menu'=>array('parent_id'=>$parent_id,'item_id'=>$item_id)));
-	   
+	    $this->Menu->save(array('Menu'=>array('parent_id'=>$parent_id)));
+	   	//exit();
 	    //$this->Menu->recover();
 	    
 	    if($move>0)
@@ -189,6 +188,12 @@ class MenusController extends AppController
 			{
 			     $this->Menu->moveDown();//$this->request->data['Menu']['id']);
 			}
+		}
+
+		if($parent_id == 1)
+		{
+			$this->request->data = array('Menu'=>array('extension'=>'menus:top_menu','id'=>$this->Menu->id));
+			$this->admin_affect_module();
 		}
 		$this->redirect(array(
 			'controller'=>'menus',
@@ -207,10 +212,10 @@ class MenusController extends AppController
 	{
 	    $item_id=$this->createItem();
 	    
-	    $this->request->data['Menu']['item_id']=$item_id;
+	    $this->request->data['Menu']['id']=$item_id;
 	    
 	    $this->Menu->id=null;
-	    $this->Menu->save(array('Menu'=>array('parent_id'=>$this->request->data['Menu']['parent_id'],'item_id'=>$item_id)));
+	    $this->Menu->save(array('Menu'=>array('parent_id'=>$this->request->data['Menu']['parent_id'],'id'=>$item_id)));
 	   
 	    
 	    if($this->request->data['Move']>0)
@@ -270,7 +275,7 @@ class MenusController extends AppController
 			{
 				if($data['_model']=='Menu')
 				{
-					$this->Menu->save(array('Content'=>$data));
+					$this->Menu->save(array($model=>$data));
 				}
 				else
 				{
@@ -280,10 +285,6 @@ class MenusController extends AppController
 					{
 						$Model->save(array($model=>$data));
 					}
-					else
-					{
-						$Model->save(array('Content'=>$data));
-					}
 					
 				}
 			}
@@ -292,7 +293,15 @@ class MenusController extends AppController
 		//exit(debug($this->request->data));
 		//parent::admin_save();
 
-		$this->redirect(array('action'=>'index', 'admin'=>true));
+		if($this->request->data['_redirect']=='default')
+		{
+			$this->redirect($_SERVER['HTTP_REFERER']);
+		}
+		else
+		{
+			$this->redirect(array('action'=>'index', 'admin'=>true));
+		}
+		exit();
 	/*if(!$this->request->data) exit();
         $this->Menu->save($this->request->data);
         $this->Session->setFlash("La page a bien été enregistrée");
@@ -301,6 +310,8 @@ class MenusController extends AppController
     
     function admin_index($id=null)
     {
+    	//debug($this->Menu->find('first'));
+    	//exit();
     }
     
     
@@ -315,12 +326,18 @@ class MenusController extends AppController
 		   
 			foreach($def['views'] as $view=>$view_label)
 			{
-				if(empty($options[$view_label['optgroup']]))
+				$groupName = $view_label['optgroup'];
+				if(Configure::read('Extensions.'.$groupName.'.name'))
 				{
-					$options[$view_label['optgroup']]=array();
+					$groupName=Configure::read('Extensions.'.$groupName.'.name');
+				}
+				if(empty($options[$groupName]))
+				{
+					
+					$options[$groupName]=array();
 				}
 
-			    $options[$view_label['optgroup']][$controller.':'.$view]=$view_label['name'];
+			    $options[$groupName][$controller.':'.$view]=$view_label;
 			}
 			
 	    
@@ -340,7 +357,6 @@ class MenusController extends AppController
 		list($ext,$view) = explode(':',$this->request->data['Menu']['extension'],2);
 		$this->request->data['Menu']['extension']=$ext;
 		$this->request->data['Menu']['view']=$view;
-	
         $this->Menu->save($this->request->data);
         $this->request->data = $this->Menu->findById($this->Menu->id);
 
@@ -364,7 +380,7 @@ class MenusController extends AppController
 
 		
 	
-        $this->redirect(array('controller'=>'contents','action'=>'item_edit','menus', $this->request->data['Menu']['item_id']));
+        $this->redirect(array('controller'=>'contents','action'=>'item_edit','menus', $this->request->data['Menu']['id']));
         exit();
     }
     
@@ -386,7 +402,7 @@ class MenusController extends AppController
 	if($id)
         {
 	    $menu = $this->Menu->findById($id);
-	    $this->request->data = $this->getItem($menu['Menu']['item_id']);
+	    $this->request->data = $this->getItem($menu['Menu']['id']);
         }
 	
 	
@@ -398,9 +414,9 @@ class MenusController extends AppController
 	}
     function admin_item_edit($item_id)
     {
-		$menu = $this->Menu->find('first',array('conditions'=>array('Menu.item_id'=>$this->request->data[$this->Hmodel_name]['id'])));
+		$menu = $this->Menu->findById($item_id);
 
-		$this->request->data['_Menu'] = $menu['Content'];
+		$this->request->data['Menu'] = $menu['Menu'];
 
 		$out=$this->requestAction('/admin/contents/load_form/'.$menu['Menu']['extension'].'/'.$menu['Menu']['view'].'_edit/'.$menu['Menu']['params'],
 					 array('named'=>array('lang_form'=>$this->_requestedLanguage,
@@ -413,9 +429,12 @@ class MenusController extends AppController
 		}
 		$this->set('controller_output', $out);
 		$this->set('SubExtensionName', $menu['Menu']['extension']);
+		Configure::write('HappyCms.fileEdit.controller',$menu['Menu']['extension']);
+		Configure::write('HappyCms.fileEdit.frontView',$menu['Menu']['view']);
+		Configure::write('HappyCms.fileEdit.adminView','admin_'.$menu['Menu']['view'].'_edit');
     }
     
-    function list_menus($parent_id)
+    function list_menus($parent_id=null)
     {
     	if(empty($parent_id))
     	{
@@ -435,6 +454,7 @@ class MenusController extends AppController
 		    'order'=>'Menu.lft'
 	   	));
 	   	//debug($menus);
+	   	//debug($this->Menu->getLastQuery());
 	   	//exit();
         
         return $menus;
@@ -445,68 +465,34 @@ class MenusController extends AppController
 
         $list = $this->Menu->generateTreeList ();//null, 'Menu.id', 'Menu.item_id',  '_', null);
         
-        //debug($list);
-       $keys=array();
-       foreach($list as $key=>&$l)
-        {
-            preg_match('/(_*)([^_]{1}.*)/',$l,$matches);
-            if(empty($matches[1]) || empty($matches[2]))
-            {
-                continue;
-            }
-            $keys[]=$matches[2];
-            $l = array('prefix'=>$matches[1],
-                       'id'=>$matches[2]
-                      );
-        }
-        //debug($keys);
-       $content = $this->Content->find('list',array('conditions'=>array(
-            'Content.extension'=>'menus',
-            'Content.item_id' => $keys,
-            'Content.language_id'=>Configure::read('Config.id_language')
-        ),'fields' => array('Content.item_id', 'Content.params')
-            ));
-       //debug($content);
-        foreach($list as $key=>&$l)
-        {
-            if(empty($l))
-            {
-                $list[$key]="Menu racine";
-            }
-            elseif(!empty($content[$l['id']]))
-            {
-                $temp = json_decode($content[$l['id']],true);
-                
-                $l = $l['prefix'].$temp['title'];
-            }
-            else{
-                unset($list[$key]);
-            }
-            
-            
-        }
-        
         return $list;
     }
 
     function admin_togglePublished()
     {
     	//debug($this->Menu->findByItemId(51));
-    	if(empty($this->request->data['_Menu']['language']) || empty($this->request->data['_Menu']['id']))
+    	if(empty($this->request->data['Menu']['language']) || empty($this->request->data['Menu']['id']))
     	{
     		
     		exit('empty data');
     	}
-    	$this->_requestedLanguage = $this->request->data['_Menu']['language'];
-    	$item = $this->Menu->findByItemId($this->request->data['_Menu']['id']);
+    	$this->_requestedLanguage = $this->request->data['Menu']['language'];
+    	$item = $this->Menu->findById($this->request->data['Menu']['id']);
     	//debug($item);
-    	$item['Content'][$this->_requestedLanguage]['published']=empty($item['Content'][$this->_requestedLanguage]['published'])?'1':'0';
-    	$this->Menu->save(array('Content'=>$item['Content']));
-
+    	$item['Menu'][$this->_requestedLanguage]['published']=empty($item['Menu'][$this->_requestedLanguage]['published'])?'1':'0';
+    	$this->Menu->save($item['Menu']);
+    	
 
     	exit();
     	
 
+    }
+
+    function sitemaps()
+    {
+    	$menus = $this->list_menus();
+    	$this->layout='empty';
+    	$this->set('Menus',$menus);
     }
 
   /*  function admin_afterParamsSave($lang,$data)

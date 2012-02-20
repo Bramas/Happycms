@@ -100,8 +100,7 @@ class ContentsController extends AppController
     {
         
 
-        $allowed = $this->requestAllowed('contents',$extension.'_edit',$this->online,$this->Auth->user('Group.rules'));
-        $allowed = $this->requestAllowed('contents',$extension.'_edit',$this->online,$this->Auth->user('rules'),$allowed);
+        $allowed = $this->requestAllowed('contents',$extension.'_edit',$this->online,$this->Auth->user());
 
 
         if(!$allowed)
@@ -265,20 +264,20 @@ $chunk = isset($_REQUEST["chunk"]) ? $_REQUEST["chunk"] : 0;
 $chunks = isset($_REQUEST["chunks"]) ? $_REQUEST["chunks"] : 0;
 $fileName = isset($_REQUEST["name"]) ? $_REQUEST["name"] : '';
 
+$realName = preg_replace('/[^\w\.\-]+/', ' ', $fileName);
+
 // Clean the fileName for security reasons
-$fileName = preg_replace('/[^\w\._]+/', '', $fileName);
-
-// Make sure the fileName is unique but only if chunking is disabled
-if ($chunks < 2 && file_exists($targetDir . $DS . $fileName)) {
-	$ext = strrpos($fileName, '.');
-	$fileName_a = substr($fileName, 0, $ext);
-	$fileName_b = substr($fileName, $ext);
-
-	$count = 1;
-	while (file_exists($targetDir . $DS . $fileName_a . '_' . $count . $fileName_b))
-		$count++;
-
-	$fileName = $fileName_a . '_' . $count . $fileName_b;
+if(($currentname = $this->Session->read('Media.currentUploadedFile.'.$realName)))
+{
+    $fileName = $currentname;
+}
+else
+{
+    $fileName = preg_replace('/^(.*)\.([a-z]{1,4})$/',uniqid('').'_'.substr(microtime(),-5).'.$2',$fileName);
+    $this->Session->write('Media.currentUploadedFile.'.$realName,$fileName);
+}
+if (!$chunks || $chunk == $chunks - 1) { // last chunk
+    $this->Session->write('Media.currentUploadedFile.'.$realName,false);
 }
 
 // Create target dir
@@ -436,7 +435,7 @@ die('{"jsonrpc" : "2.0", "result" : null, "id" : "id","realName":"'.$fileName.'"
         
         $controller->request->data['Happy']['Extension']=$itemExtension;
         $controller->request->data['Happy']['model_name'] = empty($this->request->params['named']['model_name'])?$controller->Hmodel_name:$this->request->params['named']['model_name'];
-
+        
         
 	    if(isset($this->request->params['named']['data']))
         {

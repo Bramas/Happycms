@@ -22,7 +22,7 @@ elseif(!empty($menuPath))
     	{
     		if(count($menuPath)==$idx)
     		{
-    			$breadcrumbs .= '<li>'.$temp['Content']['title'].$divider.'</li>';
+    			$breadcrumbs .= '<li>'.$temp['Menu']['title'].$divider.'</li>';
     		}
     		else
     		{

@@ -13,6 +13,7 @@ if(empty($model))
 {
     $model=isset($modelName)?$modelName:$this->request->data['Happy']['model_name'];
 }
+$this->request->data['Happy']['model_name'] = $model;
 
 if(empty($this->request->data['Happy']))
 {

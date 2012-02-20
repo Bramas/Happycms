@@ -1,4 +1,8 @@
 <?php
+if(empty($multiple))
+{
+	$multiple = false;
+}
 if(empty($default))
 {
 	$default = 0;
@@ -7,7 +11,15 @@ if(empty($domId))
 {
 	$domId = '0';
 }
-echo $this->Html->link('Choisir un autre fichier','#',array('class'=>'media-link-to-explorer','dom_id'=>$domId,'media_id'=>$default,'contextExtension'=>$ExtensionName));
+if(empty($label))
+{
+	$label = 'Choisir un autre fichier';
+}
+if(empty($checkList))
+{
+	$checkList = '0';
+}
+echo $this->Html->link($label,'#',array('class'=>'media-link-to-explorer','checkList'=>$checkList,'dom_id'=>$domId,'multiple'=>$multiple?'1':'0','media_id'=>$default,'contextExtension'=>$ExtensionName));
 
 $contextId = empty($contextId) ?  'null':$contextId ;
 

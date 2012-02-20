@@ -37,7 +37,7 @@ if(!empty($columns) && !empty($data))
     {
         echo '<th>'.$label.'</th>';
     }
-    echo '<th>Actions</th>';
+    echo '<th style="width:80px">Actions</th>';
     if(Configure::read('Config.multilanguage'))
     {
         echo '<th>Langages</th>';

@@ -14,7 +14,7 @@ switch ($step)
 	case 1:
 		if(!is_dir('app'))
 		{
-			$l = unzip('happycms.zip','');
+			$l = unzip('HappyCms.zip','');
 			if(is_array($l))
 			{
 				$content_for_layout = 'le site a correctement été dézippé. <a href="install.php?step=2">Etape suivante></a>';
@@ -59,7 +59,6 @@ switch ($step)
 		break;
 
 	case 3:
-		require 'install_htaccess.php';
 	$toutEstOk = true;
 	$content_for_layout='';
 	if(empty($_POST))
@@ -74,6 +73,7 @@ switch ($step)
 	$prefix = $_POST['prefix'];
 	$rewriteBase = $_POST['RewriteBase'];
 
+	require 'install_htaccess.php';
 	createHtaccess($rewriteBase);
 
 	$databaseConfig = 
@@ -194,7 +194,11 @@ class DATABASE_CONFIG {
 	$content_for_layout='L\'installation est terminée. Veuillez noter vos identifiants nécessaires pour se connecter è l\'administration du site
 	<div class="identifiants">
 		<div><label>Identifiant : </label>admin</div>
-		<div><label>Mot de passe : </label>linkadmin</div>
+		<div><label>Mot de passe : </label>admin</div>
+	</div>
+	<div class="identifiants">
+		<div><label>Identifiant : </label>superadmin</div>
+		<div><label>Mot de passe : </label>superadmin</div>
 	</div>
 	<a href="'.preg_replace('/\/([^\/]+)$/','',$_SERVER['PHP_SELF']).'">Voir le site</a>
 	';

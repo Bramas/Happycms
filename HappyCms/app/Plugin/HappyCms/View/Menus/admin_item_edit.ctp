@@ -11,9 +11,9 @@ echo $this->element('admin_create_form_item',array('model'=>'Menu','formOptions'
 <div class="ContentMenuInfoForm ui-corner-all">
 <span title="Cliquez pour <?php
 
- echo empty($this->request->data['_Menu']['published'])?'publier':'dépublier';
+ echo empty($this->request->data['Menu']['published'])?'publier':'dépublier';
 
- ?> cette page" lang="<?php echo $HpLangForm; ?>" menu_id="<?php echo $this->request->data["_Menu"]['id']; ?>" class="togglePublished qtip <?php echo empty($this->request->data['_Menu']['published'])?'unpublished':'published'; ?>" 
+ ?> cette page" lang="<?php echo $HpLangForm; ?>" menu_id="<?php echo $this->request->data["Menu"]['id']; ?>" class="togglePublished qtip <?php echo empty($this->request->data['Menu']['published'])?'unpublished':'published'; ?>" 
 
  >
 <script type="text/javascript">
@@ -46,7 +46,7 @@ echo $this->element('admin_create_form_item',array('model'=>'Menu','formOptions'
 
 </script>
 </span>
-<span class="page-title"><?php echo (empty($this->request->data['_Menu']['title'])?'[title]':$this->request->data['_Menu']['title']); ?></span>
+<span class="page-title"><?php echo (empty($this->request->data['Menu']['title'])?'[title]':$this->request->data['Menu']['title']); ?></span>
 <div class="form hidden">
 <?php
 

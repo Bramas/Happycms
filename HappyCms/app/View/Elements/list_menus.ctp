@@ -40,7 +40,7 @@ else
 echo '<ul class="'.$class.'">';
 foreach($menus as $menu)
 {
-    if(empty($menu['Content']['published']))
+    if(empty($menu['Menu']['published']))
     {
         continue;
     }
@@ -50,14 +50,14 @@ foreach($menus as $menu)
         $url = array(
             'controller'=>$menu['Extension']['controller'],
             'action'=>$menu['Menu']['view'] ,
-            'slug'=> $menu['Content']['alias'],
+            'slug'=> $menu['Menu']['alias'],
             'default'=>$menu['Menu']['id']==Configure::read('Config.Content.default_menu_id'));
         
     }
 
     $class=(in_array($menu['Menu']['id'],$menuPathArray)?'active ':'');
 
-    $class.=(empty($menu['Content']['class'])?'':$menu['Content']['class']).' ';
+    $class.=(empty($menu['Menu']['class'])?'':$menu['Menu']['class']).' ';
 
     $hasChildren = $menu['children'] && $limit!=0;
 
@@ -67,8 +67,8 @@ foreach($menus as $menu)
     }
 
     echo '<li class="'.trim($class).'">'.
-    $this->Html->link($menu['Content']['title'], $url,
-            array('title'=>$menu['Content']['title'],'class'=>($hasChildren?'dropdown-toggle':'')));
+    $this->Html->link($menu['Menu']['title'], $url,
+            array('title'=>$menu['Menu']['title'],'class'=>($hasChildren?'dropdown-toggle':'')));
 
 
     if($hasChildren)

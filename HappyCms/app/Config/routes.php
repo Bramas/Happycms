@@ -22,6 +22,6 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-require_once '../Plugin/HappyCms/Config/routes.php';
+require_once ROOT.DS.APP_DIR.'/Plugin/HappyCms/Config/routes.php';
         
         

@@ -17,8 +17,41 @@ $this->Tinymce->editor(array( 'theme' => 'advanced' ,
                         'width' => '100%'
                        ),array('extension'=> $ExtensionName,'id'=> $item_id));
 
-?>
 
+?>
+<input name="data[_redirect]" class="_redirect" value="default" class="" type="hidden" />
+<div class="head-action">
+    <div class="submit-action">
+        <?php 
+        echo $this->Form->submit('Enregistrer',array('class'=>'save qtip','redirect'=>'default','title'=>'Enregistrer'));
+        echo $this->Form->submit('Enregistrer et quitter',array('class'=>'saveAndQuit qtip','redirect'=>'quit','title'=>'Enregistrer et quitter'));
+
+        ?>
+    </div>
+    <div class="file-edit-action">
+        <?php
+        
+        if(Configure::read('HappyCms.fileEdit.frontView'))
+        {
+            echo $this->Html->link('Editer la vue','/admin/files/edit/app/View/'.ucfirst(Configure::read('HappyCms.fileEdit.controller')).'/'.Configure::read('HappyCms.fileEdit.frontView').'.ctp',
+            array('class'=>'front qtip','title'=>'Editer la vue'));
+        }
+        if(Configure::read('HappyCms.fileEdit.adminView'))
+        {
+            echo $this->Html->link('Editer la vue admin','/admin/files/edit/app/View/'.ucfirst(Configure::read('HappyCms.fileEdit.controller')).'/'.Configure::read('HappyCms.fileEdit.adminView').'.ctp',
+            array('class'=>'admin qtip','title'=>'Editer la vue admin'));
+        }
+        $layoutFile = 'default';
+        if(Configure::read('HappyCms.fileEdit.layout'))
+        {
+            $layoutFile = Configure::read('HappyCms.fileEdit.layout');
+        }
+            echo $this->Html->link('Editer le layout','/admin/files/edit/app/Plugin/HappyCms/View/Layouts/'.$layoutFile.'.ctp',
+            array('class'=>'layout qtip','title'=>'Editer le layout'));
+        
+          ?>
+    </div>
+</div>
 <div id="shared-output">
 <?php echo $shared_output; ?>
 </div>
@@ -60,17 +93,24 @@ echo '<div id="lang-tab-'.Configure::read('Config.language').'">'.
 
 
 }
+echo '<div class="submit-action">';
+echo $this->Form->submit('Enregistrer',array('class'=>'save','redirect'=>'default'));
+echo '</div>';
 
-
-echo $this->Form->end('Enregistrer');
+echo $this->Form->end();
 
 ?>
 
 <script type="text/javascript">
 $(function(){
+    $('#edit-panel>form .submit input').click(function(){
+        $('#edit-panel>form ._redirect').val($(this).attr('redirect'));
+
+    });
     $('#edit-panel>form').submit(function()
     {
         $(this).parent().addClass('submited');
+
     });
 });
 </script>

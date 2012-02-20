@@ -2,7 +2,7 @@
 class ContentBehavior extends ModelBehavior {
 
 
-	var $extensionName = null;
+	var $extensionName = array();
 	var $customFields = array();
 
 /**
@@ -19,24 +19,53 @@ class ContentBehavior extends ModelBehavior {
 			'customFields'=>array()
 			),$config);
 
-		$this->settings=$config;
-		$this->extensionName = $config['extensionName'];
-		$this->customFields = array();
+		$this->settings[$model->alias]=$config;
+		$this->extensionName[$model->alias] = $config['extensionName'];
+		$this->customFields[$model->alias] = array();
 		$idx = 0;
 		foreach($config['customFields'] as $c)
 		{
 			$idx++;
-			$this->customFields[$c]='custom_field_'.$idx;
+			$this->customFields[$model->alias][$c]='custom_field_'.$idx;
 		}
-		$this->customFields['published']='published';
-
+		$this->customFields[$model->alias]['published']='published';
 
 		if(!$model->useTable)
 		{
 			$model->useTable = Inflector::tableize('contents');
 			$model->setSource($model->useTable);
 			//$model->table = 'contents';
+			if(!empty($model->belongsTo))
+			{
+				foreach($model->belongsTo as $ModelName=>$set)
+				{
+					if(in_array($set['foreignKey'],array_keys($this->customFields[$model->alias])))
+					{
+						$model->belongsTo[$ModelName]['foreignKey'] = $this->customFields[$model->alias][$set['foreignKey']];
+					}
+					if(isset($model->$ModelName->hasMany[$model->alias]['foreignKey']))
+					{
+						if(in_array($model->$ModelName->hasMany[$model->alias]['foreignKey'], array_keys($this->customFields[$model->alias])))
+						{
+
+							$model->$ModelName->hasMany[$model->alias]['foreignKey'] = $this->customFields[$model->alias][$model->$ModelName->hasMany[$model->alias]['foreignKey']];
+							$model->$ModelName->hasMany[$model->alias]['conditions'] = array($model->alias.'.extension'=>$this->extensionName[$model->alias]);
+						}
+					}
+				}
+			}
+			if(!empty($model->hasMany))
+			{
+				foreach($model->hasMany as $ModelName=>$setMany)
+				{
+					if(isset($model->$ModelName->belongsTo[$model->alias]))
+					{
+						$model->$ModelName->belongsTo[$model->alias]['conditions'] = array($model->alias.'.extension'=>$this->extensionName[$model->alias]);
+					}
+				}
+			}
 		}
+
 
 	}
 /**
@@ -48,8 +77,7 @@ class ContentBehavior extends ModelBehavior {
 */
 	function checkIfItsLoaded(&$model)
 	{
-
-		if(empty($this->extensionName) && isset($model->actsAs['Content']))
+		if(isset($model->actsAs['Content']) && (empty($this->extensionName[$model->alias]) || $this->extensionName[$model->alias] != $model->actsAs['Content']['extensionName']))
 		{
 			$this->setup($model, $model->actsAs['Content']);
 		}
@@ -65,7 +93,7 @@ class ContentBehavior extends ModelBehavior {
 */
 	function beforeFind(&$model, $query)
 	{
-		
+
 		$this->checkIfItsLoaded($model);
 
 		App::import('Model','Content');
@@ -73,8 +101,10 @@ class ContentBehavior extends ModelBehavior {
 
 		if($model->table == 'contents')//!$model->useTable)
 		{
-
-			$query['conditions']['extension'] = $this->extensionName;
+			
+			$this->primaryKey = $model->primaryKey;
+			$model->primaryKey = 'item_id';
+			$query['conditions'][$model->alias.'.extension'] = $this->extensionName[$model->alias];
 			
 			if(isset($query['conditions']['id']))
 			{
@@ -87,34 +117,60 @@ class ContentBehavior extends ModelBehavior {
 				unset($query['conditions'][$model->alias.'.id']);
 			}
 			foreach($query['conditions'] as $key => $condition){
-				$this->replaceCustomField($query['conditions'],$key);
+				$this->replaceCustomField($model,$query['conditions'],$key);
 			}
 			foreach($query['order'] as &$a)
 			{
 				if(is_array($a))
 				{
 					foreach($a as $key => $condition){
-						$this->replaceCustomField($a,$key);
+						$this->replaceCustomField($model,$a,$key);
 					}
 				}
 			}	
 			/*foreach($query['limit'] as $key => $condition){
 				$this->replaceCustomField($query['limit'],$key);
 			}*/
-
+			foreach($query['order'] as $key => $condition){
+				$this->replaceCustomField($model,$query['order'],$key);
+			}
 			return $query;
 		}
 
 
 		if(!empty($query['fields']))
 		{
+			if(!is_array($query['fields']))
+			{
+				if(preg_match('/MAX(.*)/i',$query['fields']))
+				{
+					return $query;
+				}
+			}
+			else
+			{
+				$temp = array_keys($query['fields']);
+
+				if(preg_match('/MAX(.*)/i',$query['fields'][0]) || preg_match('/MAX(.*)/i',$temp[0]))
+				{
+					return $query;
+				}
+			}
+			
 			$query['fields']=array_merge((array)$query['fields'],array(
 									   'Content.id',
 									   'Content.created',
+									   'Content.item_id',
 									   'Content.params',
 									   'Content.custom_field_1',
 									   'Content.custom_field_2',
 									   ));
+				
+			if(in_array($model->alias.'.'.$model->displayField,$query['fields']))
+			{
+				unset($query['fields'][array_search($model->alias.'.'.$model->displayField,$query['fields'])]);
+			}
+			
 		}
 		else{
 			$query['fields']='*';
@@ -130,13 +186,28 @@ class ContentBehavior extends ModelBehavior {
 			
 			'table'=>$Content->tablePrefix.$Content->table,
 			'alias'=>'Content',
+			'type'=>'left outer',
 			'conditions'=>array(
-				$model->alias.'.item_id=Content.item_id',
+				$model->alias.'.id=Content.item_id',
 				'Content.language_id'=>Configure::read('Config.id_language'),
 				'Content.extension'=>$extension
 			)
 			
 		));
+		if(!empty($query['conditions']) && is_array($query['conditions']))
+		foreach($query['conditions'] as $key => $condition){
+			$this->replaceCustomField($model,$query['conditions'],$key);
+		}
+		if(!empty($query['order']) && is_array($query['order']))
+		foreach($query['order'] as &$a)
+		{
+			if(is_array($a))
+			{
+				foreach($a as $key => $condition){
+					$this->replaceCustomField($model,$a,$key);
+				}
+			}
+		}
 		return $query;
 	}
 /**
@@ -147,25 +218,28 @@ class ContentBehavior extends ModelBehavior {
 * @param mixed $key
 *
 */
-	private function replaceCustomField(&$array, &$key)
+	private function replaceCustomField(&$model, &$array, &$key)
 	{
+		$alias = $model->table=='contents'?$model->alias:'Content';
 		if(is_numeric($key))
 		{
 			if(preg_match('/^([a-zA-Z0-9]+\.)*([a-zA-Z0-9]+)[ =<>]{1}/',$array[$key].' ',$matches))
 			{
-				if(!empty($this->customFields[$matches['2']]))
+				if(!empty($this->customFields[$model->alias][$matches['2']]))
 				{
-					$array[$key] = preg_replace('/^(([a-zA-Z0-9]+\.)*)([a-zA-Z0-9]+)[ =<>]{1}/','$1'.$this->customFields[$matches['2']],$array[$key].' ');
+					$array[$key] = preg_replace('/^(([a-zA-Z0-9]+\.)*)([a-zA-Z0-9]+)[ =<>]{1}/',$alias.'.'.$this->customFields[$model->alias][$matches['2']],$array[$key].' ');
 				}
 			}
 		}
 		else
 		{
+			//debug($array);
+			//debug($key);
 			if(preg_match('/^([a-zA-Z0-9]+\.)*([a-zA-Z0-9]+)$/',trim($key),$matches))
 			{
-				if(!empty($this->customFields[$matches['2']]))
+				if(!empty($this->customFields[$model->alias][$matches['2']]))
 				{
-					$field = preg_replace('/^(([a-zA-Z0-9]+\.)*)([a-zA-Z0-9]+)$/','$1'.$this->customFields[$matches['2']],trim($key));
+					$field = preg_replace('/^(([a-zA-Z0-9]+\.)*)([a-zA-Z0-9]+)$/',$alias.'.'.$this->customFields[$model->alias][$matches['2']],trim($key));
 					$array[$field]=$array[$key];
 					unset($array[$key]);
 				}
@@ -173,7 +247,7 @@ class ContentBehavior extends ModelBehavior {
 		}
 /*
 
-		foreach($this->customFields as $customField)
+		foreach($this->customFields[$model->alias] as $customField)
 		{
 			if(in_array($customField,array_keys($query['conditions'])))
 			{
@@ -195,18 +269,33 @@ class ContentBehavior extends ModelBehavior {
 */
 	function afterFind(&$model, $results, $primary)
 	{
-			
+
 		$this->checkIfItsLoaded($model);
 
 		$alias = 'Content';
 		if($model->table == 'contents')
 		{
+			if(!empty($this->primaryKey))
+				$model->primaryKey = $this->primaryKey;
 			 	//$dbo = $model->getDatasource();
 				//debug( $dbo->getLog(false,false) );
 			$alias = $model->alias;
 		}
 		foreach($results as &$result)
 		{
+			if(empty($result[$alias]))
+			{
+				continue;
+			}
+			if(is_null($result[$alias]['params']))
+			{
+				if($model->table!='contents')
+				{
+					unset($result['Content']);
+				}
+				continue;
+			}
+
 			$temp=json_decode($result[$alias]['params'],true);
 			if(!empty($result[$alias]['item_id']))
 			{
@@ -216,28 +305,48 @@ class ContentBehavior extends ModelBehavior {
 
 			// Custom fields  ---
 
-			foreach($this->customFields as $customField=>$newField)
+			foreach($this->customFields[$model->alias] as $customField=>$newField)
 			{
-				if(isset($result[$alias][$newField]))
+				if(isset($result[$alias][$customField]))
 				{
-					$temp[$customField] = $result[$alias][$newField];
+					$temp[$newField] = $result[$alias][$customField];
 				}
 				if(!isset($temp[$newField]))
 				{
-					$temp[$customField] = '';
+					$temp[$newField] = '';
 				}
 			}
 
+			if(empty($result[$model->alias]))
+			{
+				$result[$model->alias]=array();
+			}
+			if($model->table=='contents')
+			{
+				$result[$model->alias] = $temp;
+			}
+			else
+			{
+				$result[$model->alias] = array_merge($temp,$result[$model->alias]);
+			}
 
-			$result[$alias]=$temp;
-			$result[$alias][Configure::read('Config.language')]=$temp;
+			$result[$model->alias][Configure::read('Config.language')]=$temp;
 
 			if($model->findQueryType=='list' && !empty($result['Content']['title']))
 			{
-				$result['Menu']['item_id']=$result['Content']['title'];
+				$result[$model->alias]['view']=$result['Content']['title'];
+			}
+			if($model->table!='contents')
+			{
+				unset($result['Content']);
 			}
 		}
 		
+		/*if(empty($results))
+		{
+
+			return $this->findBrut();
+		}*/
 		return $results;
 	}
 
@@ -251,7 +360,9 @@ class ContentBehavior extends ModelBehavior {
 */
 	function beforeSave(&$model)
 	{
+		
 
+		$this->checkIfItsLoaded($model);
 		$alias = 'Content';
 		if($model->table == 'contents')
 		{
@@ -261,34 +372,27 @@ class ContentBehavior extends ModelBehavior {
 		}
 		else
 		{
-			if(empty($model->data[$model->alias][$alias]))
-			{
-				//debug($model->data);
-				//return true to do the basic save method
-				return true;
-			}
-			$data = $model->data[$model->alias][$alias];
+			$data = $model->data[$model->alias];
         	App::import('Content','Happycms.Model');
-        	$ContentModel = new Content();
+        	$ContentModel = new Content();			
 		}
-		if(isset($data['params']) && !is_array( $data['params'] ))
+           
+		if(isset($data['params']) && count($data)==count($data,COUNT_RECURSIVE) && !is_array( $data['params'] ))
 		{
 			return true;
 		}
 
 
-		$this->checkIfItsLoaded($model);
 
 
         //$extension = $data['Content']['_extension'];
-        $extension = $this->extensionName;
-
+        $extension = $this->extensionName[$model->alias];
         $newEntry = false;
 		if(empty($data['id']))
         {
-        	App::import('Model','Extension');
+        	App::uses('Extension','HappyCms.Model');
         	$Extension = new Extension();
-        	$Extension->load($this->extensionName);
+        	$Extension->load($this->extensionName[$model->alias]);
             $data['id']=$Extension->getNextId(true);
             $newEntry = true;
         }
@@ -299,7 +403,7 @@ class ContentBehavior extends ModelBehavior {
 
         $item_id = $data['id'];
  
-
+ 
         foreach(Configure::read('Config.id_languages') as $lang=>$lang_id):
         
             if(empty($data[$lang]))
@@ -319,7 +423,7 @@ class ContentBehavior extends ModelBehavior {
             
             //save custom field separatly
 
-			foreach($this->customFields as $customField=>$newField)
+			foreach($this->customFields[$model->alias] as $customField=>$newField)
 			{
 				if(isset($params[$customField]))
 				{
@@ -341,15 +445,17 @@ class ContentBehavior extends ModelBehavior {
 								'extension'=>$extension,
 	                            'language_id'=>(int)$lang_id,
 	                           	'item_id'=>(int)$item_id,
-	                           	'params'=>$params
+	                           	'params'=>$params,
+	                           	'created'=>null
                                             );
-                foreach($this->customFields as $customField=>$newField)
+                foreach($this->customFields[$model->alias] as $customField=>$newField)
                 {
                 	if(isset($data[$lang][$newField]))
                 	{
 	                	$finalData[$newField] = $data[$lang][$newField];
 	                }
                 }   
+
              	$ContentModel->create();
              	$ContentModel->save(array($alias => $finalData));                             
             		
@@ -357,16 +463,15 @@ class ContentBehavior extends ModelBehavior {
              }  
              else
              {
-
             	App::uses('Sanitize', 'Utility');
              	$finalData = array(
 						$alias.'.params'=>'"'.Sanitize::escape($params).'"'
 					);
-                foreach($this->customFields as $customField=>$newField)
+                foreach($this->customFields[$model->alias] as $customField=>$newField)
                 {
                 	if(isset($data[$lang][$newField]))
                 	{
-                		$finalData[$alias.'.'.$newField] = $data[$lang][$newField];
+                		$finalData[$alias.'.'.$newField] = '"'.Sanitize::escape($data[$lang][$newField]).'"';
                 	}
                 }   
              	$tempItem = $ContentModel->updateAll(  
@@ -409,9 +514,30 @@ class ContentBehavior extends ModelBehavior {
             }*/
             
     endforeach;
-        
+
+        if($model->table!='contents')
+		{
+			return true;
+		}
 
 		return false;
+	}
+	function afterSave(&$model, $created)
+	{
+		if($model->table!='contents' && $created)
+		{
+			App::import('Content','Happycms.Model');
+        	$ContentModel = new Content();
+        	foreach(Configure::read('Config.id_languages') as $lang_id)
+        	{
+        		$ContentModel->create();
+	        	$ContentModel->save(array('Content' => array(
+        			'item_id'=>$model->getLastInsertID(),
+        			'extension'=>$this->extensionName[$model->alias],
+        			'language_id'=>$lang_id
+	        	)));
+	        }
+		}
 	}
 
 
@@ -424,7 +550,12 @@ class ContentBehavior extends ModelBehavior {
 		//	return true;
 		//} else {
 		if($model->table == 'contents')
+		{
+			$model->deleteAll(array($model->alias.'.item_id'=>$model->id,
+						$model->alias.'.extension'=>$this->extensionName[$model->alias]
+					));
 			return false;
+		}	
 
 		return true;
 		//}

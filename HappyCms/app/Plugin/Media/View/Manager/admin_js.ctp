@@ -16,20 +16,72 @@ $(function(){
         var contextExtension = $(this).attr('contextExtension');
         var domId = $(this).attr('dom_id');
         var contextId = $(this).attr('contextId');
+        var multiple = $(this).attr('multiple')==undefined?'0':'1';
+        var checkList = $(this).attr('checkList');
 		contextId = contextId?contextId:'null';
-		$(this).after('<iframe src="<?php 
-			echo $this->Html->url('/media/manager/index/',true); ?>'+contextExtension+'/'+contextId+'/'+domId+'" frameBorder="0" width="560" height="550">');         
+		/*$(this).after('<iframe src="<?php 
+			echo $this->Html->url('/media/manager/index/',true); ?>'+contextExtension+'/'+contextId+
+			'/'+domId+'" frameBorder="0" width="560" height="575">');  */
+			if($('#iframe-'+domId).length)
+			{
+				$('#iframe-'+domId).dialog('open').css('height','575px').css('width','680px');;
+			}   
+			else
+			{
+				$('<iframe id="iframe-'+domId+'" src="<?php 
+				echo $this->Html->url('/media/manager/index/',true); ?>'+contextExtension+'/'+contextId+
+				'/'+domId+'/'+multiple+'?checkList='+checkList+'" frameBorder="0" style="height: 100%;margin-left: -15px;width: 100%;">').dialog(
+					{
+						modal:true,
+						autoOpen: false,
+						width:650,
+						height:610
+					}).dialog( "open" ).load(function()
+						{
+							$(this).css('height','575px').css('width','680px');
+						}
+					); 
+			}
+			
 
 		return false;
 		
 	})
+	function randomString(string_length) {
+		   var text = "";
+		    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
+		    for( var i=0; i < string_length; i++ )
+		        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+		    return text;
+
+		};
 	$(document).bind('onFileChosen',function(event,name,url,id,domId)
 	{
-		$('#'+domId+'Container img').attr('src',url+'_<?php echo Configure::read('Media.formats.formThumb'); ?>').show();
-		$('#'+domId).val(id);
-		$('#'+domId+'Container iframe').hide();
+		var r = randomString(10);
+		if($('#'+domId+'Container .media-link-to-explorer').attr('multiple'))
+		{
+			$('#'+domId+'Container input.empty').clone().val(url).removeClass('empty').attr('uid',r).appendTo('#'+domId+'Container');
+			var temp = $('#'+domId+'Container .filesImagesContainter .empty').clone();
+			temp.removeClass('empty').appendTo('#'+domId+'Container .filesImagesContainter');
+			temp.attr('uid',r);
+			temp.attr('title',name);
+			temp=temp.find('img').first();
+			temp.removeClass('empty');
+			temp.attr('title',name).attr('src','<?php echo $this->Html->url('/',true); ?>'+url+'_<?php echo Configure::read('Media.formats.formThumb'); ?>');
+			$('#'+domId+'Container .filesImagesContainter .clear').remove();
+			$('#'+domId+'Container .filesImagesContainter').append('<div class="clear"></div>');
+		}
+		else
+		{
+			$('#'+domId+'Container img').attr('src','<?php echo $this->Html->url('/',true); ?>'+url+'_<?php echo Configure::read('Media.formats.formThumb'); ?>').show();
+			$('#'+domId+'Container input').val(url);
+			$('#iframe-'+domId).dialog('close');
+		}
+
 	});
+
 
 
 	$('#filesList .media').each(function()
@@ -71,7 +123,7 @@ function HAttachAnIcon(d)
 	d.attr('media_type',type);
 	if(type=='Image')
 	{
-		d.find('.image img').attr('src',url+d.find('.image img').attr('src'));
+		d.find('.image img').attr('src','<?php echo $this->Html->url('/',true); ?>'+url+d.find('.image img').attr('src'));
 	}
 	else
 	{

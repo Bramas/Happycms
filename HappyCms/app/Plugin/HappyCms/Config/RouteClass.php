@@ -14,7 +14,7 @@ class HappyRoute extends CakeRoute {
             $params['admin']=true;
             return $params;
         }*/
-        
+
         
         App::import('Model','Happycms.Menu');
         App::import('Model','Happycms.Content');
@@ -30,24 +30,12 @@ class HappyRoute extends CakeRoute {
             {
                 exit('Veuillez configurer la page d\'accueil du site');
             }
-            $menu = $Menu->find('first',array('fields'=>'*',
-                                                    'joins'=>array(
-						    array( 
-							'table' => $Content->tablePrefix.$Content->table, 
-							'alias' => 'Content', 
-							'type' => 'left', 
-							'foreignKey' => false, 
-							'conditions'=> array('Content.item_id = Menu.item_id'))),
-						    'conditions'=>array('Content.extension=\'menus\'',
-									    'Content.language_id='.Configure::read('Config.id_language'),
-									    'Menu.id = '.$menu_id
-                                        ,'Content.published'=>'1'
+            $menu = $Menu->find('first',array('conditions'=>array(
+									       'Menu.id'=>$menu_id
+                                            ,'Menu.published'=>'1'
                                         ) 
 	    ));
 
-
-            
-                    //debug($menu);
         }
         else
         {
@@ -66,6 +54,7 @@ class HappyRoute extends CakeRoute {
                                         AND Content.params LIKE (\'%"published":"1"%\')
                                         ') 
 	    ));
+
         }
         
         //debug($menu);
@@ -117,16 +106,19 @@ class HappyRoute extends CakeRoute {
         //$menu['Menu']['Content'] = json_decode($menu['Content']['params'],true);
         
         Configure::write('Menu',$menu['Menu']);
-        Configure::write('Menu.Content',$menu['Content']);
         $params['controller'] = $menu['Menu']['extension'];
         $params['action'] = $menu['Menu']['view'];
         if(!empty($menu['Menu']['params']) || $menu['Menu']['params'] === 0)
         {
              $params['pass'] = array_merge((array)$menu['Menu']['params'],$params['pass']);
         }
-        //$params['plugin'] = 'Happycms';
+        if(in_array($params['controller'], Configure::read('HappyCms.ControllersNeedRoutes')))
+        {
+            $params['plugin'] = 'HappyCms';
+        }
         //debug($params);
         //exit();
+
         return $params;
     }
     

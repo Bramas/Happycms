@@ -17,46 +17,49 @@ function displayNode($htmlHelper,$nodes,$place='NULL')
         }
         
         echo '<ul style="z-index:'.$z_i.'" menu_id="'.$place.'" class="sortable">';
-	$i=0;
+		$i=0;
         foreach($nodes as $node)
         {
-	    $i++;
-	    $class="node ";
-	    if($i==count($nodes))
-	    {
-		$class.="end ";
-	    }
-	    if(empty($node['children']))
-	    {
-		$class.="leaf ";
-	    }
-	    $lang=Configure::read('Config.language');
-	    $item = current($node);
-            $item['Content']=$node['Content'];
+		    $i++;
+		    $class="node ";
+		    if($i==count($nodes))
+		    {
+				$class.="end ";
+		    }
+		    if(empty($node['children']))
+		    {
+				$class.="leaf ";
+		    }
+		    $lang=Configure::read('Config.language');
+            $menu=$node['Menu'];
           
             
             
-            echo '<li id="menu-'.$item['id'].'" menu_id="'.$item['id'].'" class="menu-item-id-'.$item['item_id'].' '.trim($class).'" ><div>';
+            echo '<li id="menu-'.$menu['id'].'" menu_id="'.$menu['id'].'" class="menu-item-id-'.$menu['id'].' '.trim($class).'" ><div>';
 	    
-	    if(empty($node['Menu']['extension']))
-	    {
-		$url=array('controller'=>'menus',
-			   'action'=>'empty_module',
-			   $item['id']);
-	    }
-	    else{
-		$url=array('controller'=>'contents',
-                           'action'=>'item_edit',
-			   'menus',
-			   $item['item_id']);
-	    }
+		    if(empty($menu['extension']))
+		    {
+				$url=array(
+					'controller'=>'menus',
+				   	'action'=>'empty_module',
+				   	$menu['id']
+				);
+		    }
+		    else{
+				$url=array(
+					'controller'=>'contents',
+	                'action'=>'item_edit',
+				   	'menus',
+				   	$menu['id']
+				);
+		    }
             
-	    $span_lang='<span class="flags">';
+	    	$span_lang='<span class="flags">';
             foreach(Configure::read('Config.languages') as $l)
             {
                 $url['language']=$l;
 
-            	$temp=$node['Content'][$l];
+            	$temp=$menu[$l];
 
                 $content = '';
             	if(Configure::read('Config.multilanguage'))
@@ -64,50 +67,50 @@ function displayNode($htmlHelper,$nodes,$place='NULL')
                 	$content = $htmlHelper->image($htmlHelper->url('/img/flags/'.$l.'.png',true));
                 }
 
-                if(empty($node['Content'][$l]['id']))
+                if(empty($temp['id']))
                 {
                     $content.='<span class="no-lang"> </span>';
                 }elseif(empty($temp['published']))
                 {
-                    $content.='<span lang="'.$l.'" menu_id="'.$item['item_id'].'" class="togglePublished unpublished"> </span>';
+                    $content.='<span lang="'.$l.'" menu_id="'.$menu['id'].'" class="togglePublished unpublished"> </span>';
                 }
                 else
                 {
-                	$content.='<span lang="'.$l.'" menu_id="'.$item['item_id'].'" class="togglePublished published"> </span>';
+                	$content.='<span lang="'.$l.'" menu_id="'.$menu['id'].'" class="togglePublished published"> </span>';
                 }
 
-                $span_lang.=$htmlHelper->link(
-	                $content
-	                ,$url,array('escape'=>false,'class'=>$l))
-	               ;
+                $span_lang.=$htmlHelper->link($content,$url,array('escape'=>false,'class'=>$l));
                 unset($url['language']);
             }
             $span_lang.='</span>';
             
-            $title = (empty($item['Content']['title'])?__('[Titre]',true):$item['Content']['title']);
-	    if(empty($node['Content'][$lang]['id']))
-	    {
-		$title='<span class="warning">Attention</span>'.__('Non disponnible dans cette langue',true);
-	    }
+            $title = (empty($menu['title'])?__('[Titre]',true):$menu['title']);
+		    if(empty($menu[$lang]['id']))
+		    {
+				$title='<span class="warning">Attention</span>'.__('Non disponnible dans cette langue',true);
+		    }
             $style = '';
             
 
-            if(($temp = Configure::read('Extensions.'.$node['Menu']['extension'].'.views.'.$node['Menu']['view'].'.icon')))
+            if(($temp = Configure::read('Extensions.'.$menu['extension'].'.views.'.$menu['view'].'.menuIcon')))
             {
             	if(is_array($temp))
             	{
             		if(!empty($temp['image']) && $temp['image']!='none')
             		{
-	            		$style.="background-image:url('".$htmlHelper->url('/img/'.$temp['image'])."');";
+	            		$style.="background-image:url('".$htmlHelper->url($temp['image'])."');";
 	            	}
 	            	elseif(isset($temp['image']))
 	            	{
 	            		$style.="background-image:none;";
 	            	}
-
 					if(!empty($temp['position']))
             		{
 	            		$style.="background-position:".$temp['position'].";";
+	            	}
+					if(!empty($temp['style']))
+            		{
+	            		$style.=$temp['style'];
 	            	}
 
             	}
@@ -122,22 +125,22 @@ function displayNode($htmlHelper,$nodes,$place='NULL')
 
             echo '<div class="hline"></div><div class="node-expand"></div><div class="icon" style="'.$style.'"></div>'.
             '<span>'.
-            ($item['parent_id']?$htmlHelper->link($title,$url,array('class'=>'page-link','escape'=>false)):$item['Content']['title']);
+            ($menu['parent_id']?$htmlHelper->link($title,$url,array('class'=>'page-link','escape'=>false)):$menu['title']);
             
 	    echo $span_lang;
 
-        if(!empty($item['item_id'])) 
+        if(!empty($menu['id'])) 
         {
 	        echo '<span class="actions">'.
 		    
 	            '<span class="action-delete qtip" title="Supprimer la Page (toutes les langues)">'.
-		    $htmlHelper->link('X',array('controller'=>'menus','action'=>'to_trash','admin'=>true,$item['item_id']),array(),"Voulez-vous vraiment supprimer définitivement cette page?").
+		    $htmlHelper->link('X',array('controller'=>'menus','action'=>'to_trash','admin'=>true,$menu['id']),array(),"Voulez-vous vraiment supprimer définitivement cette page?").
 		    '</span>'.
 
 		    '</span>';
 		}
 		echo '</span></div>';
-	    displayNode($htmlHelper,$node['children'],$item['id']);
+	    displayNode($htmlHelper,$node['children'],$menu['id']);
 	    echo '</li>';
             
         }
@@ -154,9 +157,10 @@ function displayNode($htmlHelper,$nodes,$place='NULL')
     
     
 	<?php
-			//$menus = current($menus);
+			$menus = $menus[0]['children'];
 			//debug($menus);
 			displayNode($this->Html,$menus);
+			echo $this->Html->link('nouveau menu racine',array('controller'=>'menus','action'=>'add_new','admin'=>true,1,0));
 		?>
 
 

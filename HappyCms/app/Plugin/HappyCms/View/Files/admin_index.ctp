@@ -9,12 +9,12 @@
 		    {
 			   	if(is_dir(ROOT.DS.$BaseDir.'/'.$entry))
 			   	{
-					$listFolders[$entry]=$this->Html->link($entry,array('controller'=>'files','action'=>'index','admin'=>true,$BaseDir.'/'.$entry));
+					$listFolders[$entry]=$this->Html->link($entry,'/admin/files/index/'.$BaseDir.'/'.$entry);
 			   		
 			   	}
 			   	elseif(file_exists(ROOT.DS.$BaseDir.'/'.$entry))
 			   	{
-			   		$listFiles[$entry]=$this->Html->link($entry,array('controller'=>'files','action'=>'edit','admin'=>true,$BaseDir.'/'.$entry));
+			   		$listFiles[$entry]=$this->Html->link($entry,'/admin/files/edit/'.$BaseDir.'/'.$entry);
 			   	}
 		    }
 		   	

@@ -51,8 +51,19 @@ class FilesController extends AppController
 
     		if(file_exists(ROOT.DS.$filename))
     		{
+              if(!is_dir(ROOT.DS.'files_backup'))
+              {
+                  mkdir(ROOT.DS.'files_backup');
+              }
+              if(!is_dir(ROOT.DS.'files_backup'.DS.'new'))
+              {
+                  mkdir(ROOT.DS.'files_backup'.DS.'new');
+              }
+              if(!is_dir(ROOT.DS.'files_backup'.DS.'old'))
+              {
+                  mkdir(ROOT.DS.'files_backup'.DS.'old');
+              }
     			//BACKUP THE FILE
-
     			//copy(ROOT.DS.$filename,ROOT.DS.'trash'.DS.time().'-'.preg_replace('/^.*\/([^\/]*\.[a-zA-Z]{2,3})$/','$1',$filename));
     			copy(ROOT.DS.$filename,ROOT.DS.'files_backup'.DS.'old'.DS.time().'-'.preg_replace('/\//','-',$filename));
 
@@ -65,10 +76,19 @@ class FilesController extends AppController
                 copy(ROOT.DS.$filename,ROOT.DS.'files_backup'.DS.'new'.DS.time().'-'.preg_replace('/\//','-',$filename));
 
     		}
-
+            if(!empty($this->request->data['ajax']))
+            {
+                exit('{"result":true}');
+            }
     		$this->redirect('/admin/files/edit/'.$filename);
     	}
-    	$this->redirect('/admin/files/');
+        if(empty($this->request->data['ajax']))
+        {
+            $this->redirect('/admin/files/');
+        }
+    	else{
+         exit('{"result":false}');
+        }
 
     	exit();
     }
@@ -96,5 +116,23 @@ class FilesController extends AppController
         $this->set('default',$default);
         $this->layout = 'empty';
 
+    }
+
+    function admin_liveCss($filename="style.css")
+    {
+        $this->layout = 'empty';
+        //$filename = ROOT.DS.'app'.DS.'webroot'.DS.'css'.DS.$filename;
+        if(file_exists(ROOT.DS.'app'.DS.'webroot'.DS.'css'.DS.$filename))
+        {
+            $lines = file(ROOT.DS.'app'.DS.'webroot'.DS.'css'.DS.$filename);
+
+            $this->set('File',$lines);
+            $this->set('filename','app/webroot/css/'.$filename);
+
+        }
+        else
+        {
+            exit($filename.' is not a file');
+        }
     }
 }

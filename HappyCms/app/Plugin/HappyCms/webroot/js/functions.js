@@ -242,8 +242,8 @@ $(function() {
                 url:SiteBaseAdmin+'menus/togglePublished',
                 data:{
                     "data[ajax]":1,
-                    "data[_Menu][id]":menu_id,
-                    "data[_Menu][language]":lang
+                    "data[Menu][id]":menu_id,
+                    "data[Menu][language]":lang
                 },
                 type:'POST',
                 success:function()
@@ -252,7 +252,7 @@ $(function() {
                   if($('#lang-tab-'+lang+' .togglePublished').attr('menu_id')==menu_id)
                   {
                     $('#lang-tab-'+lang+' .togglePublished').toggleClass('unpublished').toggleClass('published').removeClass('waitpublished');;
-                    $('#_Menu'+lang.charAt(0).toUpperCase() + lang.slice(1)+'Published').attr('checked', !$('#_Menu'+lang.charAt(0).toUpperCase() + lang.slice(1)+'Published').attr('checked'));
+                    $('#Menu'+lang.charAt(0).toUpperCase() + lang.slice(1)+'Published').attr('checked', !$('#Menu'+lang.charAt(0).toUpperCase() + lang.slice(1)+'Published').attr('checked'));
                   }
                     
                     $('#menus .menu-item-id-'+menu_id+'>div>span>.flags .'+lang+' span.published, #menus .menu-item-id-'+menu_id+'>div>span>.flags .'+lang+' span.unpublished').toggleClass('unpublished').toggleClass('published');
@@ -285,15 +285,10 @@ $(function() {
 
     });
 
-    $('.filesImagesContainter .item .actions .delete').live('click',function(){
-        var e = $(this).parent().parent().parent().attr('extension');
-        var dom = $(this).parent().parent().parent().attr('domid');
+     $('.filesImagesContainter .item .actions .delete').live('click',function(){
         var uid = $(this).parent().parent().attr('uid');
-        var f = $(this).parent().parent().attr('title');
         $(this).parent().parent().hide();
-        $(this).parent().parent().parent().append('<input name="data[Delete]['+e+'][]" type="hidden" value="'+f+'" />');
-        $('#'+dom+' input[uid="'+uid+'"]').remove();
-        
+        $(this).parent().parent().parent().parent().find('input[uid="'+uid+'"]').remove();
         //alert($('#'+dom+' input[uid="'+uid+'"]').length);
     })
 

@@ -1,11 +1,12 @@
 <?php
-echo $this->element('admin_create_form_item',array('file'=>true));
+echo $this->element('admin_create_form_item',array('file'=>true,'model'=>'Post'));
 
 
 
 
 echo $this->Form->input('title',array('label'=>'Nom :','type'=>'text'));
 
+echo $this->element('happy/fields/file',array('label'=>'Image :','name'=>'img'));
 
 echo $this->Form->input('text',array('label'=>'Texte :','type'=>'textarea'));
 

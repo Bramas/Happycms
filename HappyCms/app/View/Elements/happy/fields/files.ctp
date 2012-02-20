@@ -1,5 +1,15 @@
 <?php
-
+if(empty($model))
+{
+	if(!empty($this->request->data['Happy']) && !empty($this->request->data['Happy']['model_name']))
+	{
+		$model = $this->request->data['Happy']['model_name'];
+	}
+	else
+	{
+		$model='';
+	}
+}
 if(empty($options['label']))
 {
     $options['label']=$name;
@@ -25,16 +35,16 @@ $lang = $this->Form->langField;
 
 echo '<div id="'.$this->Form->domId().'">';
 
-if(isset($this->request->data[$this->request->data['Happy']['model_name']][$lang][$name]) && is_array($this->request->data[$this->request->data['Happy']['model_name']][$lang][$name]))
+if(isset($this->request->data[$model][$lang][$name]) && is_array($this->request->data[$model][$lang][$name]))
 {
 	$idx=0;
-	foreach($this->request->data[$this->request->data['Happy']['model_name']][$lang][$name] as $img)
+	foreach($this->request->data[$model][$lang][$name] as $img)
 	{
-		echo '<input name="data['.$this->request->data['Happy']['model_name'].']['.$lang.']['.$name.'][]" uid="'.$name.'-'.$lang.'-'.($idx++).'" type="hidden" value="'.$img.'" />';
+		echo '<input name="data['.$model.']['.$lang.']['.$name.'][]" uid="'.$name.'-'.$lang.'-'.($idx++).'" type="hidden" value="'.$img.'" />';
 	}
 
 }	
-echo '<input class="empty" name="data['.$this->request->data['Happy']['model_name'].']['.$lang.']['.$name.'][]" type="hidden" />';
+echo '<input class="empty" name="data['.$model.']['.$lang.']['.$name.'][]" type="hidden" />';
 echo "</div>";
 
 echo '<div class="filesImagesContainter" domid="'.$this->Form->domId().'" extension="'.$ExtensionName.'" id="'.$this->Form->domId().'Img">';
@@ -44,11 +54,11 @@ array('class'=>'empty')
 )
 .'<div class="actions"><span class="delete">X</span></div></div>';
 
-if(isset($this->request->data[$this->request->data['Happy']['model_name']][$lang][$name]) && is_array($this->request->data[$this->request->data['Happy']['model_name']][$lang][$name]))
+if(isset($this->request->data[$model][$lang][$name]) && is_array($this->request->data[$model][$lang][$name]))
 {
 
 	$idx=0;
-	foreach($this->request->data[$this->request->data['Happy']['model_name']][$lang][$name] as $img)
+	foreach($this->request->data[$model][$lang][$name] as $img)
 	{
 		echo '<div uid="'.$name.'-'.$lang.'-'.($idx++).'" class="item" title="'.$img.'">'.$this->Html->image('/files/uploads/'.$ExtensionName.'/'.$img,array('title'=>$img)).'<div class="actions"><span class="delete">X</span></div></div>';
 	}

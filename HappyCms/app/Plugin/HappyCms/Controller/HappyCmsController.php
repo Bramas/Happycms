@@ -318,8 +318,7 @@ class HappyCmsController extends Controller
             $this->set('is_linksite',true);
         }
 
-	    $allowed = $this->requestAllowed($this->request->params['controller'],$this->request->params['action'],$this->online,$this->Auth->user('Group.rules'));
-	    $allowed = $this->requestAllowed($this->request->params['controller'],$this->request->params['action'],$this->online,$this->Auth->user('rules'),$allowed);
+	    $allowed = $this->requestAllowed($this->request->params['controller'],$this->request->params['action'],$this->online,$this->Auth->user());
 	    
 	    	//debug($this->Auth);
 	    	//exit();
@@ -335,9 +334,17 @@ class HappyCmsController extends Controller
         return false;
     }
 
-    public function check_token()
+    public function check_token($token = null)
     {
-		if(empty($this->request->data['_token']) || $this->request->data['_token']!=$this->Session->read('User.token'))
+    	if(empty($token))
+    	{
+    		$token = empty($this->request->data['_token'])?'':$this->request->data['_token'];
+    	}
+    	if(empty($token) && !empty($this->request->params['named']['_token']))
+    	{
+    		$token = $this->request->params['named']['_token'];
+    	}
+		if($token!=$this->Session->read('User.token'))
 		{
 		    exit('Wrong token, please retry.');
 		}
@@ -400,7 +407,14 @@ class HappyCmsController extends Controller
     	$this->admin_save_();
 
     	$this->Session->setFlash("Données sauvegardées",'flash_success');
-        $this->redirect($_SERVER['HTTP_REFERER']);
+        if(empty($this->request->data['_redirect']) || $this->request->data['_redirect']=='default')
+		{
+			$this->redirect($_SERVER['HTTP_REFERER']);
+		}
+		else
+		{
+			$this->redirect(array('action'=>'index', 'admin'=>true));
+		}
         exit();
     }
     
@@ -492,6 +506,7 @@ class HappyCmsController extends Controller
 		    }
 		}
         $item_id = $this->Extension->getNextId();
+        
 		foreach(Configure::read('Config.id_languages') as $lang=>$lang_id)
 		{
 		    if(isset($params[$lang]))
@@ -579,46 +594,52 @@ class HappyCmsController extends Controller
     function requestAllowed($object, $property, $online, $rules, $default = false)
 	{
 	    // The default value to return if no rule matching $object/$property can be found
+	    
+	    $rules = array($rules['Group.rules'],$rules['rules']);
+
 	    $allowed = $default;
 
-	    // This Regex converts a string of rules like "objectA:actionA,objectB:actionB,..." into the array $matches.
-	    preg_match_all('/([^:,]+):([^,:]+)/is', $rules, $matches, PREG_SET_ORDER);
-	    foreach ($matches as $match)
+	    foreach($rules as $rule)
 	    {
-	        list($rawMatch, $allowedObject, $allowedProperty) = $match;
-	       
-	        $allowedObject = str_replace('*', '.*', $allowedObject);
-	        $allowedProperty = str_replace('*', '.*', $allowedProperty);
-	       
-	       	if (substr($allowedObject, 0, 8)=='Offline|' && !$online)
-	        {
-	            $allowedObject = substr($allowedObject, 8);
-	        }
-	        elseif(substr($allowedObject, 0, 8)=='Offline|')
-	        {
-	        	continue;
-	        }
+		    // This Regex converts a string of rules like "objectA:actionA,objectB:actionB,..." into the array $matches.
+		    preg_match_all('/([^:,]+):([^,:]+)/is', $rule, $matches, PREG_SET_ORDER);
+		    foreach ($matches as $match)
+		    {
+		        list($rawMatch, $allowedObject, $allowedProperty) = $match;
+		       
+		        $allowedObject = str_replace('*', '.*', $allowedObject);
+		        $allowedProperty = str_replace('*', '.*', $allowedProperty);
+		       
+		       	if (substr($allowedObject, 0, 8)=='Offline|' && !$online)
+		        {
+		            $allowedObject = substr($allowedObject, 8);
+		        }
+		        elseif(substr($allowedObject, 0, 8)=='Offline|')
+		        {
+		        	continue;
+		        }
 
-	        if (substr($allowedObject, 0, 1)=='!')
-	        {
-	            $allowedObject = substr($allowedObject, 1);
-	            $negativeCondition = true;
-	        }
-	        else
-	        {
-	        	$negativeCondition = false;
-	        }
-	            
-	       
-	        if (preg_match('/^'.$allowedObject.'$/i', $object) &&
-	            preg_match('/^'.$allowedProperty.'$/i', $property))
-	        {
-	            if ($negativeCondition)
-	                $allowed = false;
-	            else
-	                $allowed = true;
-	        }
-	    }        
+		        if (substr($allowedObject, 0, 1)=='!')
+		        {
+		            $allowedObject = substr($allowedObject, 1);
+		            $negativeCondition = true;
+		        }
+		        else
+		        {
+		        	$negativeCondition = false;
+		        }
+		            
+		       
+		        if (preg_match('/^'.$allowedObject.'$/i', $object) &&
+		            preg_match('/^'.$allowedProperty.'$/i', $property))
+		        {
+		            if ($negativeCondition)
+		                $allowed = false;
+		            else
+		                $allowed = true;
+		        }
+		    }        
+		}
 	    return $allowed;
 	}
 	function extensionPlugin($extension)

@@ -21,7 +21,7 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-require_once '../Plugin/HappyCms/Config/RouteClass.php';
+require_once ROOT.DS.APP_DIR.'/Plugin/HappyCms/Config/RouteClass.php';
 
         Router::connectNamed(array('slug'));
 
