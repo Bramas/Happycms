@@ -4,6 +4,7 @@ if(!file_exists('unzip.php'))
 	exit('Ce fichier doit être supprimé');
 }
 require_once('unzip.php');
+require('version.php');
 
 
 $step = (int)(empty($_GET['step'])?1:$_GET['step']);
@@ -14,7 +15,7 @@ switch ($step)
 	case 1:
 		if(!is_dir('app'))
 		{
-			$l = unzip('HappyCms.zip','');
+			$l = unzip('HappyCms-'.$version.'.zip','');
 			if(is_array($l))
 			{
 				$content_for_layout = 'le site a correctement été dézippé. <a href="install.php?step=2">Etape suivante></a>';
