@@ -903,7 +903,10 @@ class TreeBehavior extends ModelBehavior {
 			'conditions' => $scope,
 			'fields' => $db->calculate($Model, 'max', array($name, $right)),
 			'recursive' => $recursive
+			//,'group'=>array("{$Model->alias}.{$Model->primaryKey}")
 		)));
+
+
 		return (empty($edge[$right])) ? 0 : $edge[$right];
 	}
 

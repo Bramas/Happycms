@@ -1,7 +1,7 @@
 <?php
 
 
-require_once '../Plugin/HappyCms/Config/extensions.php';
+require_once ROOT.DS.APP_DIR.'/Plugin/HappyCms/Config/extensions.php';
 
 
 

@@ -7,7 +7,7 @@
 		foreach($Gallery['img'] as $photo)
 		{
 			echo '<div class="item">'.
-			$this->Html->image('/files/uploads/galleries/'.$photo.'_200x0').
+			$this->Html->image($photo.'_200x0').
 			'</div>';
 		}
 

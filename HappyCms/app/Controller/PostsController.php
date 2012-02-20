@@ -14,6 +14,9 @@ class PostsController extends AppController
     {
         $this->request->data = $this->Post->find('all',array('order'=>'Post.created desc'));
     }
+    function admin_index_edit()
+    {
+    }
     function admin_save()
     {
         parent::admin_save_();

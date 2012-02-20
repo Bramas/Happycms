@@ -1,6 +1,4 @@
-
 <?php
-
 echo $this->Form->create('Menu',array('action'=>'affect_module','url'=>'/admin/menus/affect_module'));
 echo '<div class="masonry">';
 echo $this->Form->input('extension',array('type'=>'hidden'));//,'options'=>$extensions));

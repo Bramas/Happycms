@@ -125,7 +125,7 @@ echo $this->element('body') ?>
 	});
 
 </script>
-<span class="hideSqlDump">Cacher le Log SQL</span> - <a onClick="window.open('<?php echo $this->Html->url('/admin/files/liveCss'); ?>');return false;" href="#">Editer le Css</a>
+<span class="hideSqlDump">Cacher le Log SQL</span> - <a onClick="window.open('<?php echo $this->Html->url('/admin/files/liveCss'); ?>','Editer le Css','height=600,width=550,toolbar=0');return false;" href="#">Editer le Css</a>
 <?php
 
 		echo $this->element('sql_dump'); 

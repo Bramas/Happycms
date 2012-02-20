@@ -326,12 +326,18 @@ class MenusController extends AppController
 		   
 			foreach($def['views'] as $view=>$view_label)
 			{
-				if(empty($options[$view_label['optgroup']]))
+				$groupName = $view_label['optgroup'];
+				if(Configure::read('Extensions.'.$groupName.'.name'))
 				{
-					$options[$view_label['optgroup']]=array();
+					$groupName=Configure::read('Extensions.'.$groupName.'.name');
+				}
+				if(empty($options[$groupName]))
+				{
+					
+					$options[$groupName]=array();
 				}
 
-			    $options[$view_label['optgroup']][$controller.':'.$view]=$view_label['name'];
+			    $options[$groupName][$controller.':'.$view]=$view_label;
 			}
 			
 	    

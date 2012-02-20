@@ -609,12 +609,25 @@ form .head-action .file-edit-action a.layout
 }
 .extension-item
 {
+    cursor: pointer;
     padding:5px;
     border-radius:5px;
     background:#eeeeee;
     width:120px;
 }
-
+.extension-item
+{
+    cursor: pointer;
+    padding:5px;
+    border-radius:5px;
+    background:#eeeeee;
+    width:120px;
+    margin: 10px;
+}
+.extension-item:hover
+{
+   background:#bbbbbb;
+}
 .extension-group
 {
     float:left;

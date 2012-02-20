@@ -11,8 +11,7 @@
 						continue;
 					}
 					echo '<div class="item">'.
-
-						'<div class="img">'.$this->Html->image('/files/uploads/galleries/'.current($gallery['img']).'_120x120').'</div>'.
+						'<div class="img">'.$this->Html->image($gallery['img2']['url'].'_120x80').'</div>'.
 						'<div class="title">'.$gallery['title'].'</div>'.
 						'<div class="description">'.introText($gallery['text'],150).'</div>'.
 						'<div class="read-more">'.$this->Html->link('Voir l\'album photos',array(

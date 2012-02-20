@@ -20,6 +20,10 @@ class GalleriesController extends AppController
     {
         $this->redirect(array('action'=>'menu_index'));
     }
+    function admin_index_edit()
+    {
+       //$this->redirect(array('action'=>'menu_index'));
+    }
     function index()
     {
     	$this->set('Galleries',$this->getList(0,20));
